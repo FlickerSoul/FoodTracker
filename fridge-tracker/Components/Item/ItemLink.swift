@@ -54,7 +54,7 @@ struct ItemLink: View {
 
                 ItemDate(name: "Expire", date: item.expiryDate, color: true)
 
-                ItemDate(name: "Added", date: item.expiryDate)
+                ItemDate(name: "Added", date: item.addedDate)
             }
 
             Spacer()

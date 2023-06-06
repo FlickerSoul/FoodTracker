@@ -13,7 +13,9 @@ struct ContentView: View {
     var items: [FridgeItem]
     @State private var itemStack: [FridgeItem] = []
     @State private var addingItem: Bool = false
-
+    
+    @State var s = ""
+    
     var body: some View {
         NavigationStack(path: $itemStack) {
             List {
@@ -29,7 +31,10 @@ struct ContentView: View {
             }
             .navigationTitle("Items")
             .navigationDestination(for: FridgeItem.self) { item in
-                ItemDetail(item: item, adding: addingItem)
+                ItemDetail(item: item.copy(), adding: $addingItem) {
+                    addingItem = false
+                    itemStack.removeLast()
+                }
             }
             .toolbar {
                 Button {
@@ -61,6 +66,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    MainView()
-        .modelContainer(previewContainer)
+    NavigationView {
+        ContentView(items: [])
+    }.modelContainer(previewContainer)
 }

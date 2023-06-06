@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct ItemDetail: View {
+    @Environment(\.modelContext) private var modelContext
     @Bindable var item: FridgeItem
-    var adding: Bool
+    @Binding var adding: Bool
+    @State private var canceling = false
+    var wrapUp: () -> Void
     
     var titleText: String {
         if adding {
@@ -19,30 +22,52 @@ struct ItemDetail: View {
         }
     }
     
-    init(item: FridgeItem, adding: Bool) {
-        self.item = item
-        self.adding = adding
-    }
-    
     var body: some View {
         VStack {
             List {
-                Section {
+                Section(header: Label("Name", systemImage: "edit")) {
                     TextField("Item Name", text: $item.name)
+                    Toggle("Notification", isOn: $item.notificationOn)
                 }
                 
-                Section {
-                    DatePicker("Expiry Date", selection: $item.expiryDate)
-                    DatePicker("Added Date", selection: $item.addedDate)
+                Section(header: Label("Date", systemImage: "pencil")) {
+                    DatePicker("Expiry Date", selection: $item.expiryDate, displayedComponents: .date)
+                    DatePicker("Added Date", selection: $item.addedDate, displayedComponents: .date)
                 }
                 
-                Section {
+                Section(header: Label("Note", systemImage: "note")) {
                     TextEditor(text: $item.note)
                 }
             }
         }
-        .padding()
         .navigationTitle(titleText)
+        .toolbar {
+            if adding {
+                ToolbarItem {
+                    Button(role: .destructive) {
+                        canceling = true
+                    } label: {
+                        Text("cancel")
+                    }.alert(
+                        "Discard Changes?",
+                        isPresented: $canceling)
+                    {
+                        Button("Yes", role: .destructive) {
+                            wrapUp()
+                        }
+                    }
+                }
+            }
+            
+            ToolbarItem {
+                Button {
+                    wrapUp()
+                } label: {
+                    Text("save")
+                }
+            }
+        }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 final class FridgeItem {
-    @Attribute(.unique) let id: UUID
+    @Attribute(.unique) var id: UUID
     var name: String
     var note: String
     var addedDate: Date
@@ -28,5 +28,11 @@ final class FridgeItem {
     
     static func makeDefaultFridgeItem(name: String = "Item name") -> FridgeItem {
         return Self(name: name)
+    }
+    
+    func copy() -> Self {
+        let newSelf = Self(name: name, note: note, addedDate: addedDate, expiryDate: expiryDate, notificationOn: notificationOn)
+        newSelf.id = self.id
+        return newSelf
     }
 }
