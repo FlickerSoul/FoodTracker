@@ -12,7 +12,7 @@ struct ItemDetail: View {
     @Bindable var item: FridgeItem
     @Binding var adding: Bool
     @State private var canceling = false
-    var wrapUp: () -> Void
+    let wrapUp: () -> Void
     
     var titleText: String {
         if adding {
@@ -25,9 +25,8 @@ struct ItemDetail: View {
     var body: some View {
         VStack {
             List {
-                Section(header: Label("Name", systemImage: "edit")) {
+                Section(header: Label("Name", systemImage: "pencil")) {
                     TextField("Item Name", text: $item.name)
-                    Toggle("Notification", isOn: $item.notificationOn)
                 }
                 
                 Section(header: Label("Date", systemImage: "pencil")) {
@@ -37,6 +36,11 @@ struct ItemDetail: View {
                 
                 Section(header: Label("Note", systemImage: "note")) {
                     TextEditor(text: $item.note)
+                }
+                
+                Section(header: Label("Options", systemImage: "ellipsis")) {
+                    Toggle("Notification", isOn: $item.notificationOn)
+                    Toggle("Archive", isOn: $item.archived)
                 }
             }
         }

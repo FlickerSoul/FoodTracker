@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		576139DB2A3090BA005A10DD /* SwipeActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576139DA2A3090BA005A10DD /* SwipeActionButtons.swift */; };
+		576139F32A30AD54005A10DD /* ItemFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576139F22A30AD54005A10DD /* ItemFilter.swift */; };
 		5784E9C12A2F3FBD00F2AD46 /* fridge_trackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C02A2F3FBD00F2AD46 /* fridge_trackerApp.swift */; };
 		5784E9C32A2F3FBD00F2AD46 /* FridgeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C22A2F3FBD00F2AD46 /* FridgeItem.swift */; };
 		5784E9C52A2F3FBD00F2AD46 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C42A2F3FBD00F2AD46 /* ContentView.swift */; };
@@ -23,6 +25,7 @@
 		5784E9FF2A2F545F00F2AD46 /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9FE2A2F545F00F2AD46 /* PreviewContainer.swift */; };
 		5784EA012A2F54B700F2AD46 /* SampleFridgeItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784EA002A2F54B700F2AD46 /* SampleFridgeItems.swift */; };
 		579E0D7A2A2F620700A1F00B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579E0D792A2F620700A1F00B /* Utils.swift */; };
+		57BD50502A30B43E0076D0E1 /* ItemLinkDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD504F2A30B43E0076D0E1 /* ItemLinkDropdown.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		576139DA2A3090BA005A10DD /* SwipeActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionButtons.swift; sourceTree = "<group>"; };
+		576139F22A30AD54005A10DD /* ItemFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFilter.swift; sourceTree = "<group>"; };
 		5784E9BD2A2F3FBD00F2AD46 /* fridge-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fridge-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5784E9C02A2F3FBD00F2AD46 /* fridge_trackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fridge_trackerApp.swift; sourceTree = "<group>"; };
 		5784E9C22A2F3FBD00F2AD46 /* FridgeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeItem.swift; sourceTree = "<group>"; };
@@ -63,6 +68,7 @@
 		5784E9FE2A2F545F00F2AD46 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		5784EA002A2F54B700F2AD46 /* SampleFridgeItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleFridgeItems.swift; sourceTree = "<group>"; };
 		579E0D792A2F620700A1F00B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		57BD504F2A30B43E0076D0E1 /* ItemLinkDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemLinkDropdown.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +189,9 @@
 			children = (
 				5784E9F72A2F43BD00F2AD46 /* ItemDetail.swift */,
 				5784E9F92A2F43CA00F2AD46 /* ItemLink.swift */,
+				576139DA2A3090BA005A10DD /* SwipeActionButtons.swift */,
+				576139F22A30AD54005A10DD /* ItemFilter.swift */,
+				57BD504F2A30B43E0076D0E1 /* ItemLinkDropdown.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -212,6 +221,8 @@
 			dependencies = (
 			);
 			name = "fridge-tracker";
+			packageProductDependencies = (
+			);
 			productName = "fridge-tracker";
 			productReference = 5784E9BD2A2F3FBD00F2AD46 /* fridge-tracker.app */;
 			productType = "com.apple.product-type.application";
@@ -284,6 +295,8 @@
 				Base,
 			);
 			mainGroup = 5784E9B42A2F3FBD00F2AD46;
+			packageReferences = (
+			);
 			productRefGroup = 5784E9BE2A2F3FBD00F2AD46 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -334,9 +347,12 @@
 				5784EA012A2F54B700F2AD46 /* SampleFridgeItems.swift in Sources */,
 				5784E9F42A2F418A00F2AD46 /* SettingsView.swift in Sources */,
 				5784E9C12A2F3FBD00F2AD46 /* fridge_trackerApp.swift in Sources */,
+				576139DB2A3090BA005A10DD /* SwipeActionButtons.swift in Sources */,
+				576139F32A30AD54005A10DD /* ItemFilter.swift in Sources */,
 				5784E9FA2A2F43CA00F2AD46 /* ItemLink.swift in Sources */,
 				5784E9C52A2F3FBD00F2AD46 /* ContentView.swift in Sources */,
 				579E0D7A2A2F620700A1F00B /* Utils.swift in Sources */,
+				57BD50502A30B43E0076D0E1 /* ItemLinkDropdown.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

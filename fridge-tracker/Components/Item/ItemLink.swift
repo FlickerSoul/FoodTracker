@@ -44,8 +44,24 @@ struct ItemDate: View {
 
 // MARK: Link View
 
+enum SwipeActions {
+    case delete
+    case archive
+    case unarchive
+}
+
 struct ItemLink: View {
+    @Environment(\.modelContext) private var modelContext
+
     var item: FridgeItem
+    let leadingActions: [SwipeActions]
+    let trailingActions: [SwipeActions]
+
+    init(item: FridgeItem, leadingActions: [SwipeActions] = [], trailingActions: [SwipeActions] = []) {
+        self.item = item
+        self.leadingActions = leadingActions
+        self.trailingActions = trailingActions
+    }
 
     var body: some View {
         HStack(alignment: .center) {
@@ -60,6 +76,35 @@ struct ItemLink: View {
             Spacer()
 
             Image(systemName: "chevron.right")
+        }
+        .swipeActions(edge: .leading) {
+            ForEach(leadingActions, id: \.self) {
+                choice in chooseAction(action: choice)
+            }
+        }
+        .swipeActions {
+            ForEach(trailingActions, id: \.self) { choice in
+                chooseAction(action: choice)
+            }
+        }
+    }
+
+    func deleteItem() {
+        modelContext.delete(item)
+    }
+
+    func toggleItemArchive() {
+        item.archived.toggle()
+    }
+
+    func chooseAction(action choice: SwipeActions) -> AnyView {
+        switch choice {
+        case .delete:
+            return AnyView(SwipeDeleteButton(action: deleteItem))
+        case .archive:
+            return AnyView(SwipeArchiveButton(action: toggleItemArchive))
+        case .unarchive:
+            return AnyView(SwipeArchiveButton(action: toggleItemArchive))
         }
     }
 }

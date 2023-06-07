@@ -10,62 +10,90 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    var items: [FridgeItem]
     @State private var itemStack: [FridgeItem] = []
     @State private var addingItem: Bool = false
-    
-    @State var s = ""
-    
+    @State private var orderSelection: OrderStyle = .all
+
+    @State private var hiddenItemListOpen: Bool = false
+
+    var items: [FridgeItem]
+
+    var visibleItems: [FridgeItem] {
+        return items.filter { !$0.archived }
+    }
+
+    var hiddenItems: [FridgeItem] {
+        return items.filter { !visibleItems.contains($0) }
+    }
+
     var body: some View {
         NavigationStack(path: $itemStack) {
             List {
-                ForEach(items, id: \.id) { item in
-                    ItemLink(item: item)
-                        .onTapGesture {
+                Section {
+                    ForEach(visibleItems, id: \.id) { item in
+                        ItemLink(
+                            item: item,
+                            leadingActions: [.archive],
+                            trailingActions: [.delete]
+                        ).onTapGesture {
                             withAnimation {
                                 itemStack.append(item)
                             }
                         }
+                    }
                 }
-                .onDelete(perform: deleteItems)
+
+                if hiddenItems.count > 0 {
+                    Section {
+                        ItemLinkDropdown(name: "archived items", icon: "archivebox.circle", open: $hiddenItemListOpen)
+
+                        if hiddenItemListOpen {
+                            ForEach(hiddenItems) {
+                                item in
+                                ItemLink(
+                                    item: item,
+                                    leadingActions: [.unarchive],
+                                    trailingActions: [.delete]
+                                ).onTapGesture {
+                                    withAnimation {
+                                        itemStack.append(item)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
             .navigationTitle("Items")
             .navigationDestination(for: FridgeItem.self) { item in
-                ItemDetail(item: item.copy(), adding: $addingItem) {
+                ItemDetail(item: item, adding: $addingItem) {
                     addingItem = false
                     itemStack.removeLast()
                 }
             }
             .toolbar {
-                Button {
-                    withAnimation {
-                        addingItem = true
-                        itemStack.append(FridgeItem.makeDefaultFridgeItem())
+                ToolbarItemGroup {
+                    ItemFilter(selection: $orderSelection)
+
+                    Button {
+                        withAnimation {
+                            addingItem = true
+                            itemStack.append(FridgeItem.makeDefaultFridgeItem())
+                        }
+                    } label: {
+                        Label("Add", systemImage: "plus")
                     }
-                } label: {
-                    Label("Add", systemImage: "plus")
                 }
-            }
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = FridgeItem.makeDefaultFridgeItem()
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
             }
         }
     }
 }
 
-#Preview {
+#Preview("preview items") {
+    MainView().modelContainer(previewContainer)
+}
+
+#Preview("content view only") {
     NavigationView {
         ContentView(items: [])
     }.modelContainer(previewContainer)

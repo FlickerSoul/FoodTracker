@@ -24,7 +24,15 @@ struct SampleFridgeItems {
             name: "yogert",
             note: "also from the big shopping",
             addedDate: Date.now - 2 * 24 * 3600,
-            expiryDate: Date.now + 1 * 24 * 3600
+            expiryDate: Date.now + 1 * 24 * 3600,
+            notificationOn: false
         ),
+        FridgeItem(
+            name: "food",
+            note: "also from the big shopping",
+            addedDate: Date.now - 2 * 24 * 3600,
+            expiryDate: Date.now + 1 * 24 * 3600,
+            archived: true
+        )
     ]
 }

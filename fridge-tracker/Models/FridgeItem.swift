@@ -16,23 +16,19 @@ final class FridgeItem {
     var addedDate: Date
     var expiryDate: Date
     var notificationOn: Bool
-    
-    init(name: String, note: String = "", addedDate: Date = Date.now, expiryDate: Date = Date.now, notificationOn: Bool = true) {
+    var archived: Bool
+
+    init(name: String, note: String = "", addedDate: Date = Date.now, expiryDate: Date = Date.now, notificationOn: Bool = true, archived: Bool = false) {
         self.id = UUID()
         self.name = name
         self.note = note
         self.addedDate = addedDate
         self.expiryDate = expiryDate
         self.notificationOn = notificationOn
+        self.archived = archived
     }
-    
+
     static func makeDefaultFridgeItem(name: String = "Item name") -> FridgeItem {
         return Self(name: name)
-    }
-    
-    func copy() -> Self {
-        let newSelf = Self(name: name, note: note, addedDate: addedDate, expiryDate: expiryDate, notificationOn: notificationOn)
-        newSelf.id = self.id
-        return newSelf
     }
 }
