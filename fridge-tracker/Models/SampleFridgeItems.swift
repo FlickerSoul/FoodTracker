@@ -7,7 +7,7 @@
 import Foundation
 
 struct SampleFridgeItems {
-    static let items: [FridgeItem] = [
+    static var items: [FridgeItem] = [
         FridgeItem(
             name: "cake",
             note: "brought today",

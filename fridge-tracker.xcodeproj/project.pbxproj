@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		575FB66F2A32469100029340 /* ItemFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575FB66E2A32469100029340 /* ItemFilter.swift */; };
+		575FB6712A324CF100029340 /* NoItemPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575FB6702A324CF100029340 /* NoItemPrompt.swift */; };
 		576139DB2A3090BA005A10DD /* SwipeActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576139DA2A3090BA005A10DD /* SwipeActionButtons.swift */; };
 		576139F32A30AD54005A10DD /* ItemSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576139F22A30AD54005A10DD /* ItemSorter.swift */; };
 		5784E9C12A2F3FBD00F2AD46 /* fridge_trackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C02A2F3FBD00F2AD46 /* fridge_trackerApp.swift */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		575FB66E2A32469100029340 /* ItemFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFilter.swift; sourceTree = "<group>"; };
+		575FB6702A324CF100029340 /* NoItemPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoItemPrompt.swift; sourceTree = "<group>"; };
 		576139DA2A3090BA005A10DD /* SwipeActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionButtons.swift; sourceTree = "<group>"; };
 		576139F22A30AD54005A10DD /* ItemSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSorter.swift; sourceTree = "<group>"; };
 		5784E9BD2A2F3FBD00F2AD46 /* fridge-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fridge-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +196,8 @@
 				576139DA2A3090BA005A10DD /* SwipeActionButtons.swift */,
 				576139F22A30AD54005A10DD /* ItemSorter.swift */,
 				57BD504F2A30B43E0076D0E1 /* ItemLinkDropdown.swift */,
+				575FB66E2A32469100029340 /* ItemFilter.swift */,
+				575FB6702A324CF100029340 /* NoItemPrompt.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -343,12 +349,14 @@
 				5784E9C32A2F3FBD00F2AD46 /* FridgeItem.swift in Sources */,
 				5784E9F02A2F412E00F2AD46 /* MainView.swift in Sources */,
 				5784E9F22A2F417300F2AD46 /* SummaryView.swift in Sources */,
+				575FB66F2A32469100029340 /* ItemFilter.swift in Sources */,
 				5784E9FF2A2F545F00F2AD46 /* PreviewContainer.swift in Sources */,
 				5784EA012A2F54B700F2AD46 /* SampleFridgeItems.swift in Sources */,
 				5784E9F42A2F418A00F2AD46 /* SettingsView.swift in Sources */,
 				5784E9C12A2F3FBD00F2AD46 /* fridge_trackerApp.swift in Sources */,
 				576139DB2A3090BA005A10DD /* SwipeActionButtons.swift in Sources */,
 				576139F32A30AD54005A10DD /* ItemSorter.swift in Sources */,
+				575FB6712A324CF100029340 /* NoItemPrompt.swift in Sources */,
 				5784E9FA2A2F43CA00F2AD46 /* ItemLink.swift in Sources */,
 				5784E9C52A2F3FBD00F2AD46 /* ContentView.swift in Sources */,
 				579E0D7A2A2F620700A1F00B /* Utils.swift in Sources */,

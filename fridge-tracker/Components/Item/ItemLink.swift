@@ -54,6 +54,7 @@ struct ItemLink: View {
     @Environment(\.modelContext) private var modelContext
 
     var item: FridgeItem
+
     let leadingActions: [SwipeActions]
     let trailingActions: [SwipeActions]
 
@@ -90,11 +91,15 @@ struct ItemLink: View {
     }
 
     func deleteItem() {
-        modelContext.delete(item)
+        withAnimation {
+            modelContext.delete(item)
+        }
     }
 
     func toggleItemArchive() {
-        item.archived.toggle()
+        withAnimation {
+            item.archived.toggle()
+        }
     }
 
     func chooseAction(action choice: SwipeActions) -> AnyView {

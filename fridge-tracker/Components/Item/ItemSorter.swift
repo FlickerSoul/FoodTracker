@@ -42,11 +42,15 @@ struct ItemSorter: View {
     @Binding var selection: OrderStyle
 
     var body: some View {
-        Picker("Order", selection: self.$selection) {
-            ForEach(OrderStyle.allCases, id: \.id) { item in
-                Text(item.id.capitalized).tag(item)
+        Menu {
+            Picker("Order", selection: self.$selection) {
+                ForEach(OrderStyle.allCases, id: \.id) { item in
+                    Text(item.id.capitalized).tag(item)
+                }
             }
-        }.pickerStyle(.menu)
+        } label: {
+            Label("Order", systemImage: "line.3.horizontal.decrease")
+        }
     }
 }
 

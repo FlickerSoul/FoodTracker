@@ -5,31 +5,49 @@
 //  Created by Heyuan Zeng on 6/6/23.
 //
 
-import SwiftData
 import SwiftUI
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var itemStack: [FridgeItem] = []
     @State private var addingItem: Bool = false
-    @State private var orderSelection: OrderStyle = .expiringNearstFirst
 
     @State private var hiddenItemListOpen: Bool = false
+
+    @State private var listEditSelections: Set<UUID> = Set()
+
+    @State private var orderSelection: OrderStyle = .expiringNearstFirst
+    @State private var filteringExpired: Bool = false
 
     var items: [FridgeItem]
 
     var visibleItems: [FridgeItem] {
-        return items.filter { !$0.archived }.sorted(by: orderSelection.comparator)
+        var visibles = items.filter { !$0.archived }.sorted(by: orderSelection.comparator)
+
+        if filteringExpired {
+            visibles = visibles.filter(FridgeItem.isExpiring)
+        }
+
+        return visibles
     }
 
     var hiddenItems: [FridgeItem] {
-        return items.filter { !visibleItems.contains($0) }.sorted(by: orderSelection.comparator)
+        var hiddens = items.filter { !visibleItems.contains($0) }.sorted(by: orderSelection.comparator)
+        if filteringExpired {
+            hiddens = hiddens.filter(FridgeItem.isExpiring)
+        }
+
+        return hiddens
     }
 
     var body: some View {
         NavigationStack(path: $itemStack) {
-            List {
+            List(selection: $listEditSelections) {
                 Section {
+                    if visibleItems.count == 0 {
+                        NoItemPrompt()
+                    }
+
                     ForEach(visibleItems, id: \.id) { item in
                         ItemLink(
                             item: item,
@@ -48,7 +66,7 @@ struct ContentView: View {
                         ItemLinkDropdown(name: "archived items", icon: "archivebox.circle", open: $hiddenItemListOpen)
 
                         if hiddenItemListOpen {
-                            ForEach(hiddenItems) {
+                            ForEach(hiddenItems, id: \.id) {
                                 item in
                                 ItemLink(
                                     item: item,
@@ -72,8 +90,8 @@ struct ContentView: View {
                 }
             }
             .toolbar {
-                ToolbarItemGroup {
-                    ItemSorter(selection: $orderSelection)
+                ToolbarItemGroup(placement: .primaryAction) {
+                    EditButton()
 
                     Button {
                         withAnimation {
@@ -83,6 +101,11 @@ struct ContentView: View {
                     } label: {
                         Label("Add", systemImage: "plus")
                     }
+                }
+
+                ToolbarItemGroup(placement: .topBarLeading) {
+                    ItemSorter(selection: $orderSelection)
+                    ItemFilter(filtering: $filteringExpired)
                 }
             }
         }
