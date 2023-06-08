@@ -104,7 +104,7 @@ struct ItemLink: View {
         case .archive:
             return AnyView(SwipeArchiveButton(action: toggleItemArchive))
         case .unarchive:
-            return AnyView(SwipeArchiveButton(action: toggleItemArchive))
+            return AnyView(SwipeUnarchiveButton(action: toggleItemArchive))
         }
     }
 }

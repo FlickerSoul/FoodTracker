@@ -35,6 +35,14 @@ struct SwipeArchiveButton: View {
     }
 }
 
+struct SwipeUnarchiveButton: View {
+    let action: () -> Void
+
+    var body: some View {
+        SwipeActionButton(iconLabel: "arrow.uturn.left", tint: .green, action: action)
+    }
+}
+
 struct SwipeDeleteButton: View {
     let action: () -> Void
 
