@@ -12,18 +12,18 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var itemStack: [FridgeItem] = []
     @State private var addingItem: Bool = false
-    @State private var orderSelection: OrderStyle = .all
+    @State private var orderSelection: OrderStyle = .expiringNearstFirst
 
     @State private var hiddenItemListOpen: Bool = false
 
     var items: [FridgeItem]
 
     var visibleItems: [FridgeItem] {
-        return items.filter { !$0.archived }
+        return items.filter { !$0.archived }.sorted(by: orderSelection.comparator)
     }
 
     var hiddenItems: [FridgeItem] {
-        return items.filter { !visibleItems.contains($0) }
+        return items.filter { !visibleItems.contains($0) }.sorted(by: orderSelection.comparator)
     }
 
     var body: some View {
@@ -73,7 +73,7 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItemGroup {
-                    ItemFilter(selection: $orderSelection)
+                    ItemSorter(selection: $orderSelection)
 
                     Button {
                         withAnimation {
