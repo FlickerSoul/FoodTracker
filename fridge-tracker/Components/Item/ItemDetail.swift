@@ -65,6 +65,9 @@ struct ItemDetail: View {
             
             ToolbarItem {
                 Button {
+                    if adding {
+                        modelContext.insert(item)
+                    }
                     wrapUp()
                 } label: {
                     Text("save")

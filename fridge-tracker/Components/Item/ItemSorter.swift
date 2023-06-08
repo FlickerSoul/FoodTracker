@@ -22,15 +22,20 @@ enum OrderStyle: String, CaseIterable, Identifiable {
     var comparator: ComparatorType {
         switch self {
         case .expiringNearstFirst:
-            return { left, right in left.expiryDate < right.expiryDate }
+            return Self.sortExpiringNearestFirst
         case .expiringFarestFirst:
-            return { left, right in left.expiryDate > right.expiryDate }
+            return Self.sortExpiringFarestFirst
         case .newestAddedFirst:
-            return { left, right in left.addedDate < right.addedDate }
+            return Self.sortNewestAddedFirst
         case .oldestAddedFirst:
-            return { left, right in left.addedDate > right.addedDate }
+            return Self.sortOldestAddedFirst
         }
     }
+
+    static let sortExpiringNearestFirst: ComparatorType = { left, right in left.expiryDate < right.expiryDate }
+    static let sortExpiringFarestFirst: ComparatorType = { left, right in left.expiryDate > right.expiryDate }
+    static let sortNewestAddedFirst: ComparatorType = { left, right in left.addedDate < right.addedDate }
+    static let sortOldestAddedFirst: ComparatorType = { left, right in left.addedDate > right.addedDate }
 }
 
 struct ItemSorter: View {
