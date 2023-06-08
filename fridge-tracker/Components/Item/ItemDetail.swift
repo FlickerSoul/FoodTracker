@@ -47,8 +47,8 @@ struct ItemDetail: View {
         .navigationTitle(titleText)
         .toolbar {
             if adding {
-                ToolbarItem {
-                    Button(role: .destructive) {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button {
                         canceling = true
                     } label: {
                         Text("cancel")
@@ -63,7 +63,7 @@ struct ItemDetail: View {
                 }
             }
             
-            ToolbarItem {
+            ToolbarItem(placement: .confirmationAction) {
                 Button {
                     if adding {
                         modelContext.insert(item)
