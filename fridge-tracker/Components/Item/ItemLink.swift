@@ -52,32 +52,48 @@ enum SwipeActions {
 
 struct ItemLink: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.editMode) private var listEditMode
 
     var item: FridgeItem
 
     let leadingActions: [SwipeActions]
     let trailingActions: [SwipeActions]
 
-    init(item: FridgeItem, leadingActions: [SwipeActions] = [], trailingActions: [SwipeActions] = []) {
+    let onTap: (FridgeItem) -> Void
+
+    private var showingEditingTools: Bool {
+        return listEditMode?.wrappedValue.isEditing ?? false
+    }
+
+    init(item: FridgeItem, leadingActions: [SwipeActions] = [], trailingActions: [SwipeActions] = [], onTap action: @escaping (FridgeItem) -> Void) {
         self.item = item
         self.leadingActions = leadingActions
         self.trailingActions = trailingActions
+        self.onTap = action
     }
 
     var body: some View {
-        HStack(alignment: .center) {
-            VStack(alignment: .leading) {
-                Text(item.name).font(.title2)
-
-                ItemDate(name: "Expire", date: item.expiryDate, color: true)
-
-                ItemDate(name: "Added", date: item.addedDate)
+        Button {
+            if showingEditingTools {
+                return
             }
+            onTap(item)
+        } label: {
+            HStack(alignment: .center) {
+                VStack(alignment: .leading) {
+                    Text(item.name).font(.title2)
 
-            Spacer()
+                    ItemDate(name: "Expire", date: item.expiryDate, color: true)
 
-            Image(systemName: "chevron.right")
+                    ItemDate(name: "Added", date: item.addedDate)
+                }
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+            }
         }
+        .buttonStyle(.plain)
         .swipeActions(edge: .leading) {
             ForEach(leadingActions, id: \.self) {
                 choice in chooseAction(action: choice)
@@ -92,7 +108,7 @@ struct ItemLink: View {
 
     func deleteItem() {
         withAnimation {
-            modelContext.delete(item)
+            modelContext.delete(item) // TODO: this crashes https://developer.apple.com/documentation/xcode-release-notes/xcode-15-release-notes#SwiftData
         }
     }
 

@@ -5,10 +5,10 @@
 //  Created by Heyuan Zeng on 6/6/23.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
     @State private var itemStack: [FridgeItem] = []
     @State private var addingItem: Bool = false
 
@@ -19,7 +19,7 @@ struct ContentView: View {
     @State private var orderSelection: OrderStyle = .expiringNearstFirst
     @State private var filteringExpired: Bool = false
 
-    var items: [FridgeItem]
+    @Query private var items: [FridgeItem]
 
     var visibleItems: [FridgeItem] {
         var visibles = items.filter { !$0.archived }.sorted(by: orderSelection.comparator)
@@ -42,7 +42,7 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack(path: $itemStack) {
-            List(selection: $listEditSelections) {
+            List {
                 Section {
                     if visibleItems.count == 0 {
                         NoItemPrompt()
@@ -52,12 +52,9 @@ struct ContentView: View {
                         ItemLink(
                             item: item,
                             leadingActions: [.archive],
-                            trailingActions: [.delete]
-                        ).onTapGesture {
-                            withAnimation {
-                                itemStack.append(item)
-                            }
-                        }
+                            trailingActions: [.delete],
+                            onTap: enterItem
+                        )
                     }
                 }
 
@@ -71,12 +68,9 @@ struct ContentView: View {
                                 ItemLink(
                                     item: item,
                                     leadingActions: [.unarchive],
-                                    trailingActions: [.delete]
-                                ).onTapGesture {
-                                    withAnimation {
-                                        itemStack.append(item)
-                                    }
-                                }
+                                    trailingActions: [.delete],
+                                    onTap: enterItem
+                                )
                             }
                         }
                     }
@@ -84,23 +78,13 @@ struct ContentView: View {
             }
             .navigationTitle("Items")
             .navigationDestination(for: FridgeItem.self) { item in
-                ItemDetail(item: item, adding: $addingItem) {
-                    addingItem = false
-                    itemStack.removeLast()
-                }
+                ItemDetail(item: item, adding: addingItem)
             }
             .toolbar {
                 ToolbarItemGroup(placement: .primaryAction) {
-                    EditButton()
-
-                    Button {
-                        withAnimation {
-                            addingItem = true
-                            itemStack.append(FridgeItem.makeDefaultFridgeItem())
-                        }
-                    } label: {
+                    Button(action: enterNewItem, label: {
                         Label("Add", systemImage: "plus")
-                    }
+                    })
                 }
 
                 ToolbarItemGroup(placement: .topBarLeading) {
@@ -110,14 +94,20 @@ struct ContentView: View {
             }
         }
     }
-}
 
-#Preview("preview items") {
-    MainView().modelContainer(previewContainer)
+    private func enterNewItem() {
+        enterItem(item: FridgeItem.makeDefaultFridgeItem())
+    }
+
+    private func enterItem(item: FridgeItem) {
+        addingItem = false
+        withAnimation {
+            itemStack.append(item)
+        }
+    }
 }
 
 #Preview("content view only") {
-    NavigationView {
-        ContentView(items: [])
-    }.modelContainer(previewContainer)
+    MainView()
+        .modelContainer(previewContainer)
 }

@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ItemDetail: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
     @Bindable var item: FridgeItem
-    @Binding var adding: Bool
+    var adding: Bool
     @State private var canceling = false
-    let wrapUp: () -> Void
     
     var titleText: String {
         if adding {
@@ -48,16 +48,14 @@ struct ItemDetail: View {
         .toolbar {
             if adding {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button {
+                    Button("cancel") {
                         canceling = true
-                    } label: {
-                        Text("cancel")
                     }.alert(
                         "Discard Changes?",
                         isPresented: $canceling)
                     {
                         Button("Yes", role: .destructive) {
-                            wrapUp()
+                            dismiss()
                         }
                     }
                 }
@@ -68,7 +66,8 @@ struct ItemDetail: View {
                     if adding {
                         modelContext.insert(item)
                     }
-                    wrapUp()
+                    
+                    dismiss()
                 } label: {
                     Text("save")
                 }

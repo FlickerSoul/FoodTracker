@@ -5,20 +5,18 @@
 //  Created by Heyuan Zeng on 6/6/23.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct MainView: View {
-    @Query private var items: [FridgeItem]
-    
     var body: some View {
         TabView {
-            ContentView(items: items)
+            ContentView()
                 .tabItem { Label("Items", systemImage: "square.and.pencil") }
-            
+
             SummaryView()
                 .tabItem { Label("Summary", systemImage: "info.square") }
-            
+
             SettingsView()
                 .tabItem { Label("Settings", systemImage: "slider.horizontal.3") }
         }

@@ -13,18 +13,20 @@ struct ItemLinkDropdown: View {
     @Binding var open: Bool
 
     var body: some View {
-        HStack(alignment: .center) {
-            Label(name, systemImage: icon)
-
-            Spacer()
-
-            Image(systemName: "chevron.right")
-                .rotationEffect(.degrees(open ? 90 : 0))
-        }.onTapGesture {
+        Button {
             withAnimation {
                 open.toggle()
             }
-        }
+        } label: {
+            HStack(alignment: .center) {
+                Label(name, systemImage: icon)
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .rotationEffect(.degrees(open ? 90 : 0))
+            }
+        }.buttonStyle(.plain)
     }
 }
 
