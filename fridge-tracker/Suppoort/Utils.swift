@@ -12,7 +12,7 @@ func roundDownToDate(date: Date) -> Date {
     return Calendar.current.date(from: components)!
 }
 
-func makeNotificationDateComponents(from date: Date) -> DateComponents {
+func getDateComponent(from date: Date) -> DateComponents {
     let components = Calendar.current.dateComponents([.year, .month, .day], from: date)
     return components
 }
