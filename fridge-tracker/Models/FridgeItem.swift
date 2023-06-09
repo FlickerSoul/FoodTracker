@@ -48,7 +48,7 @@ final class FridgeItem {
         content.body = ""
         content.sound = .default
         
-        let dateComponents = makeNotificationDateComponents(from: expiryDate)
+        let dateComponents = getDateComponent(from: expiryDate)
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         
