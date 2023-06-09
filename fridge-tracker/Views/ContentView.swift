@@ -40,6 +40,10 @@ struct ContentView: View {
         return hiddens
     }
 
+    var hasHiddenItems: Bool {
+        return hiddenItems.count > 0
+    }
+
     var body: some View {
         NavigationStack(path: $itemStack) {
             List {
@@ -58,20 +62,20 @@ struct ContentView: View {
                     }
                 }
 
-                if hiddenItems.count > 0 {
-                    Section {
-                        ItemLinkDropdown(name: "archived items", icon: "archivebox.circle", open: $hiddenItemListOpen)
+                Section {
+                    ItemLinkDropdown(name: "archived items", icon: "archivebox.circle", open: $hiddenItemListOpen)
+                        .opacity(hasHiddenItems ? 1 : 0.3)
+                        .disabled(!hasHiddenItems)
 
-                        if hiddenItemListOpen {
-                            ForEach(hiddenItems, id: \.id) {
-                                item in
-                                ItemLink(
-                                    item: item,
-                                    leadingActions: [.unarchive],
-                                    trailingActions: [.delete],
-                                    onTap: enterItem
-                                )
-                            }
+                    if hiddenItemListOpen {
+                        ForEach(hiddenItems, id: \.id) {
+                            item in
+                            ItemLink(
+                                item: item,
+                                leadingActions: [.unarchive],
+                                trailingActions: [.delete],
+                                onTap: enterItem
+                            )
                         }
                     }
                 }
