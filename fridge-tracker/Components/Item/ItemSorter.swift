@@ -32,6 +32,19 @@ enum OrderStyle: String, CaseIterable, Identifiable {
         }
     }
 
+    var sortDescriptor: SortDescriptor<FridgeItem> {
+        switch self {
+        case .expiringNearstFirst:
+            return SortDescriptor(\FridgeItem.expiryDate, order: .forward)
+        case .expiringFarestFirst:
+            return SortDescriptor(\FridgeItem.expiryDate, order: .reverse)
+        case .newestAddedFirst:
+            return SortDescriptor(\FridgeItem.addedDate, order: .forward)
+        case .oldestAddedFirst:
+            return SortDescriptor(\FridgeItem.addedDate, order: .reverse)
+        }
+    }
+
     static let sortExpiringNearestFirst: ComparatorType = { left, right in left.expiryDate < right.expiryDate }
     static let sortExpiringFarestFirst: ComparatorType = { left, right in left.expiryDate > right.expiryDate }
     static let sortNewestAddedFirst: ComparatorType = { left, right in left.addedDate < right.addedDate }
