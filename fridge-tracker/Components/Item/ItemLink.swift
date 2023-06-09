@@ -118,14 +118,15 @@ struct ItemLink: View {
         }
     }
 
-    func chooseAction(action choice: SwipeActions) -> AnyView {
+    @ViewBuilder
+    func chooseAction(action choice: SwipeActions) -> some View {
         switch choice {
         case .delete:
-            return AnyView(SwipeDeleteButton(action: deleteItem))
+            SwipeDeleteButton(action: deleteItem)
         case .archive:
-            return AnyView(SwipeArchiveButton(action: toggleItemArchive))
+            SwipeArchiveButton(action: toggleItemArchive)
         case .unarchive:
-            return AnyView(SwipeUnarchiveButton(action: toggleItemArchive))
+            SwipeUnarchiveButton(action: toggleItemArchive)
         }
     }
 }
