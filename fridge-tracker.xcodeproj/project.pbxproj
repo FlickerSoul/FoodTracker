@@ -28,6 +28,8 @@
 		5784EA012A2F54B700F2AD46 /* SampleFridgeItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784EA002A2F54B700F2AD46 /* SampleFridgeItems.swift */; };
 		579E0D7A2A2F620700A1F00B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579E0D792A2F620700A1F00B /* Utils.swift */; };
 		57BD50502A30B43E0076D0E1 /* ItemLinkDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD504F2A30B43E0076D0E1 /* ItemLinkDropdown.swift */; };
+		57CC1AF22A33380F00A902CC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CC1AF12A33380F00A902CC /* CalendarView.swift */; };
+		57CC1AF42A3341B800A902CC /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CC1AF32A3341B800A902CC /* PieChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		5784EA002A2F54B700F2AD46 /* SampleFridgeItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleFridgeItems.swift; sourceTree = "<group>"; };
 		579E0D792A2F620700A1F00B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		57BD504F2A30B43E0076D0E1 /* ItemLinkDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemLinkDropdown.swift; sourceTree = "<group>"; };
+		57CC1AF12A33380F00A902CC /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		57CC1AF32A3341B800A902CC /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +187,7 @@
 		5784E9F52A2F439400F2AD46 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				57CC1AF02A3337F000A902CC /* Summary */,
 				5784E9F62A2F439D00F2AD46 /* Item */,
 			);
 			path = Components;
@@ -209,6 +214,15 @@
 				579E0D792A2F620700A1F00B /* Utils.swift */,
 			);
 			path = Suppoort;
+			sourceTree = "<group>";
+		};
+		57CC1AF02A3337F000A902CC /* Summary */ = {
+			isa = PBXGroup;
+			children = (
+				57CC1AF12A33380F00A902CC /* CalendarView.swift */,
+				57CC1AF32A3341B800A902CC /* PieChartView.swift */,
+			);
+			path = Summary;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,9 +359,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57CC1AF42A3341B800A902CC /* PieChartView.swift in Sources */,
 				5784E9F82A2F43BD00F2AD46 /* ItemDetail.swift in Sources */,
 				5784E9C32A2F3FBD00F2AD46 /* FridgeItem.swift in Sources */,
 				5784E9F02A2F412E00F2AD46 /* MainView.swift in Sources */,
+				57CC1AF22A33380F00A902CC /* CalendarView.swift in Sources */,
 				5784E9F22A2F417300F2AD46 /* SummaryView.swift in Sources */,
 				575FB66F2A32469100029340 /* ItemFilter.swift in Sources */,
 				5784E9FF2A2F545F00F2AD46 /* PreviewContainer.swift in Sources */,
