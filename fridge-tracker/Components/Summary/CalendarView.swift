@@ -41,18 +41,26 @@ struct CalendarView: View {
         }
     }
 
-    @State var scrollPosition: Int = 0
+    @State var scrollPosition: Date = .now
 
     var body: some View {
         GeometryReader { geometry in
-            VStack {
+            VStack(alignment: .leading) {
+                VStack(alignment: .leading) {
+                    Text("Food Calendar")
+                        .font(.title)
+                        .bold()
+                    Text("As for \(Date.now.formatted(date: .abbreviated, time: .omitted))")
+                }
+                .padding(.leading, 20)
+
                 Chart {
                     ForEach(itemCountByDates, id: \.date) { date, count in
                         BarMark(
                             x: .value("Date", date, unit: .day),
                             y: .value("Item Count", count)
                         )
-                        .foregroundStyle(date > Date.now ? .mint : .orange)
+                        .foregroundStyle(date > Date.now ? .green : .red)
                     }
 
                     RuleMark(x: .value("Today", Date.now, unit: .day))
@@ -67,7 +75,7 @@ struct CalendarView: View {
                             )
                         ) {
                             ZStack {
-                                Rectangle()
+                                RoundedRectangle(cornerRadius: 5)
                                     .frame(width: 30, height: 20)
                                 Text("Now")
                             }
@@ -82,6 +90,12 @@ struct CalendarView: View {
                 .frame(maxHeight: geometry.size.width)
                 .chartScrollPosition(initialX: Date.now - SECONDS_IN_A_DAY)
                 .chartScrollPosition(x: $scrollPosition)
+                .chartScrollTargetBehavior(
+                    .valueAligned(
+                        matching: DateComponents(hour: 0),
+                        majorAlignment: .matching(DateComponents(hour: 0))
+                    )
+                )
                 .chartYAxisLabel("Food Count")
                 .chartXAxisLabel("Expiry Date")
                 .padding()
