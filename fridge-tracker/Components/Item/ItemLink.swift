@@ -22,7 +22,7 @@ struct ItemDate: View {
         HStack(spacing: 5) {
             Text(displayName)
             if color {
-                Text(date, style: .date).foregroundStyle(date < Date.now ? Color(.red) : Color(.green))
+                Text(date, style: .date).foregroundStyle(date < Date.now ? .red : .green)
             } else {
                 Text(date, style: .date)
             }
