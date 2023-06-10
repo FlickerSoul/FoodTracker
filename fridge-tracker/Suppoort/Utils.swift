@@ -7,9 +7,10 @@
 
 import Foundation
 
+let SECONDS_IN_A_DAY: Double = 24 * 3600
+
 func roundDownToDate(date: Date) -> Date {
-    let components = Calendar.current.dateComponents([.year, .month, .day], from: date)
-    return Calendar.current.date(from: components)!
+    return Calendar.current.startOfDay(for: date)
 }
 
 func getDateComponent(from date: Date) -> DateComponents {

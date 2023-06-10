@@ -19,8 +19,6 @@ enum DateSection: String, CaseIterable, Plottable {
     case oneMonth = "30 days"
     case oneYear = "365 days"
 
-    private static let secondsOfADay: Double = 24 * 3600
-
     private var begin: Date {
         let date = roundDownToDate(date: Date.now)
 
@@ -30,11 +28,11 @@ enum DateSection: String, CaseIterable, Plottable {
         case .oneDay:
             return date
         case .oneWeek:
-            return date + Self.secondsOfADay
+            return date + SECONDS_IN_A_DAY
         case .oneMonth:
-            return date + 7 * Self.secondsOfADay
+            return date + 7 * SECONDS_IN_A_DAY
         case .oneYear:
-            return date + 30 * Self.secondsOfADay
+            return date + 30 * SECONDS_IN_A_DAY
         }
     }
 
@@ -45,13 +43,13 @@ enum DateSection: String, CaseIterable, Plottable {
         case .alreadyExpired:
             return Date.distantPast..<date
         case .oneDay:
-            return self.begin..<(date + Self.secondsOfADay)
+            return self.begin..<(date + SECONDS_IN_A_DAY)
         case .oneWeek:
-            return self.begin..<(date + 7 * Self.secondsOfADay)
+            return self.begin..<(date + 7 * SECONDS_IN_A_DAY)
         case .oneMonth:
-            return self.begin..<(date + 30 * Self.secondsOfADay)
+            return self.begin..<(date + 30 * SECONDS_IN_A_DAY)
         case .oneYear:
-            return self.begin..<(date + 365 * Self.secondsOfADay)
+            return self.begin..<(date + 365 * SECONDS_IN_A_DAY)
         }
     }
 
@@ -149,6 +147,7 @@ struct PieChartView: View {
                     }
                 }
                 .frame(maxHeight: geometry.size.width)
+                .padding()
 
                 List {
                     ForEach(self.itemsBySections, id: \.section) { info in
@@ -167,7 +166,6 @@ struct PieChartView: View {
                     }
                 }
             }
-            .padding()
         }
     }
 }
