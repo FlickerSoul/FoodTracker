@@ -11,7 +11,7 @@ struct ItemDetail: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @Bindable var item: FridgeItem
-    var adding: Bool
+    @Binding var adding: Bool
     @State private var canceling = false
     
     var titleText: String {

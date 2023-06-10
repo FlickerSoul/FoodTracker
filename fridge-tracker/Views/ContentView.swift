@@ -57,7 +57,7 @@ struct ContentView: View {
                             item: item,
                             leadingActions: [.archive],
                             trailingActions: [.delete],
-                            onTap: enterItem
+                            onTap: enterEditItem
                         )
                     }
                 }
@@ -74,7 +74,7 @@ struct ContentView: View {
                                 item: item,
                                 leadingActions: [.unarchive],
                                 trailingActions: [.delete],
-                                onTap: enterItem
+                                onTap: enterEditItem
                             )
                         }
                     }
@@ -82,7 +82,7 @@ struct ContentView: View {
             }
             .navigationTitle("Items")
             .navigationDestination(for: FridgeItem.self) { item in
-                ItemDetail(item: item, adding: addingItem)
+                ItemDetail(item: item, adding: $addingItem)
             }
             .toolbar {
                 ToolbarItemGroup(placement: .primaryAction) {
@@ -100,12 +100,16 @@ struct ContentView: View {
     }
 
     private func enterNewItem() {
-        enterItem(item: FridgeItem.makeDefaultFridgeItem())
+        enterItem(item: FridgeItem.makeDefaultFridgeItem(), adding: true)
     }
 
-    private func enterItem(item: FridgeItem) {
-        addingItem = false
+    private func enterEditItem(item: FridgeItem) {
+        enterItem(item: item)
+    }
+
+    private func enterItem(item: FridgeItem, adding: Bool = false) {
         withAnimation {
+            addingItem = adding
             itemStack.append(item)
         }
     }
