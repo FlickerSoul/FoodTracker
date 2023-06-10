@@ -41,12 +41,6 @@ final class FridgeItem {
         } else {
             NotificationHandler.current.cancelNotification(item: self)
         }
-        
-        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { requests in
-            print(requests)
-            print(self.notificationIdentifiers)
-            
-        })
     }
         
     init(name: String, note: String = "", addedDate: Date = Date.now, expiryDate: Date = Date.now, notificationOn: Bool = true, archived: Bool = false, notificationIdentifiers: [String] = []) {
