@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5700E0E12A34C6280033CAE5 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5700E0E02A34C6280033CAE5 /* Notification.swift */; };
 		572948592A34A6D40075487E /* CategoryDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572948582A34A6D40075487E /* CategoryDropdown.swift */; };
 		575FB66F2A32469100029340 /* ItemFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575FB66E2A32469100029340 /* ItemFilter.swift */; };
 		575FB6712A324CF100029340 /* NoItemPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575FB6702A324CF100029340 /* NoItemPrompt.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5700E0E02A34C6280033CAE5 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		572948582A34A6D40075487E /* CategoryDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDropdown.swift; sourceTree = "<group>"; };
 		575FB66E2A32469100029340 /* ItemFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFilter.swift; sourceTree = "<group>"; };
 		575FB6702A324CF100029340 /* NoItemPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoItemPrompt.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 			children = (
 				5784E9FE2A2F545F00F2AD46 /* PreviewContainer.swift */,
 				579E0D792A2F620700A1F00B /* Utils.swift */,
+				5700E0E02A34C6280033CAE5 /* Notification.swift */,
 			);
 			path = Suppoort;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				576139F32A30AD54005A10DD /* ItemSorter.swift in Sources */,
 				575FB6712A324CF100029340 /* NoItemPrompt.swift in Sources */,
 				5784E9FA2A2F43CA00F2AD46 /* ItemLink.swift in Sources */,
+				5700E0E12A34C6280033CAE5 /* Notification.swift in Sources */,
 				5784E9C52A2F3FBD00F2AD46 /* ContentView.swift in Sources */,
 				579E0D7A2A2F620700A1F00B /* Utils.swift in Sources */,
 				57BD50502A30B43E0076D0E1 /* ItemLinkDropdown.swift in Sources */,

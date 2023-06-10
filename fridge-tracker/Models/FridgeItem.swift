@@ -36,10 +36,10 @@ final class FridgeItem {
     
     func toggleNotification() {
         if notificationOn, !archived {
-            requestNotification()
-            scheduleNotification()
+            NotificationHandler.current.requestNotification()
+            NotificationHandler.current.scheduleNotification(item: self)
         } else {
-            cancelNotification()
+            NotificationHandler.current.cancelNotification(item: self)
         }
         
         UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { requests in
@@ -49,55 +49,6 @@ final class FridgeItem {
         })
     }
         
-    private func scheduleNotification() {
-        let today = roundDownToDate(date: Date.now)
-        
-        if roundDownToDate(date: expiryDate) < today {
-            return
-        }
-        
-        let content = UNMutableNotificationContent()
-        content.title = "Food '\(name)' is expiring today!"
-        content.subtitle = "It was added on \(addedDate.formatted(date: .complete, time: .omitted))"
-        content.body = "Click to see the details"
-        content.sound = .default
-        
-        let expiryDateComponent = getDateComponent(from: expiryDate)
-        
-        var trigger: UNNotificationTrigger?
-        
-        if expiryDateComponent != getDateComponent(from: today) {
-            trigger = UNCalendarNotificationTrigger(dateMatching: expiryDateComponent, repeats: false)
-        }
-        
-        let uuidString = UUID().uuidString
-        let request = UNNotificationRequest(identifier: uuidString,
-                                            content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request) { error in
-            if error != nil {
-                // TODO: decouple this part
-                print("error")
-            } else {
-                self.notificationIdentifiers.append(uuidString)
-            }
-        }
-    }
-    
-    private func requestNotification() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    private func cancelNotification() {
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.removePendingNotificationRequests(withIdentifiers: notificationIdentifiers)
-        notificationIdentifiers.removeAll()
-    }
-    
     init(name: String, note: String = "", addedDate: Date = Date.now, expiryDate: Date = Date.now, notificationOn: Bool = true, archived: Bool = false, notificationIdentifiers: [String] = []) {
         self.id = UUID()
         self.name = name
