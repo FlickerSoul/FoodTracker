@@ -12,8 +12,8 @@ import SwiftUI
     import SwiftData
 #endif
 
-enum DateSection: String, CaseIterable {
-    case alreadyExpired = "already expired"
+enum DateSection: String, CaseIterable, Plottable {
+    case alreadyExpired = "Already expired"
     case oneDay = "1 day"
     case oneWeek = "7 days"
     case oneMonth = "30 days"
@@ -54,6 +54,21 @@ enum DateSection: String, CaseIterable {
             return self.begin..<(date + 365 * Self.secondsOfADay)
         }
     }
+
+    var color: Color {
+        switch self {
+        case .alreadyExpired:
+            return .red
+        case .oneDay:
+            return .orange
+        case .oneWeek:
+            return .yellow
+        case .oneMonth:
+            return .green
+        case .oneYear:
+            return .teal
+        }
+    }
 }
 
 struct PieChartView: View {
@@ -63,60 +78,59 @@ struct PieChartView: View {
         var items: [FridgeItem]
     #endif
 
-    private typealias ItemInfoType = [String: [FridgeItem]]
+    private let sections: [DateSection] = DateSection.allCases
 
-    private typealias ItemCountInfoType = [(name: String, count: Int)]
+    typealias ItemInfoType = (section: DateSection, items: [FridgeItem], count: Int)
 
-    private(set) var sections: [DateSection] = DateSection.allCases
+    typealias ItemInfoArrayType = [ItemInfoType]
 
-    private var itemInfoBySections: ItemInfoType {
-        return self.sections.reduce(into: ItemInfoType()) { dict, section in
-            dict[section.rawValue] = self.items.filter { item in
+    private var itemsBySections: ItemInfoArrayType {
+        return self.sections.map { section in
+            let filtered = self.items.filter { item in
                 section.timeRange.contains(item.expiryDate)
             }
+            return (
+                section: section,
+                items: filtered,
+                count: filtered.count
+            )
         }
-    }
-
-    private var itemCountBySections: ItemCountInfoType {
-        return self.itemInfoBySections.map { name, items in
-            (name: name, count: items.count)
-        }
-    }
-
-    private var selectedName: String? {
-        if var value = selectedValue {
-            for (name, count) in self.itemCountBySections {
-                value -= count
-                if value <= 0 {
-                    return name
-                }
-            }
-        }
-
-        return nil
     }
 
     private var noItems: Bool {
         return self.items.count == 0
     }
 
-    @State private var selectedValue: Int? = nil
-    @State private var nameStack: [String] = []
+    @State var openings: [DateSection: Bool] = DateSection.allCases.reduce(into: [DateSection: Bool]()) { dict, section in
+        dict[section] = false
+    }
+
+    private func dictBinding(for section: DateSection) -> Binding<Bool> {
+        return Binding {
+            return self.openings[section]!
+        } set: { val in
+            self.openings[section] = val
+        }
+    }
 
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
-                Chart(self.itemCountBySections, id: \.name) { name, count in
+                Chart(self.itemsBySections, id: \.section) { section, _, count in
                     SectorMark(
                         angle: .value("Count", count),
                         innerRadius: .ratio(0.618),
                         angularInset: 2
                     )
                     .cornerRadius(5)
-                    .foregroundStyle(by: .value("Name", name))
+                    .foregroundStyle(section.color)
+                    .foregroundStyle(by: .value("Name", section))
                 }
                 .chartLegend(position: .bottom, alignment: .center, spacing: 20)
-                .chartAngleSelection(self.$selectedValue)
+                .chartForegroundStyleScale(
+                    domain: self.sections,
+                    range: self.sections.map { $0.color }
+                )
                 .chartBackground { chartProxy in
                     GeometryReader { geometry in
                         let frame = geometry[chartProxy.plotAreaFrame]
@@ -136,9 +150,22 @@ struct PieChartView: View {
                 }
                 .frame(maxHeight: geometry.size.width)
 
-                Text("This is helper text")
+                List {
+                    ForEach(self.itemsBySections, id: \.section) { info in
+                        Section {
+                            CategoryDropdown(info: info, opened: self.dictBinding(for: info.section))
 
-                Spacer()
+                            if self.openings[info.section]! {
+                                ForEach(info.items, id: \.id) { item in
+                                    ItemLink(item: item) { _ in
+                                    }
+                                }
+                            } else {
+                                EmptyView()
+                            }
+                        }
+                    }
+                }
             }
             .padding()
         }
