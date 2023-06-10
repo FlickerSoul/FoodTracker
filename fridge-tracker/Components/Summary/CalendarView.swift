@@ -19,10 +19,18 @@ struct CalendarView: View {
         var items: [FridgeItem]
     #endif
 
+    var visibleItems: [FridgeItem] {
+        if filteringArchived {
+            return items.filter { !$0.archived }
+        } else {
+            return items
+        }
+    }
+
     private typealias ItemInfoType = [Date: [FridgeItem]]
 
     private var itemsByDates: ItemInfoType {
-        return Dictionary(grouping: items) { item in
+        return Dictionary(grouping: visibleItems) { item in
             roundDownToDate(date: item.expiryDate)
         }
     }
@@ -42,17 +50,24 @@ struct CalendarView: View {
     }
 
     @State var scrollPosition: Date = .now
+    @State var filteringArchived: Bool = false
 
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading) {
-                VStack(alignment: .leading) {
-                    Text("Food Calendar")
-                        .font(.title)
-                        .bold()
-                    Text("As for \(Date.now.formatted(date: .abbreviated, time: .omitted))")
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Food Calendar")
+                            .font(.title)
+                            .bold()
+                        Text("As for \(Date.now.formatted(date: .abbreviated, time: .omitted))")
+                    }
+
+                    Spacer()
+
+                    ItemFilter(filtering: $filteringArchived, text: "Filter Archived")
                 }
-                .padding(.leading, 20)
+                .padding(.horizontal)
 
                 Chart {
                     ForEach(itemCountByDates, id: \.date) { date, count in

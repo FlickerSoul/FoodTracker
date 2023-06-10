@@ -13,13 +13,17 @@ struct SummaryView: View {
 
     var body: some View {
         TabView {
-#if DEBUG
+            #if DEBUG
             PieChartView().tabItem { Label("Chart", systemImage: "chart.pie") }
-#else
+            #else
             PieChartView(items: items).tabItem { Label("Chart", systemImage: "chart.pie") }
-#endif
+            #endif
 
+            #if DEBUG
             CalendarView().tabItem { Label("Calendar", systemImage: "calendar") }
+            #else
+            CalendarView(items: items).tabItem { Label("Calendar", systemImage: "calendar") }
+            #endif
         }
         .tabViewStyle(.page)
     }

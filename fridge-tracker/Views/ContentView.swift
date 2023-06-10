@@ -93,7 +93,7 @@ struct ContentView: View {
 
                 ToolbarItemGroup(placement: .topBarLeading) {
                     ItemSorter(selection: $orderSelection)
-                    ItemFilter(filtering: $filteringExpired)
+                    ItemFilter(filtering: $filteringExpired, text: "Filter Expired")
                 }
             }
         }

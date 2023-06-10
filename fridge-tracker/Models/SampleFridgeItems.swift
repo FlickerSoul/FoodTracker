@@ -15,6 +15,13 @@ struct SampleFridgeItems {
             expiryDate: Date.now + 2 * SECONDS_IN_A_DAY
         ),
         FridgeItem(
+            name: "stolen cake",
+            note: "brought today",
+            addedDate: Date.now,
+            expiryDate: Date.now + 3 * SECONDS_IN_A_DAY,
+            archived: true
+        ),
+        FridgeItem(
             name: "Banana",
             note: "from a big shopping",
             addedDate: Date.now - 2 * SECONDS_IN_A_DAY,
