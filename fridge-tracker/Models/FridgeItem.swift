@@ -34,32 +34,49 @@ final class FridgeItem {
         !notificationIdentifiers.isEmpty
     }
     
-    private func toggleNotification() {
+    func toggleNotification() {
         if notificationOn, !archived {
+            requestNotification()
             scheduleNotification()
         } else {
             cancelNotification()
         }
+        
+        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { requests in
+            print(requests)
+            print(self.notificationIdentifiers)
+            
+        })
     }
-    
+        
     private func scheduleNotification() {
+        let today = roundDownToDate(date: Date.now)
+        
+        if roundDownToDate(date: expiryDate) < today {
+            return
+        }
+        
         let content = UNMutableNotificationContent()
         content.title = "Food '\(name)' is expiring today!"
-        content.body = ""
+        content.subtitle = "It was added on \(addedDate.formatted(date: .complete, time: .omitted))"
+        content.body = "Click to see the details"
         content.sound = .default
         
-        let dateComponents = getDateComponent(from: expiryDate)
+        let expiryDateComponent = getDateComponent(from: expiryDate)
         
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        var trigger: UNNotificationTrigger?
+        
+        if expiryDateComponent != getDateComponent(from: today) {
+            trigger = UNCalendarNotificationTrigger(dateMatching: expiryDateComponent, repeats: false)
+        }
         
         let uuidString = UUID().uuidString
         let request = UNNotificationRequest(identifier: uuidString,
                                             content: content, trigger: trigger)
-        let notificationCenter = UNUserNotificationCenter.current()
         
-        notificationCenter.add(request) { error in
+        UNUserNotificationCenter.current().add(request) { error in
             if error != nil {
-                // TODO: better error handling
+                // TODO: decouple this part
                 print("error")
             } else {
                 self.notificationIdentifiers.append(uuidString)
@@ -68,10 +85,8 @@ final class FridgeItem {
     }
     
     private func requestNotification() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-            if success {
-                print("All set!")
-            } else if let error = error {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, error in
+            if let error = error {
                 print(error.localizedDescription)
             }
         }
@@ -94,7 +109,7 @@ final class FridgeItem {
         self.archived = archived
     }
     
-    static func makeDefaultFridgeItem(name: String = "Item name") -> FridgeItem {
+    static func makeDefaultFridgeItem(name: String = "") -> FridgeItem {
         return Self(name: name)
     }
     

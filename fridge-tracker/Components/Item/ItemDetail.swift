@@ -69,6 +69,7 @@ struct ItemDetail: View {
             ToolbarItem(placement: .confirmationAction) {
                 Button {
                     if adding {
+                        item.toggleNotification()
                         modelContext.insert(item)
                     }
                     
