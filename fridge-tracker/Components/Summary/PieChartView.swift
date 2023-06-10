@@ -14,7 +14,8 @@ import SwiftUI
 
 enum DateSection: String, CaseIterable, Plottable {
     case alreadyExpired = "Already expired"
-    case oneDay = "1 day"
+    case oneDay = "today"
+    case threeDays = "3 days"
     case oneWeek = "7 days"
     case oneMonth = "30 days"
     case oneYear = "365 days"
@@ -27,8 +28,10 @@ enum DateSection: String, CaseIterable, Plottable {
             return Date.distantPast
         case .oneDay:
             return date
-        case .oneWeek:
+        case .threeDays:
             return date + SECONDS_IN_A_DAY
+        case .oneWeek:
+            return date + 3 * SECONDS_IN_A_DAY
         case .oneMonth:
             return date + 7 * SECONDS_IN_A_DAY
         case .oneYear:
@@ -44,6 +47,8 @@ enum DateSection: String, CaseIterable, Plottable {
             return Date.distantPast..<date
         case .oneDay:
             return self.begin..<(date + SECONDS_IN_A_DAY)
+        case .threeDays:
+            return self.begin..<(date + 3 * SECONDS_IN_A_DAY)
         case .oneWeek:
             return self.begin..<(date + 7 * SECONDS_IN_A_DAY)
         case .oneMonth:
@@ -59,12 +64,14 @@ enum DateSection: String, CaseIterable, Plottable {
             return .red
         case .oneDay:
             return .orange
-        case .oneWeek:
+        case .threeDays:
             return .yellow
+        case .oneWeek:
+            return .mint
         case .oneMonth:
             return .green
         case .oneYear:
-            return .teal
+            return .blue
         }
     }
 }
