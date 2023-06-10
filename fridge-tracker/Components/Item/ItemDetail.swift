@@ -13,6 +13,7 @@ struct ItemDetail: View {
     @Bindable var item: FridgeItem
     @Binding var adding: Bool
     @State private var canceling = false
+    @State private var showInvalidAleart = false
     
     var titleText: String {
         if adding {
@@ -22,11 +23,15 @@ struct ItemDetail: View {
         }
     }
     
+    private var isItemInvalid: Bool {
+        item.name.isEmpty
+    }
+    
     var body: some View {
         VStack {
             List {
                 Section(header: Label("Name", systemImage: "pencil")) {
-                    TextField("Item Name", text: $item.name)
+                    TextField("Give a name to this item", text: $item.name)
                 }
                 
                 Section(header: Label("Date", systemImage: "pencil")) {
@@ -52,8 +57,8 @@ struct ItemDetail: View {
                         canceling = true
                     }.alert(
                         "Discard Changes?",
-                        isPresented: $canceling)
-                    {
+                        isPresented: $canceling
+                    ) {
                         Button("Yes", role: .destructive) {
                             dismiss()
                         }
@@ -70,7 +75,7 @@ struct ItemDetail: View {
                     dismiss()
                 } label: {
                     Text("save")
-                }
+                }.disabled(isItemInvalid)
             }
         }
         .navigationBarBackButtonHidden(true)
