@@ -91,19 +91,9 @@ struct CalendarView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading) {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("Food Calendar")
-                            .font(.title)
-                            .bold()
-                        Text("As for \(Date.now.formatted(date: .abbreviated, time: .omitted))")
-                    }
-
-                    Spacer()
-
+                SummaryTitle {
                     ItemFilter(filtering: $filteringArchived, text: "Filter Archived")
                 }
-                .padding(.horizontal)
 
                 Chart {
                     ForEach(itemCountByDates, id: \.date) { date, count in

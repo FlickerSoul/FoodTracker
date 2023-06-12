@@ -8,24 +8,43 @@
 import SwiftData
 import SwiftUI
 
+private enum SummaryTabs: Hashable {
+    case pie
+    case cal
+}
+
 struct SummaryView: View {
     @Query private var items: [FridgeItem] // TODO: change this so that all views share one query
 
-    var body: some View {
-        TabView {
-            #if DEBUG
-            PieChartView().tabItem { Label("Chart", systemImage: "chart.pie") }
-            #else
-            PieChartView(items: items).tabItem { Label("Chart", systemImage: "chart.pie") }
-            #endif
+    @State private var selectedTab: SummaryTabs = .pie
 
-            #if DEBUG
-            CalendarView().tabItem { Label("Calendar", systemImage: "calendar") }
-            #else
-            CalendarView(items: items).tabItem { Label("Calendar", systemImage: "calendar") }
-            #endif
+    var body: some View {
+        VStack {
+            Picker("", selection: $selectedTab) {
+                Text("Pie Chart").tag(SummaryTabs.pie)
+                Text("Calendar").tag(SummaryTabs.cal)
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding(.horizontal)
+
+            switch selectedTab {
+            case .pie:
+#if DEBUG
+                PieChartView().tabItem { Label("Chart", systemImage: "chart.pie").foregroundColor(.blue) }
+#else
+                PieChartView(items: items.tabItem { Label("Chart", systemImage: "chart.pie").foregroundColor(.blue) })
+#endif
+
+            case .cal:
+
+#if DEBUG
+                CalendarView().tabItem { Label("Calendar", systemImage: "calendar").foregroundColor(.blue) }
+#else
+                CalendarView(items: items).tabItem { Label("Calendar", systemImage: "calendar").foregroundColor(.blue) }
+
+#endif
+            }
         }
-        .tabViewStyle(.page)
     }
 }
 

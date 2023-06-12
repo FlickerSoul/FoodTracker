@@ -128,6 +128,8 @@ struct PieChartView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
+                SummaryTitle<EmptyView>()
+
                 Chart {
                     ForEach(self.itemsBySections, id: \.section) { section, _, count in
                         SectorMark(
