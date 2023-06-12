@@ -14,11 +14,11 @@ import SwiftUI
 
 enum DateSection: String, CaseIterable, Plottable {
     case alreadyExpired = "Already expired"
-    case oneDay = "today"
+    case oneDay = "Today"
     case threeDays = "3 days"
     case oneWeek = "7 days"
     case oneMonth = "30 days"
-    case oneYear = "365 days"
+    case other = "A long time"
 
     private var begin: Date {
         let date = roundDownToDate(date: Date.now)
@@ -34,7 +34,7 @@ enum DateSection: String, CaseIterable, Plottable {
             return date + 3 * SECONDS_IN_A_DAY
         case .oneMonth:
             return date + 7 * SECONDS_IN_A_DAY
-        case .oneYear:
+        case .other:
             return date + 30 * SECONDS_IN_A_DAY
         }
     }
@@ -53,8 +53,8 @@ enum DateSection: String, CaseIterable, Plottable {
             return self.begin..<(date + 7 * SECONDS_IN_A_DAY)
         case .oneMonth:
             return self.begin..<(date + 30 * SECONDS_IN_A_DAY)
-        case .oneYear:
-            return self.begin..<(date + 365 * SECONDS_IN_A_DAY)
+        case .other:
+            return self.begin..<Date.distantFuture
         }
     }
 
@@ -70,7 +70,7 @@ enum DateSection: String, CaseIterable, Plottable {
             return .mint
         case .oneMonth:
             return .green
-        case .oneYear:
+        case .other:
             return .blue
         }
     }
@@ -118,18 +118,27 @@ struct PieChartView: View {
         }
     }
 
+//    private func selectSection(at location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) {
+//        let xPosition = location.x - geometry[proxy.plotAreaFrame].origin.x
+//        let yPosition = location.y - geometry[proxy.plotAreaFrame].origin.y
+//
+//        let sec = proxy.value(at: CGPoint(x: xPosition, y: yPosition), as: (String, Int).self)
+//    }
+
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
-                Chart(self.itemsBySections, id: \.section) { section, _, count in
-                    SectorMark(
-                        angle: .value("Count", count),
-                        innerRadius: .ratio(0.618),
-                        angularInset: 2
-                    )
-                    .cornerRadius(5)
-                    .foregroundStyle(section.color)
-                    .foregroundStyle(by: .value("Name", section))
+                Chart {
+                    ForEach(self.itemsBySections, id: \.section) { section, _, count in
+                        SectorMark(
+                            angle: .value("Count", count),
+                            innerRadius: .ratio(0.618),
+                            angularInset: 2
+                        )
+                        .cornerRadius(5)
+                        .foregroundStyle(section.color)
+                        .foregroundStyle(by: .value("Name", section))
+                    }
                 }
                 .chartLegend(position: .bottom, alignment: .center, spacing: 20)
                 .chartForegroundStyleScale(
@@ -154,6 +163,16 @@ struct PieChartView: View {
                     }
                 }
                 .frame(maxHeight: geometry.size.width)
+//                .chartOverlay(content: { proxy in
+//                    GeometryReader { geometry in
+//                        Rectangle()
+//                            .fill(.clear)
+//                            .contentShape(Rectangle())
+//                            .onTapGesture { point in
+//                                self.selectSection(at: point, proxy: proxy, geometry: geometry)
+//                            }
+//                    }
+//                })
                 .padding()
 
                 List {
