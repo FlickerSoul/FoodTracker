@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5700E0E12A34C6280033CAE5 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5700E0E02A34C6280033CAE5 /* Notification.swift */; };
+		570886C72A37448800F48B69 /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570886C62A37448800F48B69 /* About.swift */; };
+		570886CB2A374AA100F48B69 /* SettingsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570886CA2A374AA100F48B69 /* SettingsConfig.swift */; };
+		570886CD2A3750C200F48B69 /* NotificationTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570886CC2A3750C200F48B69 /* NotificationTime.swift */; };
 		572948592A34A6D40075487E /* CategoryDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572948582A34A6D40075487E /* CategoryDropdown.swift */; };
 		575FB66F2A32469100029340 /* ItemFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575FB66E2A32469100029340 /* ItemFilter.swift */; };
 		575FB6712A324CF100029340 /* NoItemPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575FB6702A324CF100029340 /* NoItemPrompt.swift */; };
@@ -53,6 +56,9 @@
 
 /* Begin PBXFileReference section */
 		5700E0E02A34C6280033CAE5 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		570886C62A37448800F48B69 /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
+		570886CA2A374AA100F48B69 /* SettingsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsConfig.swift; sourceTree = "<group>"; };
+		570886CC2A3750C200F48B69 /* NotificationTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTime.swift; sourceTree = "<group>"; };
 		572948582A34A6D40075487E /* CategoryDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDropdown.swift; sourceTree = "<group>"; };
 		575FB66E2A32469100029340 /* ItemFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFilter.swift; sourceTree = "<group>"; };
 		575FB6702A324CF100029340 /* NoItemPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoItemPrompt.swift; sourceTree = "<group>"; };
@@ -108,6 +114,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		570886C52A37447F00F48B69 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				570886C62A37448800F48B69 /* About.swift */,
+				570886CC2A3750C200F48B69 /* NotificationTime.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		5784E9B42A2F3FBD00F2AD46 = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +206,7 @@
 		5784E9F52A2F439400F2AD46 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				570886C52A37447F00F48B69 /* Settings */,
 				57CC1AF02A3337F000A902CC /* Summary */,
 				5784E9F62A2F439D00F2AD46 /* Item */,
 			);
@@ -217,6 +233,7 @@
 				5784E9FE2A2F545F00F2AD46 /* PreviewContainer.swift */,
 				579E0D792A2F620700A1F00B /* Utils.swift */,
 				5700E0E02A34C6280033CAE5 /* Notification.swift */,
+				570886CA2A374AA100F48B69 /* SettingsConfig.swift */,
 			);
 			path = Suppoort;
 			sourceTree = "<group>";
@@ -371,6 +388,7 @@
 				5784E9F02A2F412E00F2AD46 /* MainView.swift in Sources */,
 				57CC1AF22A33380F00A902CC /* CalendarView.swift in Sources */,
 				5784E9F22A2F417300F2AD46 /* SummaryView.swift in Sources */,
+				570886CD2A3750C200F48B69 /* NotificationTime.swift in Sources */,
 				575FB66F2A32469100029340 /* ItemFilter.swift in Sources */,
 				5784E9FF2A2F545F00F2AD46 /* PreviewContainer.swift in Sources */,
 				5784EA012A2F54B700F2AD46 /* SampleFridgeItems.swift in Sources */,
@@ -378,6 +396,8 @@
 				572948592A34A6D40075487E /* CategoryDropdown.swift in Sources */,
 				5784E9C12A2F3FBD00F2AD46 /* fridge_trackerApp.swift in Sources */,
 				576139DB2A3090BA005A10DD /* SwipeActionButtons.swift in Sources */,
+				570886C72A37448800F48B69 /* About.swift in Sources */,
+				570886CB2A374AA100F48B69 /* SettingsConfig.swift in Sources */,
 				576139F32A30AD54005A10DD /* ItemSorter.swift in Sources */,
 				575FB6712A324CF100029340 /* NoItemPrompt.swift in Sources */,
 				5784E9FA2A2F43CA00F2AD46 /* ItemLink.swift in Sources */,

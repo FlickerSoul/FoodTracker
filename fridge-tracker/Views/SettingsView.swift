@@ -8,12 +8,19 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @State private var settings: SettingsConfig = .init()
+
     var body: some View {
         NavigationView {
             List {
-                AboutLink()
+                Section {
+                    AboutLink()
+                }
             }
             .navigationTitle("Settings")
+            .onChange(of: settings) { _, newValue in
+                newValue.store()
+            }
         }
     }
 }
