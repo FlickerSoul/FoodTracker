@@ -43,14 +43,38 @@ struct CalendarView: View {
         }
     }
 
-    private var maxCount: Int {
-        return itemCountByDates.reduce(Int.min) { res, countInfo in
-            max(res, countInfo.count)
-        }
+    private var countDomain: ClosedRange<Int> {
+        return 0 ... (
+            itemCountByDates.reduce(Int.min) { res, countInfo in
+                max(res, countInfo.count)
+            } + 1
+        )
     }
 
-    @State var scrollPosition: Date = .now
-    @State var filteringArchived: Bool = false
+    private var dateDomain: ClosedRange<Date> {
+        (
+            itemsByDates.keys.reduce(Date.distantFuture) { partialResult, date in
+                min(partialResult, date)
+            } - 3 * SECONDS_IN_A_DAY
+        ) ... (
+            itemsByDates.keys.reduce(Date.distantPast) { partialResult, date in
+                max(partialResult, date)
+            } + 3 * SECONDS_IN_A_DAY
+        )
+    }
+
+    @State var filteringArchived: Bool = true
+
+    @State var selectedDate: Date? = nil
+
+    private func selectBar(at location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) {
+        let xPosition = location.x - geometry[proxy.plotAreaFrame].origin.x
+        if let date: Date = proxy.value(atX: xPosition) {
+            selectedDate = date
+        } else {
+            selectedDate = nil
+        }
+    }
 
     var body: some View {
         GeometryReader { geometry in
@@ -96,26 +120,55 @@ struct CalendarView: View {
                             }
                         }
                 }
+                .chartOverlay { proxy in
+                    GeometryReader { geometry in
+                        Rectangle()
+                            .fill(.clear)
+                            .contentShape(Rectangle())
+                            .onTapGesture { location in
+                                self.selectBar(at: location, proxy: proxy, geometry: geometry)
+                            }
+                    }
+                }
                 .chartScrollableAxes(.horizontal)
                 .chartXAxis {
                     AxisMarks(values: .stride(by: .day))
                 }
                 .chartXVisibleDomain(length: 7 * SECONDS_IN_A_DAY)
-                .chartYScale(domain: 0 ... (maxCount + 1))
+                .chartYScale(domain: countDomain)
+                .chartXScale(domain: dateDomain)
                 .frame(maxHeight: geometry.size.width)
                 .chartScrollPosition(initialX: Date.now - SECONDS_IN_A_DAY)
-                .chartScrollPosition(x: $scrollPosition)
                 .chartScrollTargetBehavior(
                     .valueAligned(
                         matching: DateComponents(hour: 0),
-                        majorAlignment: .matching(DateComponents(hour: 0))
+                        majorAlignment: .matching(DateComponents(day: 1))
                     )
                 )
                 .chartYAxisLabel("Food Count")
                 .chartXAxisLabel("Expiry Date")
-                .padding()
+                .padding(.horizontal)
 
-                Text("\(scrollPosition)")
+                List {
+                    if let selectedDate = selectedDate {
+                        let rounded = roundDownToDate(date: selectedDate)
+
+                        Text("On \(selectedDate.formatted(date: .complete, time: .omitted))")
+
+                        if let selectedItems =
+                            itemsByDates[rounded]
+                        {
+                            ForEach(selectedItems) { item in
+                                ItemLink(item: item) { _ in
+                                }
+                            }
+                        } else {
+                            Text("Nothing")
+                        }
+                    } else {
+                        Text("No Date Selected")
+                    }
+                }
             }
         }
     }
