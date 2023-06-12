@@ -126,45 +126,43 @@ struct PieChartView: View {
 //    }
 
     var body: some View {
-        GeometryReader { geometry in
-            VStack(alignment: .center) {
-                SummaryTitle<EmptyView>()
+        VStack(alignment: .center) {
+            SummaryTitle<EmptyView>()
 
-                Chart {
-                    ForEach(self.itemsBySections, id: \.section) { section, _, count in
-                        SectorMark(
-                            angle: .value("Count", count),
-                            innerRadius: .ratio(0.618),
-                            angularInset: 2
-                        )
-                        .cornerRadius(5)
-                        .foregroundStyle(section.color)
-                        .foregroundStyle(by: .value("Name", section))
-                    }
+            Chart {
+                ForEach(self.itemsBySections, id: \.section) { section, _, count in
+                    SectorMark(
+                        angle: .value("Count", count),
+                        innerRadius: .ratio(0.618),
+                        angularInset: 2
+                    )
+                    .cornerRadius(5)
+                    .foregroundStyle(section.color)
+                    .foregroundStyle(by: .value("Name", section))
                 }
-                .chartLegend(position: .bottom, alignment: .center, spacing: 20)
-                .chartForegroundStyleScale(
-                    domain: self.sections,
-                    range: self.sections.map { $0.color }
-                )
-                .chartBackground { chartProxy in
-                    GeometryReader { geometry in
-                        let frame = geometry[chartProxy.plotAreaFrame]
+            }
+            .chartLegend(position: .bottom, alignment: .center, spacing: 20)
+            .chartForegroundStyleScale(
+                domain: self.sections,
+                range: self.sections.map { $0.color }
+            )
+            .chartBackground { chartProxy in
+                GeometryReader { geometry in
+                    let frame = geometry[chartProxy.plotAreaFrame] // TODO: error 
 
-                        VStack(alignment: .center) {
-                            if self.noItems {
-                                Text("No Items")
-                            } else {
-                                Text("Expiring Food")
-                                    .font(.title2)
-                                    .bold()
-                                Text("By")
-                                Text("Dates")
-                            }
-                        }.position(x: frame.midX, y: frame.midY)
-                    }
+                    VStack(alignment: .center) {
+                        if self.noItems {
+                            Text("No Items")
+                        } else {
+                            Text("Expiring Food")
+                                .font(.title2)
+                                .bold()
+                            Text("By")
+                            Text("Dates")
+                        }
+                    }.position(x: frame.midX, y: frame.midY)
                 }
-                .frame(maxHeight: geometry.size.width)
+            }
 //                .chartOverlay(content: { proxy in
 //                    GeometryReader { geometry in
 //                        Rectangle()
@@ -175,21 +173,20 @@ struct PieChartView: View {
 //                            }
 //                    }
 //                })
-                .padding()
+            .padding()
 
-                List {
-                    ForEach(self.itemsBySections, id: \.section) { info in
-                        Section {
-                            CategoryDropdown(info: info, opened: self.dictBinding(for: info.section))
+            List {
+                ForEach(self.itemsBySections, id: \.section) { info in
+                    Section {
+                        CategoryDropdown(info: info, opened: self.dictBinding(for: info.section))
 
-                            if self.openings[info.section]! {
-                                ForEach(info.items, id: \.id) { item in
-                                    ItemLink(item: item) { _ in
-                                    }
+                        if self.openings[info.section]! {
+                            ForEach(info.items, id: \.id) { item in
+                                ItemLink(item: item) { _ in
                                 }
-                            } else {
-                                EmptyView()
                             }
+                        } else {
+                            EmptyView()
                         }
                     }
                 }

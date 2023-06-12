@@ -89,91 +89,88 @@ struct CalendarView: View {
     }
 
     var body: some View {
-        GeometryReader { geometry in
-            VStack(alignment: .leading) {
-                SummaryTitle {
-                    ItemFilter(filtering: $filteringArchived, text: "Filter Archived")
-                }
+        VStack(alignment: .leading) {
+            SummaryTitle {
+                ItemFilter(filtering: $filteringArchived, text: "Filter Archived")
+            }
 
-                Chart {
-                    ForEach(itemCountByDates, id: \.date) { date, count in
-                        BarMark(
-                            x: .value("Date", date, unit: .day),
-                            y: .value("Item Count", count)
-                        )
-                        .foregroundStyle(date > Date.now ? .green : .red)
-                    }
-
-                    RuleMark(x: .value("Today", Date.now, unit: .day))
-                        .foregroundStyle(.yellow)
-                        .offset(yStart: -10)
-                        .annotation(
-                            position: .top,
-                            spacing: 0,
-                            overflowResolution: .init(
-                                x: .fit(to: .chart),
-                                y: .disabled
-                            )
-                        ) {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 5)
-                                    .frame(width: 30, height: 20)
-                                Text("Now")
-                            }
-                        }
-                }
-                .chartOverlay { proxy in
-                    if noItems {
-                        Text("No Items")
-                    } else {
-                        GeometryReader { geometry in
-                            Rectangle()
-                                .fill(.clear)
-                                .contentShape(Rectangle())
-                                .onTapGesture { location in
-                                    self.selectBar(at: location, proxy: proxy, geometry: geometry)
-                                }
-                        }
-                    }
-                }
-                .chartScrollableAxes(.horizontal)
-                .chartXAxis {
-                    AxisMarks(values: .stride(by: .day))
-                }
-                .chartXVisibleDomain(length: 7 * SECONDS_IN_A_DAY)
-                .chartYScale(domain: countDomain)
-                .chartXScale(domain: dateDomain)
-                .frame(maxHeight: geometry.size.width)
-                .chartScrollPosition(initialX: Date.now - SECONDS_IN_A_DAY)
-                .chartScrollTargetBehavior(
-                    .valueAligned(
-                        matching: DateComponents(hour: 0),
-                        majorAlignment: .matching(DateComponents(day: 0))
+            Chart {
+                ForEach(itemCountByDates, id: \.date) { date, count in
+                    BarMark(
+                        x: .value("Date", date, unit: .day),
+                        y: .value("Item Count", count)
                     )
-                )
-                .chartYAxisLabel("Food Count")
-                .chartXAxisLabel("Expiry Date")
-                .padding(.horizontal)
+                    .foregroundStyle(date > Date.now ? .green : .red)
+                }
 
-                List {
-                    if let selectedDate = selectedDate {
-                        let rounded = roundDownToDate(date: selectedDate)
-
-                        Text("On \(selectedDate.formatted(date: .complete, time: .omitted))")
-
-                        if let selectedItems =
-                            itemsByDates[rounded]
-                        {
-                            ForEach(selectedItems) { item in
-                                ItemLink(item: item) { _ in
-                                }
+                RuleMark(x: .value("Today", Date.now, unit: .day))
+                    .foregroundStyle(.yellow)
+                    .offset(yStart: -10)
+                    .annotation(
+                        position: .top,
+                        spacing: 0,
+                        overflowResolution: .init(
+                            x: .fit(to: .chart),
+                            y: .disabled
+                        )
+                    ) {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 5)
+                                .frame(width: 30, height: 20)
+                            Text("Now")
+                        }
+                    }
+            }
+            .chartOverlay { proxy in
+                if noItems {
+                    Text("No Items")
+                } else {
+                    GeometryReader { geometry in
+                        Rectangle()
+                            .fill(.clear)
+                            .contentShape(Rectangle())
+                            .onTapGesture { location in
+                                self.selectBar(at: location, proxy: proxy, geometry: geometry)
                             }
-                        } else {
-                            Text("Nothing")
+                    }
+                }
+            }
+            .chartScrollableAxes(.horizontal)
+            .chartXAxis {
+                AxisMarks(values: .stride(by: .day))
+            }
+            .chartXVisibleDomain(length: 7 * SECONDS_IN_A_DAY)
+            .chartYScale(domain: countDomain)
+            .chartXScale(domain: dateDomain)
+            .chartScrollPosition(initialX: Date.now - SECONDS_IN_A_DAY)
+            .chartScrollTargetBehavior(
+                .valueAligned(
+                    matching: DateComponents(hour: 0),
+                    majorAlignment: .matching(DateComponents(day: 0))
+                )
+            )
+            .chartYAxisLabel("Food Count")
+            .chartXAxisLabel("Expiry Date")
+            .padding(.horizontal)
+
+            List {
+                if let selectedDate = selectedDate {
+                    let rounded = roundDownToDate(date: selectedDate)
+
+                    Text("On \(selectedDate.formatted(date: .complete, time: .omitted))")
+
+                    if let selectedItems =
+                        itemsByDates[rounded]
+                    {
+                        ForEach(selectedItems) { item in
+                            ItemLink(item: item) { _ in
+                            }
                         }
                     } else {
-                        Text("No Date Selected")
+                        Text("Nothing")
                     }
+                } else {
+                    Text("No Date Selected")
                 }
             }
         }
