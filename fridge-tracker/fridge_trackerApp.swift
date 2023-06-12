@@ -5,12 +5,11 @@
 //  Created by Heyuan Zeng on 6/6/23.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 @main
 struct fridge_trackerApp: App {
-
     var body: some Scene {
         WindowGroup {
             MainView()
