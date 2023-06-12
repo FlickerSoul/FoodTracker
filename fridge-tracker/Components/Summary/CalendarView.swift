@@ -44,23 +44,35 @@ struct CalendarView: View {
     }
 
     private var countDomain: ClosedRange<Int> {
-        return 0 ... (
-            itemCountByDates.reduce(Int.min) { res, countInfo in
-                max(res, countInfo.count)
-            } + 1
-        )
+        if noItems {
+            return 0 ... 0
+        } else {
+            return 0 ... (
+                itemCountByDates.reduce(Int.min) { res, countInfo in
+                    max(res, countInfo.count)
+                } + 1
+            )
+        }
     }
 
     private var dateDomain: ClosedRange<Date> {
-        (
-            itemsByDates.keys.reduce(Date.distantFuture) { partialResult, date in
-                min(partialResult, date)
-            } - 3 * SECONDS_IN_A_DAY
-        ) ... (
-            itemsByDates.keys.reduce(Date.distantPast) { partialResult, date in
-                max(partialResult, date)
-            } + 3 * SECONDS_IN_A_DAY
-        )
+        if noItems {
+            return Date.now ... Date.now
+        } else {
+            return (
+                itemsByDates.keys.reduce(Date.distantFuture) { partialResult, date in
+                    min(partialResult, date)
+                } - 3 * SECONDS_IN_A_DAY
+            ) ... (
+                itemsByDates.keys.reduce(Date.distantPast) { partialResult, date in
+                    max(partialResult, date)
+                } + 3 * SECONDS_IN_A_DAY
+            )
+        }
+    }
+
+    private var noItems: Bool {
+        visibleItems.isEmpty
     }
 
     @State var filteringArchived: Bool = true
@@ -121,13 +133,17 @@ struct CalendarView: View {
                         }
                 }
                 .chartOverlay { proxy in
-                    GeometryReader { geometry in
-                        Rectangle()
-                            .fill(.clear)
-                            .contentShape(Rectangle())
-                            .onTapGesture { location in
-                                self.selectBar(at: location, proxy: proxy, geometry: geometry)
-                            }
+                    if noItems {
+                        Text("No Items")
+                    } else {
+                        GeometryReader { geometry in
+                            Rectangle()
+                                .fill(.clear)
+                                .contentShape(Rectangle())
+                                .onTapGesture { location in
+                                    self.selectBar(at: location, proxy: proxy, geometry: geometry)
+                                }
+                        }
                     }
                 }
                 .chartScrollableAxes(.horizontal)
