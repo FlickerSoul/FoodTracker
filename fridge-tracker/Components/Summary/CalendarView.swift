@@ -142,7 +142,7 @@ struct CalendarView: View {
                 .chartScrollTargetBehavior(
                     .valueAligned(
                         matching: DateComponents(hour: 0),
-                        majorAlignment: .matching(DateComponents(day: 1))
+                        majorAlignment: .matching(DateComponents(day: 0))
                     )
                 )
                 .chartYAxisLabel("Food Count")
