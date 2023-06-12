@@ -18,31 +18,35 @@ struct SummaryView: View {
 
     @State private var selectedTab: SummaryTabs = .pie
 
+    @State private var itemStack: [FridgeItem] = []
+
     var body: some View {
-        VStack {
-            Picker("", selection: $selectedTab) {
-                Text("Pie Chart").tag(SummaryTabs.pie)
-                Text("Calendar").tag(SummaryTabs.cal)
-            }
-            .pickerStyle(SegmentedPickerStyle())
-            .padding(.horizontal)
+        NavigationView {
+            VStack {
+                Picker("", selection: $selectedTab) {
+                    Text("Pie Chart").tag(SummaryTabs.pie)
+                    Text("Calendar").tag(SummaryTabs.cal)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.horizontal)
 
-            switch selectedTab {
-            case .pie:
+                switch selectedTab {
+                case .pie:
 #if DEBUG
-                PieChartView().tabItem { Label("Chart", systemImage: "chart.pie").foregroundColor(.blue) }
+                    PieChartView().tabItem { Label("Chart", systemImage: "chart.pie").foregroundColor(.blue) }
 #else
-                PieChartView(items: items.tabItem { Label("Chart", systemImage: "chart.pie").foregroundColor(.blue) })
+                    PieChartView(items: items).tabItem { Label("Chart", systemImage: "chart.pie").foregroundColor(.blue) }
 #endif
 
-            case .cal:
+                case .cal:
 
 #if DEBUG
-                CalendarView().tabItem { Label("Calendar", systemImage: "calendar").foregroundColor(.blue) }
+                    CalendarView().tabItem { Label("Calendar", systemImage: "calendar").foregroundColor(.blue) }
 #else
-                CalendarView(items: items).tabItem { Label("Calendar", systemImage: "calendar").foregroundColor(.blue) }
+                    CalendarView(items: items).tabItem { Label("Calendar", systemImage: "calendar").foregroundColor(.blue) }
 
 #endif
+                }
             }
         }
     }
