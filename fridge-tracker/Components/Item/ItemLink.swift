@@ -59,17 +59,14 @@ struct ItemLink: View {
     let leadingActions: [SwipeActions]
     let trailingActions: [SwipeActions]
 
-    let onTap: (FridgeItem) -> Void
-
     private var showingEditingTools: Bool {
         return listEditMode?.wrappedValue.isEditing ?? false
     }
 
-    init(item: FridgeItem, leadingActions: [SwipeActions] = [], trailingActions: [SwipeActions] = [], onTap action: @escaping (FridgeItem) -> Void) {
+    init(item: FridgeItem, leadingActions: [SwipeActions] = [], trailingActions: [SwipeActions] = []) {
         self.item = item
         self.leadingActions = leadingActions
         self.trailingActions = trailingActions
-        self.onTap = action
     }
 
     var body: some View {

@@ -182,8 +182,7 @@ struct PieChartView: View {
 
                         if self.openings[info.section]! {
                             ForEach(info.items, id: \.id) { item in
-                                ItemLink(item: item) { _ in
-                                }
+                                ItemLink(item: item) 
                             }
                         } else {
                             EmptyView()

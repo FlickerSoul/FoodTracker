@@ -56,8 +56,7 @@ struct ContentView: View {
                         ItemLink(
                             item: item,
                             leadingActions: [.archive],
-                            trailingActions: [.delete],
-                            onTap: enterEditItem
+                            trailingActions: [.delete]
                         )
                     }
                 }
@@ -73,8 +72,7 @@ struct ContentView: View {
                             ItemLink(
                                 item: item,
                                 leadingActions: [.unarchive],
-                                trailingActions: [.delete],
-                                onTap: enterEditItem
+                                trailingActions: [.delete]
                             )
                         }
                     }

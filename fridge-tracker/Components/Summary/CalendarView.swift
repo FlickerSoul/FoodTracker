@@ -163,8 +163,7 @@ struct CalendarView: View {
                         itemsByDates[rounded]
                     {
                         ForEach(selectedItems) { item in
-                            ItemLink(item: item) { _ in
-                            }
+                            ItemLink(item: item)
                         }
                     } else {
                         Text("Nothing")
