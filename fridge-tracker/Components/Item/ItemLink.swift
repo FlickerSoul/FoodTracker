@@ -73,11 +73,8 @@ struct ItemLink: View {
     }
 
     var body: some View {
-        Button {
-            if showingEditingTools {
-                return
-            }
-            onTap(item)
+        NavigationLink {
+            ItemDetail(item: item, adding: .constant(false))
         } label: {
             HStack(alignment: .center) {
                 VStack(alignment: .leading) {
@@ -87,10 +84,6 @@ struct ItemLink: View {
 
                     ItemDate(name: "Added", date: item.addedDate)
                 }
-
-                Spacer()
-
-                Image(systemName: "chevron.right")
             }
         }
         .buttonStyle(.plain)
