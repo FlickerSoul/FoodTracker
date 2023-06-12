@@ -49,5 +49,30 @@ struct SampleFridgeItems {
             expiryDate: Date.now - 5 * SECONDS_IN_A_DAY,
             archived: true
         ),
+        FridgeItem(
+            name: "I have forgotten this",
+            note: "also from the big shopping",
+            addedDate: Calendar.current.date(from: DateComponents(year: 2023, month: 6, day: 7))!,
+            expiryDate: Calendar.current.date(from: DateComponents(year: 2023, month: 6, day: 7))! + 2 * SECONDS_IN_A_DAY,
+            archived: false
+        ),
+        FridgeItem(
+            name: "Need to throw this today",
+            addedDate: Date.now - 3 * SECONDS_IN_A_DAY,
+            expiryDate: Date.now,
+            archived: false
+        ),
+        FridgeItem(
+            name: "Food that can last a long time",
+            addedDate: Calendar.current.date(from: DateComponents(year: 2023, month: 6, day: 7))!,
+            expiryDate: Date.now + 20 * SECONDS_IN_A_DAY,
+            archived: false
+        ),
+        FridgeItem(
+            name: "Food that can last forever",
+            addedDate: Calendar.current.date(from: DateComponents(year: 2023, month: 6, day: 7))!,
+            expiryDate: Date.now + 366 * SECONDS_IN_A_DAY,
+            archived: false
+        ),
     ]
 }
