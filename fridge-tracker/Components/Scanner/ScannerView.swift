@@ -17,7 +17,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     private var cameraPermission = false
     
-    private let requestQueue = DispatchQueue(label: "camera request queue")
+    private let requestQueue = DispatchQueue(label: "request queue")
     
     private var callbackWhenFound: ((String) -> Void)? = nil
     
@@ -26,13 +26,19 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         requestQueue.async {
             [unowned self] in
-            guard cameraPermission else { return }
+            guard cameraPermission else {
+                failed(title: "Cannot Get Camera Permissions", detail: "Allow permission in the system settings.")
+                return
+            }
             self.setupCaptureSession()
         }
     }
     
     private func attachInput(videoDevice: AVCaptureDevice) {
-        guard let videoInput = try? AVCaptureDeviceInput(device: videoDevice) else { return }
+        guard let videoInput = try? AVCaptureDeviceInput(device: videoDevice) else {
+            failed(title: "Cannot Add Device Input")
+            return
+        }
         
         if captureSession.canAddInput(videoInput) {
             captureSession.addInput(videoInput)
@@ -42,16 +48,21 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     private func attachOutput(videoDevice: AVCaptureDevice) {
         let metadataOutput = AVCaptureMetadataOutput()
 
-        if captureSession.canAddOutput(metadataOutput) {
-            captureSession.addOutput(metadataOutput)
-            
-            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.qr, .ean13, .code128]
+        guard captureSession.canAddOutput(metadataOutput) else {
+            failed(title: "Cannot Add Device Output")
+            return
         }
+        captureSession.addOutput(metadataOutput)
+            
+        metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        metadataOutput.metadataObjectTypes = [.qr, .ean13, .code128]
     }
     
     private func setupCaptureSession() {
-        guard let videoDevice = AVCaptureDevice.default(for: .video) else { return }
+        guard let videoDevice = AVCaptureDevice.default(for: .video) else {
+            failed(title: "Cannot Get Video Capture Device")
+            return
+        }
         
         attachInput(videoDevice: videoDevice)
         attachOutput(videoDevice: videoDevice)
@@ -62,8 +73,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         previewLayer.frame = CGRect(x: 0, y: 0, width: screenGeometry.width, height: screenGeometry.height)
         previewLayer.videoGravity = .resizeAspectFill
         
+        view.layer.addSublayer(previewLayer)
+
         requestQueue.async { [unowned self] in
-            self.view.layer.addSublayer(self.previewLayer)
             self.captureSession.startRunning()
         }
     }
@@ -72,17 +84,24 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         captureSession.stopRunning()
 
         if let metadataObject = metadataObjects.first {
-            guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
-            guard let stringValue = readableObject.stringValue else { return }
+            guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else {
+                failed(title: "Cannot Convert Metadata Into Redeable Code")
+                return
+            }
+            guard let stringValue = readableObject.stringValue else {
+                failed(title: "Cannot Get Scanned Result As String")
+                return
+            }
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            
             foundCode(code: stringValue)
         }
 
         dismiss(animated: true)
     }
     
-    private func failed(detail msg: String) {
-        let ac = UIAlertController(title: "Scanning not supported", message: "Detail error: \(msg).", preferredStyle: .alert)
+    private func failed(title: String, detail msg: String = "Please contact the developer") {
+        let ac = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
     }
