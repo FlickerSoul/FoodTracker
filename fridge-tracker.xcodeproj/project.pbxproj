@@ -17,6 +17,8 @@
 		575FB6712A324CF100029340 /* NoItemPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575FB6702A324CF100029340 /* NoItemPrompt.swift */; };
 		576139DB2A3090BA005A10DD /* SwipeActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576139DA2A3090BA005A10DD /* SwipeActionButtons.swift */; };
 		576139F32A30AD54005A10DD /* ItemSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576139F22A30AD54005A10DD /* ItemSorter.swift */; };
+		576353892A3877A50013F4F0 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576353882A3877A50013F4F0 /* ScannerView.swift */; };
+		5763538B2A3889A70013F4F0 /* BarCodeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763538A2A3889A70013F4F0 /* BarCodeAPI.swift */; };
 		5784E9C12A2F3FBD00F2AD46 /* fridge_trackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C02A2F3FBD00F2AD46 /* fridge_trackerApp.swift */; };
 		5784E9C32A2F3FBD00F2AD46 /* FridgeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C22A2F3FBD00F2AD46 /* FridgeItem.swift */; };
 		5784E9C52A2F3FBD00F2AD46 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C42A2F3FBD00F2AD46 /* ContentView.swift */; };
@@ -66,6 +68,8 @@
 		575FB6702A324CF100029340 /* NoItemPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoItemPrompt.swift; sourceTree = "<group>"; };
 		576139DA2A3090BA005A10DD /* SwipeActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionButtons.swift; sourceTree = "<group>"; };
 		576139F22A30AD54005A10DD /* ItemSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSorter.swift; sourceTree = "<group>"; };
+		576353882A3877A50013F4F0 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		5763538A2A3889A70013F4F0 /* BarCodeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeAPI.swift; sourceTree = "<group>"; };
 		5784E9BD2A2F3FBD00F2AD46 /* fridge-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fridge-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5784E9C02A2F3FBD00F2AD46 /* fridge_trackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fridge_trackerApp.swift; sourceTree = "<group>"; };
 		5784E9C22A2F3FBD00F2AD46 /* FridgeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeItem.swift; sourceTree = "<group>"; };
@@ -123,6 +127,14 @@
 				570886CC2A3750C200F48B69 /* NotificationTime.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		576353872A3877940013F4F0 /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				576353882A3877A50013F4F0 /* ScannerView.swift */,
+			);
+			path = Scanner;
 			sourceTree = "<group>";
 		};
 		5784E9B42A2F3FBD00F2AD46 = {
@@ -208,6 +220,7 @@
 		5784E9F52A2F439400F2AD46 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				576353872A3877940013F4F0 /* Scanner */,
 				570886C52A37447F00F48B69 /* Settings */,
 				57CC1AF02A3337F000A902CC /* Summary */,
 				5784E9F62A2F439D00F2AD46 /* Item */,
@@ -236,6 +249,7 @@
 				579E0D792A2F620700A1F00B /* Utils.swift */,
 				5700E0E02A34C6280033CAE5 /* Notification.swift */,
 				570886CA2A374AA100F48B69 /* SettingsConfig.swift */,
+				5763538A2A3889A70013F4F0 /* BarCodeAPI.swift */,
 			);
 			path = Suppoort;
 			sourceTree = "<group>";
@@ -390,6 +404,7 @@
 				5784E9C32A2F3FBD00F2AD46 /* FridgeItem.swift in Sources */,
 				5784E9F02A2F412E00F2AD46 /* MainView.swift in Sources */,
 				57CC1AF22A33380F00A902CC /* CalendarView.swift in Sources */,
+				5763538B2A3889A70013F4F0 /* BarCodeAPI.swift in Sources */,
 				570886CF2A3764B200F48B69 /* SummaryTitle.swift in Sources */,
 				5784E9F22A2F417300F2AD46 /* SummaryView.swift in Sources */,
 				570886CD2A3750C200F48B69 /* NotificationTime.swift in Sources */,
@@ -409,6 +424,7 @@
 				5784E9C52A2F3FBD00F2AD46 /* ContentView.swift in Sources */,
 				579E0D7A2A2F620700A1F00B /* Utils.swift in Sources */,
 				57BD50502A30B43E0076D0E1 /* ItemLinkDropdown.swift in Sources */,
+				576353892A3877A50013F4F0 /* ScannerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,7 +588,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Food Tracker";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We use camera to scan barcode so that users don't have to type in information manually. ";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -610,7 +628,10 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "fridge-tracker/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Food Tracker";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We use camera to scan barcode so that users don't have to type in information manually. ";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

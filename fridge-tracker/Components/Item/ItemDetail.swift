@@ -15,6 +15,8 @@ struct ItemDetail: View {
     @State private var canceling = false
     @State private var showInvalidAleart = false
     
+    @State private var showScanningView = false
+    
     var titleText: String {
         if adding {
             return "Add Item"
@@ -66,6 +68,14 @@ struct ItemDetail: View {
                 }
             }
             
+            ToolbarItem {
+                Button {
+                    showScanningView.toggle()
+                } label: {
+                    Label("scan", systemImage: "barcode.viewfinder")
+                }
+            }
+            
             ToolbarItem(placement: .confirmationAction) {
                 Button {
                     if adding {
@@ -80,6 +90,11 @@ struct ItemDetail: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .sheet(isPresented: $showScanningView) {
+            ScannerView { code in
+                self.item.name = code
+            }
+        }
     }
 }
 
