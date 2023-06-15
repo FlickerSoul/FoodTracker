@@ -17,6 +17,8 @@ final class FridgeItem {
     var addedDate: Date
     var expiryDate: Date
     
+    var barcode: String
+    
     var notificationOn: Bool = true {
         didSet {
             toggleNotification()
@@ -43,9 +45,10 @@ final class FridgeItem {
         }
     }
         
-    init(name: String, note: String = "", addedDate: Date = Date.now, expiryDate: Date = Date.now, notificationOn: Bool = true, archived: Bool = false, notificationIdentifiers: [String] = []) {
+    init(name: String, barcode: String = "", note: String = "", addedDate: Date = Date.now, expiryDate: Date = Date.now, notificationOn: Bool = true, archived: Bool = false, notificationIdentifiers: [String] = []) {
         self.id = UUID()
         self.name = name
+        self.barcode = barcode
         self.note = note
         self.addedDate = addedDate
         self.expiryDate = expiryDate

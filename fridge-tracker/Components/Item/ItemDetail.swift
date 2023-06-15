@@ -29,10 +29,37 @@ struct ItemDetail: View {
         item.name.isEmpty
     }
     
+    @State var errorMessage: ErrorMessageDetail = .init()
+    @State var loadingBarcodeDetail: Bool = false
+    
+    private var isCodeValid: Bool {
+        item.barcode.isNumber
+    }
+    
     var body: some View {
         VStack {
             List {
-                Section(header: Label("Name", systemImage: "pencil")) {
+                Section(header: Label("Barcode", systemImage: "barcode"), footer: Text("The barcode of this food item. You can ignore this and fill in manually.")) {
+                    HStack {
+                        TextField("Barcode", text: $item.barcode)
+                        
+                        Button {
+                            showScanningView.toggle()
+                        } label: {
+                            Image(systemName: "barcode.viewfinder")
+                        }.buttonStyle(.borderless)
+                        
+                        Button {
+                            searchBarCode()
+                        } label: {
+                            Image(systemName: loadingBarcodeDetail ? "icloud.and.arrow.down" : "questionmark.bubble")
+                                .contentTransition(.symbolEffect(.replace.upUp.wholeSymbol))
+                                .symbolEffect(.pulse.byLayer, isActive: loadingBarcodeDetail)
+                        }.buttonStyle(.borderless)
+                    }
+                }
+                
+                Section(header: Label("Name", systemImage: "pencil"), footer: Text("The name should not be empty.")) {
                     TextField("Give a name to this item", text: $item.name)
                 }
                 
@@ -67,15 +94,7 @@ struct ItemDetail: View {
                     }
                 }
             }
-            
-            ToolbarItem {
-                Button {
-                    showScanningView.toggle()
-                } label: {
-                    Label("scan", systemImage: "barcode.viewfinder")
-                }
-            }
-            
+
             ToolbarItem(placement: .confirmationAction) {
                 Button {
                     if adding {
@@ -92,9 +111,66 @@ struct ItemDetail: View {
         .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $showScanningView) {
             ScannerView { code in
-                self.item.name = code
+                self.item.barcode = code
+                searchBarCode()
             }
         }
+        .alert(isPresented: $errorMessage.isShowing) {
+            Alert(title: Text(errorMessage.title), message: Text(errorMessage.message), dismissButton: .default(Text(errorMessage.buttonText)))
+        }
+    }
+}
+
+extension ItemDetail {
+    private func searchBarCode() {
+        guard isCodeValid else {
+            errorMessage.showErrorMessage(title: "Barcode Is Not Valid", message: "Please scan or enter a correct barcode before fetching")
+            return
+        }
+        
+        OpenFoodFactsRequestFactory.current.makeFoodInfoRequest(barcode: item.barcode) {
+            startLoadingBarcodeDetail()
+        } resultCallback: { result, error in
+            finishLoadingBarcodeDetail(error: error)
+            
+            if var result = result {
+                fillInItemNameFromBarcode(of: &result.product)
+                
+                // TODO: infer categories etc.
+            }
+        }
+    }
+    
+    private func startLoadingBarcodeDetail() {
+        loadingBarcodeDetail.toggle()
+    }
+    
+    private func finishLoadingBarcodeDetail(error: APIRequestError?) {
+        loadingBarcodeDetail.toggle()
+        
+        if let error = error {
+            errorMessage.showErrorMessage(title: "Cannot Load Barcode Detail", message: "Please check if the barcode is correctly entered or not.")
+            
+            // TODO: better error handling
+            switch error {
+            case .decodeError(let data):
+                print(data)
+            case .requestError:
+                print("Request error")
+            }
+        }
+    }
+
+    private func fillInItemNameFromBarcode(of data: inout OpenFoodFactsProductDetail) {
+        item.name = data.brands + (
+            data.product_name ?? data.generic_name ?? data.generic_name_en ?? ""
+        )
+    }
+}
+
+private extension String {
+    var isNumber: Bool {
+        return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
     }
 }
 
