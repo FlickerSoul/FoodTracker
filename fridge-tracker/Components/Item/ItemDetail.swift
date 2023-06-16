@@ -162,8 +162,12 @@ extension ItemDetail {
     }
 
     private func fillInItemNameFromBarcode(of data: inout OpenFoodFactsProductDetail) {
-        item.name = data.brands + (
-            data.product_name ?? data.generic_name ?? data.generic_name_en ?? ""
+        item.name = (
+            data.brands ?? ""
+        ) + (
+            data.product_name ??
+                data.generic_name ??
+                data.generic_name_en ?? ""
         )
     }
 }

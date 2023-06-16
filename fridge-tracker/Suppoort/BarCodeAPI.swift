@@ -11,14 +11,14 @@ let OPEN_FOOD_FACTS_BAR_CODE_API = "https://world.openfoodfacts.org/api/v2/produ
 let OPEN_FOOD_FACTS_QUERY_UA = "FoodTracker - iOS"
 
 struct OpenFoodFactsProductDetail: Codable {
-    var brands: String
+    var brands: String?
     var generic_name: String?
     var generic_name_en: String?
-    var countries: String
-    var countries_hierarchy: [String]
+    var countries: String?
+    var countries_hierarchy: [String]?
     var product_name: String?
-    var product_quantity: String
-    var quantity: String
+    var product_quantity: String?
+    var quantity: String?
 }
 
 struct OpenFoodFactsAPIResponse: Codable {
