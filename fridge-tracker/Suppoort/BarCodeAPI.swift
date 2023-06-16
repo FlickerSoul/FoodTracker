@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import os
 
 let OPEN_FOOD_FACTS_BAR_CODE_API = "https://world.openfoodfacts.org/api/v2/product/"
 let OPEN_FOOD_FACTS_QUERY_UA = "FoodTracker - iOS"
+
+let API_LOGGER = Logger(subsystem: Bundle.main.bundlePath, category: "API")
 
 struct OpenFoodFactsProductDetail: Codable {
     var brands: String?
@@ -47,7 +50,9 @@ class OpenFoodFactsRequestFactory {
     }
 
     func makeQueryUrl(barcode: String) -> URL {
-        return URL(string: "\(OPEN_FOOD_FACTS_BAR_CODE_API)\(barcode)")!
+        let urlString = "\(OPEN_FOOD_FACTS_BAR_CODE_API)\(barcode)"
+        API_LOGGER.debug("URL \(urlString) made")
+        return URL(string: urlString)!
     }
 
     func makeFoodInfoRequest(barcode: String, initCallback: () -> Void = {}, resultCallback: @escaping (OpenFoodFactsAPIResponse?, APIRequestError?) -> Void) {
@@ -60,14 +65,22 @@ class OpenFoodFactsRequestFactory {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(OPEN_FOOD_FACTS_QUERY_UA, forHTTPHeaderField: "User-Agent")
 
-        URLSession.shared.dataTask(with: request) { data, _, _ in
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            API_LOGGER.debug("received open food fact api response with \n data: \(String(decoding: data ?? Data(), as: UTF8.self))\n response: \(response)\n error: \(error)")
+
             if let data = data {
                 if let result = try? JSONDecoder().decode(OpenFoodFactsAPIResponse.self, from: data) {
+                    API_LOGGER.debug("API parse successfully")
+
                     resultCallback(result, nil)
                 } else {
+                    API_LOGGER.error("API parse error")
+
                     resultCallback(nil, APIRequestError.decodeError(data: String(decoding: data, as: UTF8.self)))
                 }
             } else {
+                API_LOGGER.debug("API Request Error")
+
                 resultCallback(nil, APIRequestError.requestError)
             }
         }.resume()

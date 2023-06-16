@@ -150,14 +150,6 @@ extension ItemDetail {
         
         if let error = error {
             errorMessage.showErrorMessage(title: "Cannot Load Barcode Detail", message: "Please check if the barcode is correctly entered or not.")
-            
-            // TODO: better error handling
-            switch error {
-            case .decodeError(let data):
-                print(data)
-            case .requestError:
-                print("Request error")
-            }
         }
     }
 
