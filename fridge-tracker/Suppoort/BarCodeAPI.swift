@@ -16,12 +16,19 @@ let API_LOGGER = Logger(subsystem: Bundle.main.bundlePath, category: "API")
 struct OpenFoodFactsProductDetail: Codable {
     var brands: String?
     var generic_name: String?
-    var generic_name_en: String?
     var countries: String?
     var countries_hierarchy: [String]?
     var product_name: String?
     var product_quantity: String?
     var quantity: String?
+    var categories_tags: [String]?
+    var categories_hierarchy: [String]?
+    var _keywords: [String]?
+
+    var name: String {
+        self.product_name ??
+            self.generic_name ?? ""
+    }
 }
 
 struct OpenFoodFactsAPIResponse: Codable {
@@ -58,7 +65,7 @@ class OpenFoodFactsRequestFactory {
     func makeFoodInfoRequest(barcode: String, initCallback: () -> Void = {}, resultCallback: @escaping (OpenFoodFactsAPIResponse?, APIRequestError?) -> Void) {
         initCallback()
 
-        let queryUrl = makeQueryUrl(barcode: barcode)
+        let queryUrl = self.makeQueryUrl(barcode: barcode)
 
         var request = URLRequest(url: queryUrl)
         request.httpMethod = "GET"

@@ -32,10 +32,6 @@ struct ItemDetail: View {
     @State var errorMessage: ErrorMessageDetail = .init()
     @State var loadingBarcodeDetail: Bool = false
     
-    private var isCodeValid: Bool {
-        item.barcode.isNumber
-    }
-    
     var body: some View {
         VStack {
             List {
@@ -52,8 +48,7 @@ struct ItemDetail: View {
                         Button {
                             searchBarCode()
                         } label: {
-                            Image(systemName: loadingBarcodeDetail ? "icloud.and.arrow.down" : "questionmark.bubble")
-                                .contentTransition(.symbolEffect(.replace.upUp.wholeSymbol))
+                            Image(systemName: "questionmark.bubble")
                                 .symbolEffect(.pulse.byLayer, isActive: loadingBarcodeDetail)
                         }.buttonStyle(.borderless)
                     }
@@ -122,6 +117,10 @@ struct ItemDetail: View {
 }
 
 extension ItemDetail {
+    private var isCodeValid: Bool {
+        item.barcode.isNumber
+    }
+    
     private func searchBarCode() {
         guard isCodeValid else {
             errorMessage.showErrorMessage(title: "Barcode Is Not Valid", message: "Please scan or enter a correct barcode before fetching")
@@ -148,19 +147,13 @@ extension ItemDetail {
     private func finishLoadingBarcodeDetail(error: APIRequestError?) {
         loadingBarcodeDetail.toggle()
         
-        if let error = error {
+        if error != nil {
             errorMessage.showErrorMessage(title: "Cannot Load Barcode Detail", message: "Please check if the barcode is correctly entered or not.")
         }
     }
 
     private func fillInItemNameFromBarcode(of data: inout OpenFoodFactsProductDetail) {
-        item.name = (
-            data.brands ?? ""
-        ) + (
-            data.product_name ??
-                data.generic_name ??
-                data.generic_name_en ?? ""
-        )
+        item.name = "\(data.name) (\(String(describing: data.quantity))) (\(String(describing: data.brands)))"
     }
 }
 
