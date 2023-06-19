@@ -7,12 +7,20 @@
 
 import Foundation
 
+// let FULL_NAME: StaticString = "observer.universe.food-tracker"  // no constexpr :(((
+
+enum SettingsKeys: String, CaseIterable {
+    case openAIKey = "observer.universe.food-tracker.open-ai-key"
+    case generalSettingsKey = "observer.universe.food-tracker.general-settings"
+}
+
 struct SettingsConfig: Codable, Equatable {
-    static let SETTINGS_CONFIG_STORAGE_KEY = "observer.universe.food-tracker:settings"
+    static let SETTINGS_CONFIG_STORAGE_KEY = SettingsKeys.generalSettingsKey
+
     var notificationTime: Date
 
     static func getStored() -> Self? {
-        if let stored = UserDefaults.standard.data(forKey: Self.SETTINGS_CONFIG_STORAGE_KEY) {
+        if let stored = UserDefaults.standard.data(forKey: Self.SETTINGS_CONFIG_STORAGE_KEY.rawValue) {
             let converted = try! JSONDecoder().decode(SettingsConfig.self, from: stored)
             return converted
         }
@@ -36,6 +44,6 @@ struct SettingsConfig: Codable, Equatable {
 
     func store() {
         let encoded = try! JSONEncoder().encode(self)
-        UserDefaults.standard.set(encoded, forKey: Self.SETTINGS_CONFIG_STORAGE_KEY)
+        UserDefaults.standard.set(encoded, forKey: Self.SETTINGS_CONFIG_STORAGE_KEY.rawValue)
     }
 }
