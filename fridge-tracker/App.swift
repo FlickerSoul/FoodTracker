@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 @main
-struct fridge_trackerApp: App {
+struct FoodTrackerApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
