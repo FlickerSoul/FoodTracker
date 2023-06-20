@@ -133,7 +133,7 @@ struct PieChartView: View {
                 ForEach(self.itemsBySections, id: \.section) { section, _, count in
                     SectorMark(
                         angle: .value("Count", count),
-                        innerRadius: .ratio(0.65),
+                        innerRadius: .ratio(0.7),
                         angularInset: 2
                     )
                     .cornerRadius(5)
@@ -163,7 +163,7 @@ struct PieChartView: View {
                     }.position(x: frame.midX, y: frame.midY)
                 }
             }
-            .frame(height: 350)
+            .frame(height: 300)
 //                .chartOverlay(content: { proxy in
 //                    GeometryReader { geometry in
 //                        Rectangle()
