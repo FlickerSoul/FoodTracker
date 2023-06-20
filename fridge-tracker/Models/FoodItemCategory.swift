@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum FoodItemCategory: Hashable, Codable {
+enum FoodItemCategory: String, Hashable, Codable {
     case Milk
     case FlavoredMilk
     case DairyDrinksAndSubstitutes
@@ -46,9 +46,9 @@ enum FoodItemCategory: Hashable, Codable {
     case BabyBeverages
     case InfantFormulas
     case HumanMilk
-    case Other(label: String = "")
-    case Leftover(label: String = "")
-    case CannedFood(label: String = "")
+    case Leftover
+    case CannedFood
+    case Other
 }
 
 extension FoodItemCategory {
@@ -130,106 +130,17 @@ extension FoodItemCategory {
             return "Infant Formulas"
         case .HumanMilk:
             return "Human Milk"
-        case .Other(label: let label):
-            return "Other - \(label)"
-        case .Leftover(label: let label):
-            return "Leftover - \(label)"
-        case .CannedFood(label: let label):
-            return "Canned Food - \(label)"
+        case .Leftover:
+            return "Leftover"
+        case .CannedFood:
+            return "Canned Food"
+        case .Other:
+            return "Other"
         }
     }
 
     static var listing: String {
-        Self.allCases.map { "- \($0)" }.joined(separator: "\n")
-    }
-}
-
-extension FoodItemCategory {
-    var description: String {
-        switch self {
-        case .Milk:
-            return ""
-        case .FlavoredMilk:
-            return ""
-        case .DairyDrinksAndSubstitutes:
-            return ""
-        case .Cheese:
-            return ""
-        case .Yogurt:
-            return ""
-        case .Meats:
-            return ""
-        case .Poultry:
-            return ""
-        case .Seafood:
-            return ""
-        case .Eggs:
-            return ""
-        case .CuredMeatsOrPoultry:
-            return ""
-        case .PlantbasedProteinFoods:
-            return ""
-        case .CookedGrains:
-            return ""
-        case .BreadsRollsTortillas:
-            return ""
-        case .QuickBreadsAndBreadProducts:
-            return ""
-        case .ReadyToEatCereals:
-            return ""
-        case .CookedCereals:
-            return ""
-        case .SavorySnacks:
-            return ""
-        case .Crackers:
-            return ""
-        case .SnackMealBars:
-            return ""
-        case .SweetBakeryProducts:
-            return ""
-        case .Candy:
-            return ""
-        case .Desserts:
-            return ""
-        case .Fruits:
-            return ""
-        case .Vegetables:
-            return ""
-        case .Juice:
-            return ""
-        case .DietBeverages:
-            return ""
-        case .SweetenedBeverages:
-            return ""
-        case .CoffeeAndTea:
-            return ""
-        case .AlcoholicBeverages:
-            return ""
-        case .PlainWater:
-            return ""
-        case .FlavoredOrEnhancedWater:
-            return ""
-        case .FatsAndOils:
-            return ""
-        case .CondimentsAndSauces:
-            return ""
-        case .Sugars:
-            return ""
-        case .BabyFoods:
-            return ""
-        case .BabyBeverages:
-            return ""
-        case .InfantFormulas:
-            return ""
-        case .HumanMilk:
-            return "Human Milk"
-        case .Other(label: let label):
-            return "Other - \(label)"
-        case .Leftover(label: let label):
-            return "Leftover - \(label)"
-        case .CannedFood(label: let label):
-            return "Canned Food - \(label)"
-        }
+        Self.allCases.map { "- \($0.rawValue) : \($0.name)" }.joined(separator: "\n")
     }
 }
 
@@ -274,9 +185,9 @@ extension FoodItemCategory: CaseIterable {
             .BabyBeverages,
             .InfantFormulas,
             .HumanMilk,
-            .Other(),
-            .Leftover(),
-            .CannedFood()
+            .Leftover,
+            .CannedFood,
+            .Other,
         ]
     }
 }
