@@ -11,8 +11,8 @@ enum OrderStyle: String, CaseIterable, Identifiable {
     typealias ComparatorType = (FridgeItem, FridgeItem) -> Bool
 
     case expiringNearstFirst = "expiring first"
-    case newestAddedFirst = "newest added first"
     case expiringFarestFirst = "expiring farest first"
+    case newestAddedFirst = "newest added first"
     case oldestAddedFirst = "oldest added first"
 
     var id: String {

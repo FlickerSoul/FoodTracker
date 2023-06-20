@@ -17,25 +17,22 @@ struct ContentView: View {
     @State private var listEditSelections: Set<UUID> = Set()
 
     @State private var orderSelection: OrderStyle = .expiringNearstFirst
-    @State private var filteringExpired: Bool = false
+    @State private var filteringExpired: ExpiringFilterStyle = .none
 
     @Query private var items: [FridgeItem]
 
     var visibleItems: [FridgeItem] {
         var visibles = items.filter { !$0.archived }.sorted(by: orderSelection.comparator)
 
-        if filteringExpired {
-            visibles = visibles.filter(FridgeItem.isExpiring)
-        }
+        visibles = visibles.filter(filteringExpired.filter)
 
         return visibles
     }
 
     var hiddenItems: [FridgeItem] {
         var hiddens = items.filter { !visibleItems.contains($0) }.sorted(by: orderSelection.comparator)
-        if filteringExpired {
-            hiddens = hiddens.filter(FridgeItem.isExpiring)
-        }
+
+        hiddens = hiddens.filter(filteringExpired.filter)
 
         return hiddens
     }

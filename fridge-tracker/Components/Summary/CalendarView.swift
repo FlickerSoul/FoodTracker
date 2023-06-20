@@ -20,11 +20,7 @@ struct CalendarView: View {
     #endif
 
     var visibleItems: [FridgeItem] {
-        if filteringArchived {
-            return items.filter { !$0.archived }
-        } else {
-            return items
-        }
+        return items.filter(filteringArchived.filter)
     }
 
     private typealias ItemInfoType = [Date: [FridgeItem]]
@@ -75,7 +71,7 @@ struct CalendarView: View {
         visibleItems.isEmpty
     }
 
-    @State var filteringArchived: Bool = true
+    @State var filteringArchived: ArchiveFilterStyle = .none
 
     @State var selectedDate: Date? = nil
 
