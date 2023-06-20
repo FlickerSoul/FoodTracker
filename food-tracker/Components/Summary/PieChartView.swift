@@ -163,7 +163,8 @@ struct PieChartView: View {
                     }.position(x: frame.midX, y: frame.midY)
                 }
             }
-            .frame(height: 300)
+            .chartLegend(.hidden)
+            .frame(height: 250)
 //                .chartOverlay(content: { proxy in
 //                    GeometryReader { geometry in
 //                        Rectangle()
