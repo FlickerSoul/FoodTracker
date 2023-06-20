@@ -40,6 +40,8 @@ struct ItemLink: View {
                 VStack(alignment: .leading) {
                     Text(item.name).font(.title2)
 
+                    ItemCategory(category: item.category)
+
                     ItemDate(name: "Expire", date: item.expiryDate, color: true)
                         .font(.footnote)
 
