@@ -66,12 +66,18 @@ struct ItemFilter<FilterType: CaseIterable & RawRepresentable & HasNone>: View w
     var body: some View {
         Menu {
             ForEach(FilterType.allCases, id: \.rawValue) { item in
+
                 Button {
                     withAnimation {
                         filtering = item
                     }
                 } label: {
-                    Text(item.rawValue)
+                    HStack {
+                        Text(item.rawValue)
+                        if filtering == item {
+                            Image(systemName: "checkmark")
+                        }
+                    }
                 }
             }
 
