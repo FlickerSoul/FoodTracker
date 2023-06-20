@@ -193,7 +193,9 @@ struct PieChartView: View {
     }
 }
 
-#Preview {
-    PieChartView()
-        .modelContainer(previewContainer)
-}
+#if DEBUG
+    #Preview {
+        PieChartView()
+            .modelContainer(previewContainer)
+    }
+#endif

@@ -172,7 +172,9 @@ struct CalendarView: View {
     }
 }
 
-#Preview {
-    CalendarView()
-        .modelContainer(previewContainer)
-}
+#if DEBUG
+    #Preview {
+        CalendarView()
+            .modelContainer(previewContainer)
+    }
+#endif
