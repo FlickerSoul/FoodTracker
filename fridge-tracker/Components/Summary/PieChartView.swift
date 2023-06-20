@@ -133,7 +133,7 @@ struct PieChartView: View {
                 ForEach(self.itemsBySections, id: \.section) { section, _, count in
                     SectorMark(
                         angle: .value("Count", count),
-                        innerRadius: .ratio(0.618),
+                        innerRadius: .ratio(0.65),
                         angularInset: 2
                     )
                     .cornerRadius(5)
@@ -148,7 +148,7 @@ struct PieChartView: View {
             )
             .chartBackground { chartProxy in
                 GeometryReader { geometry in
-                    let frame = geometry[chartProxy.plotAreaFrame] // TODO: error 
+                    let frame = geometry[chartProxy.plotAreaFrame] // TODO: error
 
                     VStack(alignment: .center) {
                         if self.noItems {
@@ -163,6 +163,7 @@ struct PieChartView: View {
                     }.position(x: frame.midX, y: frame.midY)
                 }
             }
+            .frame(height: 350)
 //                .chartOverlay(content: { proxy in
 //                    GeometryReader { geometry in
 //                        Rectangle()
@@ -182,7 +183,7 @@ struct PieChartView: View {
 
                         if self.openings[info.section]! {
                             ForEach(info.items, id: \.id) { item in
-                                ItemLink(item: item) 
+                                ItemLink(item: item)
                             }
                         } else {
                             EmptyView()
