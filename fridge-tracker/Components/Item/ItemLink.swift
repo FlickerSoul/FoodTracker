@@ -44,10 +44,8 @@ struct ItemDate: View {
                     Text(date, style: .date).foregroundStyle(DateSection.oneDay.color)
                 case today + 1 * SECONDS_IN_A_DAY ..< today + 4 * SECONDS_IN_A_DAY:
                     Text(date, style: .date).foregroundStyle(DateSection.threeDays.color)
-                case today + 4 * SECONDS_IN_A_DAY ..< Date.distantFuture:
-                    Text(date, style: .date).foregroundStyle(DateSection.other.color)
                 default:
-                    EmptyView()
+                    Text(date, style: .date).foregroundStyle(DateSection.other.color)
                 }
 
             } else {

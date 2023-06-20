@@ -127,7 +127,7 @@ struct PieChartView: View {
 
     var body: some View {
         VStack(alignment: .center) {
-            SummaryTitle<EmptyView>()
+            SummaryTitle<EmptyView>(titleText: "Food Summary")
 
             Chart {
                 ForEach(self.itemsBySections, id: \.section) { section, _, count in

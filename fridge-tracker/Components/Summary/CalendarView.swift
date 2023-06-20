@@ -86,7 +86,7 @@ struct CalendarView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            SummaryTitle {
+            SummaryTitle(titleText: "Food Calendar") {
                 ItemFilter(filtering: $filteringArchived, text: "Filter Archived")
             }
 

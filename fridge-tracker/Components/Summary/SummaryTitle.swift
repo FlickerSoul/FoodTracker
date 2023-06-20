@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct SummaryTitle<Content: View>: View {
-    var tools: (() -> Content)? = nil
+    let titleText: String
+    let tools: (() -> Content)?
+
+    init(titleText: String, tools: (() -> Content)? = nil) {
+        self.titleText = titleText
+        self.tools = tools
+    }
 
     var body: some View {
         HStack {
