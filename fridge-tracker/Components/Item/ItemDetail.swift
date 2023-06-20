@@ -209,7 +209,7 @@ extension ItemDetail {
         
         switch choice.message {
         case .assistant(let content):
-            if let category = FoodItemCategory(rawValue: content) {
+            if let id = Int(content), let category = FoodItemCategory(rawValue: id) {
                 item.category = category
             } else {
                 errorMessage.showErrorMessage(title: "Cannot Get Correct Category")

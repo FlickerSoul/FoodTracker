@@ -7,7 +7,8 @@
 
 import Foundation
 
-enum FoodItemCategory: String, Hashable, Codable {
+// SwiftData Bug: https://developer.apple.com/forums/thread/731538
+enum FoodItemCategory: Int, Hashable, Codable {
     case Milk
     case FlavoredMilk
     case DairyDrinksAndSubstitutes
