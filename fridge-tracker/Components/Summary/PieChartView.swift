@@ -179,14 +179,12 @@ struct PieChartView: View {
             List {
                 ForEach(self.itemsBySections, id: \.section) { info in
                     Section {
-                        CategoryDropdown(info: info, opened: self.dictBinding(for: info.section))
+                        DateCategoryDropdown(info: info, opened: self.dictBinding(for: info.section))
 
                         if self.openings[info.section]! {
                             ForEach(info.items, id: \.id) { item in
                                 ItemLink(item: item)
                             }
-                        } else {
-                            EmptyView()
                         }
                     }
                 }

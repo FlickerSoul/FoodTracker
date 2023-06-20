@@ -13,7 +13,7 @@
 		570886CD2A3750C200F48B69 /* NotificationTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570886CC2A3750C200F48B69 /* NotificationTime.swift */; };
 		570886CF2A3764B200F48B69 /* SummaryTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570886CE2A3764B200F48B69 /* SummaryTitle.swift */; };
 		5709C6EF2A3B6D1000E1646F /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5709C6EE2A3B6D1000E1646F /* ErrorMessage.swift */; };
-		572948592A34A6D40075487E /* CategoryDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572948582A34A6D40075487E /* CategoryDropdown.swift */; };
+		572948592A34A6D40075487E /* DateCategoryDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572948582A34A6D40075487E /* DateCategoryDropdown.swift */; };
 		575FB66F2A32469100029340 /* ItemFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575FB66E2A32469100029340 /* ItemFilter.swift */; };
 		575FB6712A324CF100029340 /* NoItemPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575FB6702A324CF100029340 /* NoItemPrompt.swift */; };
 		576139DB2A3090BA005A10DD /* SwipeActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576139DA2A3090BA005A10DD /* SwipeActionButtons.swift */; };
@@ -69,7 +69,7 @@
 		570886CC2A3750C200F48B69 /* NotificationTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTime.swift; sourceTree = "<group>"; };
 		570886CE2A3764B200F48B69 /* SummaryTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTitle.swift; sourceTree = "<group>"; };
 		5709C6EE2A3B6D1000E1646F /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
-		572948582A34A6D40075487E /* CategoryDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDropdown.swift; sourceTree = "<group>"; };
+		572948582A34A6D40075487E /* DateCategoryDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCategoryDropdown.swift; sourceTree = "<group>"; };
 		575FB66E2A32469100029340 /* ItemFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFilter.swift; sourceTree = "<group>"; };
 		575FB6702A324CF100029340 /* NoItemPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoItemPrompt.swift; sourceTree = "<group>"; };
 		576139DA2A3090BA005A10DD /* SwipeActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionButtons.swift; sourceTree = "<group>"; };
@@ -273,7 +273,7 @@
 			children = (
 				57CC1AF12A33380F00A902CC /* CalendarView.swift */,
 				57CC1AF32A3341B800A902CC /* PieChartView.swift */,
-				572948582A34A6D40075487E /* CategoryDropdown.swift */,
+				572948582A34A6D40075487E /* DateCategoryDropdown.swift */,
 				570886CE2A3764B200F48B69 /* SummaryTitle.swift */,
 			);
 			path = Summary;
@@ -430,7 +430,7 @@
 				5784E9FF2A2F545F00F2AD46 /* PreviewContainer.swift in Sources */,
 				5784EA012A2F54B700F2AD46 /* SampleFridgeItems.swift in Sources */,
 				5784E9F42A2F418A00F2AD46 /* SettingsView.swift in Sources */,
-				572948592A34A6D40075487E /* CategoryDropdown.swift in Sources */,
+				572948592A34A6D40075487E /* DateCategoryDropdown.swift in Sources */,
 				5784E9C12A2F3FBD00F2AD46 /* App.swift in Sources */,
 				576139DB2A3090BA005A10DD /* SwipeActionButtons.swift in Sources */,
 				570886C72A37448800F48B69 /* About.swift in Sources */,

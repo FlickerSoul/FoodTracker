@@ -1,5 +1,5 @@
 //
-//  CategoryDropdown.swift
+//  DateCategoryDropdown.swift
 //  fridge-tracker
 //
 //  Created by Heyuan Zeng on 6/10/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CategoryDropdown: View {
+struct DateCategoryDropdown: View {
     let info: PieChartView.ItemInfoType
     @Binding var opened: Bool
 
