@@ -11,6 +11,7 @@ import Foundation
 
 enum SettingsKeys: String, CaseIterable {
     case openAIKey = "observer.universe.food-tracker.open-ai-key"
+    case autoFetch = "observer.universe.food-tracker.auto-fetch-detail"
     case generalSettingsKey = "observer.universe.food-tracker.general-settings"
 }
 

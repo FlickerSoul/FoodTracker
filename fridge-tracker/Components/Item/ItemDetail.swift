@@ -8,6 +8,8 @@
 import OpenAIKit
 import SwiftUI
 
+// MARK: - Item Detail View Decl
+
 struct ItemDetail: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
@@ -35,6 +37,8 @@ struct ItemDetail: View {
     
     @State private var foodFactCache: OpenFoodFactsAPIResponse? = nil
     
+    @AppStorage(SettingsKeys.autoFetch.rawValue) private var autoFetch: Bool = true
+    
     var body: some View {
         VStack {
             List {
@@ -46,13 +50,6 @@ struct ItemDetail: View {
                             showScanningView.toggle()
                         } label: {
                             Image(systemName: "barcode.viewfinder")
-                        }.buttonStyle(.borderless)
-                        
-                        Button {
-                            searchBarCode()
-                        } label: {
-                            Image(systemName: "questionmark.bubble")
-                                .symbolEffect(.pulse.byLayer, isActive: loadingBarcodeDetail)
                         }.buttonStyle(.borderless)
                     }
                 }
@@ -96,6 +93,15 @@ struct ItemDetail: View {
                     }
                 }
             }
+            
+            ToolbarItem {
+                Button {
+                    searchBarCode()
+                } label: {
+                    Image(systemName: "questionmark.bubble")
+                        .symbolEffect(.pulse.byLayer, isActive: loadingBarcodeDetail)
+                }.buttonStyle(.borderless)
+            }
 
             ToolbarItem(placement: .confirmationAction) {
                 Button {
@@ -123,6 +129,8 @@ struct ItemDetail: View {
     }
 }
 
+// MARK: - Item Detail Bar Code
+
 extension ItemDetail {
     private var isCodeValid: Bool {
         item.barcode.isNumber
@@ -142,10 +150,10 @@ extension ItemDetail {
             if let result = result {
                 self.foodFactCache = result
                 
-                fillInItemNameFromBarcode()
-                
-                // TODO: infer categories etc.
-                inferDetail()
+                if autoFetch {
+                    fillInItemNameFromBarcode()
+                    inferDetail()
+                }
             }
         }
     }
@@ -168,6 +176,8 @@ extension ItemDetail {
         item.name = "\(data.product.name) \(data.product.brandDescription) \(data.product.quantityDescription)"
     }
 }
+
+// MARK: - Item Detail AI Classification
 
 extension ItemDetail {
     private func inferDetail() {
