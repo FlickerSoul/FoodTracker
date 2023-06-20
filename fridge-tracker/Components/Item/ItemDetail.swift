@@ -181,11 +181,9 @@ extension ItemDetail {
 
 extension ItemDetail {
     private func inferDetail() {
-        setupAI()
+        guard setupAI() else { return }
         
-        guard let foodFactCache = foodFactCache else {
-            return
-        }
+        guard let foodFactCache = foodFactCache else { return }
         
         // TODO: use dispatch queue
         Task {
@@ -194,13 +192,13 @@ extension ItemDetail {
                 if let chat = chat {
                     updateCategory(chat: chat)
                 } else {
-                    errorMessage.showErrorMessage(title: "Cannot Update Category")
+                    errorMessage.showErrorMessage(title: "Cannot Infer Category")
                 }
             }
         }
     }
     
-    private func setupAI() {
+    private func setupAI() -> Bool {
         let apiKey = UserDefaults.standard.string(forKey: SettingsKeys.openAIKey.rawValue)
         
         OpenAIFoodItemQueryMaker.current.setApiKey(apiKey)
@@ -208,10 +206,10 @@ extension ItemDetail {
         do {
             try OpenAIFoodItemQueryMaker.current.setup()
         } catch {
-            errorMessage.showErrorMessage(title: "Cannot Setup AI Inferrer", message: "Please setup a OpenAI API key in the settings")
-            
-            return
+            return false
         }
+        
+        return true
     }
     
     private func updateCategory(chat: OpenAIKit.Chat) {
