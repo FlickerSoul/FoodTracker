@@ -29,6 +29,22 @@ struct OpenFoodFactsProductDetail: Codable {
         self.product_name ??
             self.generic_name ?? ""
     }
+
+    var brandDescription: String {
+        if let brands = brands {
+            return "(\(brands))"
+        } else {
+            return ""
+        }
+    }
+
+    var quantityDescription: String {
+        if let quantity = quantity {
+            return "(\(quantity))"
+        } else {
+            return ""
+        }
+    }
 }
 
 struct OpenFoodFactsAPIResponse: Codable {
@@ -73,7 +89,7 @@ class OpenFoodFactsRequestFactory {
         request.setValue(OPEN_FOOD_FACTS_QUERY_UA, forHTTPHeaderField: "User-Agent")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
-            API_LOGGER.debug("received open food fact api response with \n data: \(String(decoding: data ?? Data(), as: UTF8.self))\n response: \(response)\n error: \(error)")
+            API_LOGGER.debug("Received open food fact api response with \n data: \(String(decoding: data ?? Data(), as: UTF8.self))\n response: \(response)\n error: \(error)")
 
             if let data = data {
                 if let result = try? JSONDecoder().decode(OpenFoodFactsAPIResponse.self, from: data) {
