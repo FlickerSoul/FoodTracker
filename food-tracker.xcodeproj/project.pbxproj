@@ -613,7 +613,7 @@
 				CODE_SIGN_ENTITLEMENTS = "food-tracker/fridge_tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20230620.1;
-				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_ASSET_PATHS = "food-tracker/Preview\\ Content";
 				DEVELOPMENT_TEAM = 2U5P65L274;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -655,7 +655,7 @@
 				CODE_SIGN_ENTITLEMENTS = "food-tracker/fridge_tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20230620.1;
-				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_ASSET_PATHS = "food-tracker/Preview\\ Content";
 				DEVELOPMENT_TEAM = 2U5P65L274;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
