@@ -53,14 +53,14 @@
 			containerPortal = 5784E9B52A2F3FBD00F2AD46 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 5784E9BC2A2F3FBD00F2AD46;
-			remoteInfo = "fridge-tracker";
+			remoteInfo = "food-tracker";
 		};
 		5784E9DB2A2F3FBE00F2AD46 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5784E9B52A2F3FBD00F2AD46 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 5784E9BC2A2F3FBD00F2AD46;
-			remoteInfo = "fridge-tracker";
+			remoteInfo = "food-tracker";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -78,16 +78,16 @@
 		576139F22A30AD54005A10DD /* ItemSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSorter.swift; sourceTree = "<group>"; };
 		576353882A3877A50013F4F0 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		5763538A2A3889A70013F4F0 /* BarCodeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeAPI.swift; sourceTree = "<group>"; };
-		5784E9BD2A2F3FBD00F2AD46 /* fridge-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fridge-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5784E9BD2A2F3FBD00F2AD46 /* food-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "food-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5784E9C02A2F3FBD00F2AD46 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		5784E9C22A2F3FBD00F2AD46 /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
 		5784E9C42A2F3FBD00F2AD46 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5784E9C62A2F3FBE00F2AD46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		5784E9C82A2F3FBE00F2AD46 /* fridge_tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fridge_tracker.entitlements; sourceTree = "<group>"; };
+		5784E9C82A2F3FBE00F2AD46 /* food-tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "food-tracker.entitlements"; sourceTree = "<group>"; };
 		5784E9CA2A2F3FBE00F2AD46 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		5784E9D02A2F3FBE00F2AD46 /* fridge-trackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "fridge-trackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5784E9D02A2F3FBE00F2AD46 /* food-trackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "food-trackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5784E9D42A2F3FBE00F2AD46 /* fridge_trackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fridge_trackerTests.swift; sourceTree = "<group>"; };
-		5784E9DA2A2F3FBE00F2AD46 /* fridge-trackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "fridge-trackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5784E9DA2A2F3FBE00F2AD46 /* food-trackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "food-trackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5784E9DE2A2F3FBE00F2AD46 /* fridge_trackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fridge_trackerUITests.swift; sourceTree = "<group>"; };
 		5784E9E02A2F3FBE00F2AD46 /* fridge_trackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fridge_trackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5784E9EF2A2F412E00F2AD46 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -155,9 +155,9 @@
 		5784E9B42A2F3FBD00F2AD46 = {
 			isa = PBXGroup;
 			children = (
-				5784E9BF2A2F3FBD00F2AD46 /* fridge-tracker */,
-				5784E9D32A2F3FBE00F2AD46 /* fridge-trackerTests */,
-				5784E9DD2A2F3FBE00F2AD46 /* fridge-trackerUITests */,
+				5784E9BF2A2F3FBD00F2AD46 /* food-tracker */,
+				5784E9D32A2F3FBE00F2AD46 /* food-trackerTests */,
+				5784E9DD2A2F3FBE00F2AD46 /* food-trackerUITests */,
 				5784E9BE2A2F3FBD00F2AD46 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -165,14 +165,14 @@
 		5784E9BE2A2F3FBD00F2AD46 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5784E9BD2A2F3FBD00F2AD46 /* fridge-tracker.app */,
-				5784E9D02A2F3FBE00F2AD46 /* fridge-trackerTests.xctest */,
-				5784E9DA2A2F3FBE00F2AD46 /* fridge-trackerUITests.xctest */,
+				5784E9BD2A2F3FBD00F2AD46 /* food-tracker.app */,
+				5784E9D02A2F3FBE00F2AD46 /* food-trackerTests.xctest */,
+				5784E9DA2A2F3FBE00F2AD46 /* food-trackerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5784E9BF2A2F3FBD00F2AD46 /* fridge-tracker */ = {
+		5784E9BF2A2F3FBD00F2AD46 /* food-tracker */ = {
 			isa = PBXGroup;
 			children = (
 				5784E9FD2A2F545200F2AD46 /* Suppoort */,
@@ -181,11 +181,11 @@
 				5784E9ED2A2F3FE200F2AD46 /* Models */,
 				5784E9C02A2F3FBD00F2AD46 /* App.swift */,
 				5784E9C62A2F3FBE00F2AD46 /* Assets.xcassets */,
-				5784E9C82A2F3FBE00F2AD46 /* fridge_tracker.entitlements */,
+				5784E9C82A2F3FBE00F2AD46 /* food-tracker.entitlements */,
 				5784E9C92A2F3FBE00F2AD46 /* Preview Content */,
 				57867D4E2A42608C00E54A0D /* Info.plist */,
 			);
-			path = "fridge-tracker";
+			path = "food-tracker";
 			sourceTree = "<group>";
 		};
 		5784E9C92A2F3FBE00F2AD46 /* Preview Content */ = {
@@ -196,21 +196,21 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		5784E9D32A2F3FBE00F2AD46 /* fridge-trackerTests */ = {
+		5784E9D32A2F3FBE00F2AD46 /* food-trackerTests */ = {
 			isa = PBXGroup;
 			children = (
 				5784E9D42A2F3FBE00F2AD46 /* fridge_trackerTests.swift */,
 			);
-			path = "fridge-trackerTests";
+			path = "food-trackerTests";
 			sourceTree = "<group>";
 		};
-		5784E9DD2A2F3FBE00F2AD46 /* fridge-trackerUITests */ = {
+		5784E9DD2A2F3FBE00F2AD46 /* food-trackerUITests */ = {
 			isa = PBXGroup;
 			children = (
 				5784E9DE2A2F3FBE00F2AD46 /* fridge_trackerUITests.swift */,
 				5784E9E02A2F3FBE00F2AD46 /* fridge_trackerUITestsLaunchTests.swift */,
 			);
-			path = "fridge-trackerUITests";
+			path = "food-trackerUITests";
 			sourceTree = "<group>";
 		};
 		5784E9ED2A2F3FE200F2AD46 /* Models */ = {
@@ -290,9 +290,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5784E9BC2A2F3FBD00F2AD46 /* fridge-tracker */ = {
+		5784E9BC2A2F3FBD00F2AD46 /* food-tracker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5784E9E42A2F3FBE00F2AD46 /* Build configuration list for PBXNativeTarget "fridge-tracker" */;
+			buildConfigurationList = 5784E9E42A2F3FBE00F2AD46 /* Build configuration list for PBXNativeTarget "food-tracker" */;
 			buildPhases = (
 				5784E9B92A2F3FBD00F2AD46 /* Sources */,
 				5784E9BA2A2F3FBD00F2AD46 /* Frameworks */,
@@ -302,17 +302,17 @@
 			);
 			dependencies = (
 			);
-			name = "fridge-tracker";
+			name = "food-tracker";
 			packageProductDependencies = (
 				57867D3E2A3C706300E54A0D /* OpenAIKit */,
 			);
-			productName = "fridge-tracker";
-			productReference = 5784E9BD2A2F3FBD00F2AD46 /* fridge-tracker.app */;
+			productName = "food-tracker";
+			productReference = 5784E9BD2A2F3FBD00F2AD46 /* food-tracker.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5784E9CF2A2F3FBE00F2AD46 /* fridge-trackerTests */ = {
+		5784E9CF2A2F3FBE00F2AD46 /* food-trackerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5784E9E72A2F3FBE00F2AD46 /* Build configuration list for PBXNativeTarget "fridge-trackerTests" */;
+			buildConfigurationList = 5784E9E72A2F3FBE00F2AD46 /* Build configuration list for PBXNativeTarget "food-trackerTests" */;
 			buildPhases = (
 				5784E9CC2A2F3FBE00F2AD46 /* Sources */,
 				5784E9CD2A2F3FBE00F2AD46 /* Frameworks */,
@@ -323,14 +323,14 @@
 			dependencies = (
 				5784E9D22A2F3FBE00F2AD46 /* PBXTargetDependency */,
 			);
-			name = "fridge-trackerTests";
-			productName = "fridge-trackerTests";
-			productReference = 5784E9D02A2F3FBE00F2AD46 /* fridge-trackerTests.xctest */;
+			name = "food-trackerTests";
+			productName = "food-trackerTests";
+			productReference = 5784E9D02A2F3FBE00F2AD46 /* food-trackerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		5784E9D92A2F3FBE00F2AD46 /* fridge-trackerUITests */ = {
+		5784E9D92A2F3FBE00F2AD46 /* food-trackerUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5784E9EA2A2F3FBE00F2AD46 /* Build configuration list for PBXNativeTarget "fridge-trackerUITests" */;
+			buildConfigurationList = 5784E9EA2A2F3FBE00F2AD46 /* Build configuration list for PBXNativeTarget "food-trackerUITests" */;
 			buildPhases = (
 				5784E9D62A2F3FBE00F2AD46 /* Sources */,
 				5784E9D72A2F3FBE00F2AD46 /* Frameworks */,
@@ -341,9 +341,9 @@
 			dependencies = (
 				5784E9DC2A2F3FBE00F2AD46 /* PBXTargetDependency */,
 			);
-			name = "fridge-trackerUITests";
-			productName = "fridge-trackerUITests";
-			productReference = 5784E9DA2A2F3FBE00F2AD46 /* fridge-trackerUITests.xctest */;
+			name = "food-trackerUITests";
+			productName = "food-trackerUITests";
+			productReference = 5784E9DA2A2F3FBE00F2AD46 /* food-trackerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -369,7 +369,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5784E9B82A2F3FBD00F2AD46 /* Build configuration list for PBXProject "fridge-tracker" */;
+			buildConfigurationList = 5784E9B82A2F3FBD00F2AD46 /* Build configuration list for PBXProject "food-tracker" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -385,9 +385,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5784E9BC2A2F3FBD00F2AD46 /* fridge-tracker */,
-				5784E9CF2A2F3FBE00F2AD46 /* fridge-trackerTests */,
-				5784E9D92A2F3FBE00F2AD46 /* fridge-trackerUITests */,
+				5784E9BC2A2F3FBD00F2AD46 /* food-tracker */,
+				5784E9CF2A2F3FBE00F2AD46 /* food-trackerTests */,
+				5784E9D92A2F3FBE00F2AD46 /* food-trackerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -480,12 +480,12 @@
 /* Begin PBXTargetDependency section */
 		5784E9D22A2F3FBE00F2AD46 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5784E9BC2A2F3FBD00F2AD46 /* fridge-tracker */;
+			target = 5784E9BC2A2F3FBD00F2AD46 /* food-tracker */;
 			targetProxy = 5784E9D12A2F3FBE00F2AD46 /* PBXContainerItemProxy */;
 		};
 		5784E9DC2A2F3FBE00F2AD46 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5784E9BC2A2F3FBD00F2AD46 /* fridge-tracker */;
+			target = 5784E9BC2A2F3FBD00F2AD46 /* food-tracker */;
 			targetProxy = 5784E9DB2A2F3FBE00F2AD46 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -610,10 +610,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "fridge-tracker/fridge_tracker.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "food-tracker/fridge_tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20230620.1;
-				DEVELOPMENT_ASSET_PATHS = "\"fridge-tracker/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 2U5P65L274;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -652,15 +652,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "fridge-tracker/fridge_tracker.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "food-tracker/fridge_tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20230620.1;
-				DEVELOPMENT_ASSET_PATHS = "\"fridge-tracker/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 2U5P65L274;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "fridge-tracker/Info.plist";
+				INFOPLIST_FILE = "food-tracker/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Food Tracker";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We use camera to scan barcode so that users don't have to type in information manually. ";
@@ -702,14 +702,16 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "universe.observer.fridge-trackerTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "universe.observer.food-trackerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/fridge-tracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/fridge-tracker";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/food-tracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/food-tracker";
 			};
 			name = Debug;
 		};
@@ -725,14 +727,16 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "universe.observer.fridge-trackerTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "universe.observer.food-trackerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/fridge-tracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/fridge-tracker";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/food-tracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/food-tracker";
 			};
 			name = Release;
 		};
@@ -747,14 +751,16 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "universe.observer.fridge-trackerUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "universe.observer.food-trackerUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "fridge-tracker";
+				TEST_TARGET_NAME = "food-tracker";
 			};
 			name = Debug;
 		};
@@ -769,21 +775,23 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "universe.observer.fridge-trackerUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "universe.observer.food-trackerUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "fridge-tracker";
+				TEST_TARGET_NAME = "food-tracker";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5784E9B82A2F3FBD00F2AD46 /* Build configuration list for PBXProject "fridge-tracker" */ = {
+		5784E9B82A2F3FBD00F2AD46 /* Build configuration list for PBXProject "food-tracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5784E9E22A2F3FBE00F2AD46 /* Debug */,
@@ -792,7 +800,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5784E9E42A2F3FBE00F2AD46 /* Build configuration list for PBXNativeTarget "fridge-tracker" */ = {
+		5784E9E42A2F3FBE00F2AD46 /* Build configuration list for PBXNativeTarget "food-tracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5784E9E52A2F3FBE00F2AD46 /* Debug */,
@@ -801,7 +809,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5784E9E72A2F3FBE00F2AD46 /* Build configuration list for PBXNativeTarget "fridge-trackerTests" */ = {
+		5784E9E72A2F3FBE00F2AD46 /* Build configuration list for PBXNativeTarget "food-trackerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5784E9E82A2F3FBE00F2AD46 /* Debug */,
@@ -810,7 +818,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5784E9EA2A2F3FBE00F2AD46 /* Build configuration list for PBXNativeTarget "fridge-trackerUITests" */ = {
+		5784E9EA2A2F3FBE00F2AD46 /* Build configuration list for PBXNativeTarget "food-trackerUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5784E9EB2A2F3FBE00F2AD46 /* Debug */,
