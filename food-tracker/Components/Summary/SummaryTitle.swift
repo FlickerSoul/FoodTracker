@@ -19,7 +19,7 @@ struct SummaryTitle<Content: View>: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("Food Calendar")
+                Text(titleText)
                     .font(.title)
                     .bold()
                 Text("As for \(Date.now.formatted(date: .abbreviated, time: .omitted))")
