@@ -20,8 +20,8 @@
 		576139F32A30AD54005A10DD /* ItemSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576139F22A30AD54005A10DD /* ItemSorter.swift */; };
 		576353892A3877A50013F4F0 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576353882A3877A50013F4F0 /* ScannerView.swift */; };
 		5763538B2A3889A70013F4F0 /* BarCodeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763538A2A3889A70013F4F0 /* BarCodeAPI.swift */; };
-		5784E9C12A2F3FBD00F2AD46 /* fridge_trackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C02A2F3FBD00F2AD46 /* fridge_trackerApp.swift */; };
-		5784E9C32A2F3FBD00F2AD46 /* FridgeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C22A2F3FBD00F2AD46 /* FridgeItem.swift */; };
+		5784E9C12A2F3FBD00F2AD46 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C02A2F3FBD00F2AD46 /* App.swift */; };
+		5784E9C32A2F3FBD00F2AD46 /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C22A2F3FBD00F2AD46 /* FoodItem.swift */; };
 		5784E9C52A2F3FBD00F2AD46 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C42A2F3FBD00F2AD46 /* ContentView.swift */; };
 		5784E9C72A2F3FBE00F2AD46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5784E9C62A2F3FBE00F2AD46 /* Assets.xcassets */; };
 		5784E9CB2A2F3FBE00F2AD46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5784E9CA2A2F3FBE00F2AD46 /* Preview Assets.xcassets */; };
@@ -35,6 +35,10 @@
 		5784E9FA2A2F43CA00F2AD46 /* ItemLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9F92A2F43CA00F2AD46 /* ItemLink.swift */; };
 		5784E9FF2A2F545F00F2AD46 /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9FE2A2F545F00F2AD46 /* PreviewContainer.swift */; };
 		5784EA012A2F54B700F2AD46 /* SampleFridgeItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784EA002A2F54B700F2AD46 /* SampleFridgeItems.swift */; };
+		57867D3F2A3C706300E54A0D /* OpenAIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 57867D3E2A3C706300E54A0D /* OpenAIKit */; };
+		57867D412A3C780C00E54A0D /* LLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867D402A3C780C00E54A0D /* LLM.swift */; };
+		57867D432A40902A00E54A0D /* FoodItemCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867D422A40902A00E54A0D /* FoodItemCategory.swift */; };
+		57867D472A41EC0100E54A0D /* FoodCategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867D462A41EC0100E54A0D /* FoodCategoryPicker.swift */; };
 		579E0D7A2A2F620700A1F00B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579E0D792A2F620700A1F00B /* Utils.swift */; };
 		57BD50502A30B43E0076D0E1 /* ItemLinkDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD504F2A30B43E0076D0E1 /* ItemLinkDropdown.swift */; };
 		57CC1AF22A33380F00A902CC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CC1AF12A33380F00A902CC /* CalendarView.swift */; };
@@ -73,8 +77,8 @@
 		576353882A3877A50013F4F0 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		5763538A2A3889A70013F4F0 /* BarCodeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeAPI.swift; sourceTree = "<group>"; };
 		5784E9BD2A2F3FBD00F2AD46 /* fridge-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fridge-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5784E9C02A2F3FBD00F2AD46 /* fridge_trackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fridge_trackerApp.swift; sourceTree = "<group>"; };
-		5784E9C22A2F3FBD00F2AD46 /* FridgeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeItem.swift; sourceTree = "<group>"; };
+		5784E9C02A2F3FBD00F2AD46 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		5784E9C22A2F3FBD00F2AD46 /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
 		5784E9C42A2F3FBD00F2AD46 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5784E9C62A2F3FBE00F2AD46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5784E9C82A2F3FBE00F2AD46 /* fridge_tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fridge_tracker.entitlements; sourceTree = "<group>"; };
@@ -91,6 +95,9 @@
 		5784E9F92A2F43CA00F2AD46 /* ItemLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemLink.swift; sourceTree = "<group>"; };
 		5784E9FE2A2F545F00F2AD46 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		5784EA002A2F54B700F2AD46 /* SampleFridgeItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleFridgeItems.swift; sourceTree = "<group>"; };
+		57867D402A3C780C00E54A0D /* LLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLM.swift; sourceTree = "<group>"; };
+		57867D422A40902A00E54A0D /* FoodItemCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemCategory.swift; sourceTree = "<group>"; };
+		57867D462A41EC0100E54A0D /* FoodCategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategoryPicker.swift; sourceTree = "<group>"; };
 		579E0D792A2F620700A1F00B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		57BD504F2A30B43E0076D0E1 /* ItemLinkDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemLinkDropdown.swift; sourceTree = "<group>"; };
 		57CC1AF12A33380F00A902CC /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -102,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57867D3F2A3C706300E54A0D /* OpenAIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,7 +174,7 @@
 				5784E9F52A2F439400F2AD46 /* Components */,
 				5784E9EE2A2F411800F2AD46 /* Views */,
 				5784E9ED2A2F3FE200F2AD46 /* Models */,
-				5784E9C02A2F3FBD00F2AD46 /* fridge_trackerApp.swift */,
+				5784E9C02A2F3FBD00F2AD46 /* App.swift */,
 				5784E9C62A2F3FBE00F2AD46 /* Assets.xcassets */,
 				5784E9C82A2F3FBE00F2AD46 /* fridge_tracker.entitlements */,
 				5784E9C92A2F3FBE00F2AD46 /* Preview Content */,
@@ -202,8 +210,9 @@
 		5784E9ED2A2F3FE200F2AD46 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5784E9C22A2F3FBD00F2AD46 /* FridgeItem.swift */,
+				5784E9C22A2F3FBD00F2AD46 /* FoodItem.swift */,
 				5784EA002A2F54B700F2AD46 /* SampleFridgeItems.swift */,
+				57867D422A40902A00E54A0D /* FoodItemCategory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -240,6 +249,7 @@
 				57BD504F2A30B43E0076D0E1 /* ItemLinkDropdown.swift */,
 				575FB66E2A32469100029340 /* ItemFilter.swift */,
 				575FB6702A324CF100029340 /* NoItemPrompt.swift */,
+				57867D462A41EC0100E54A0D /* FoodCategoryPicker.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -253,6 +263,7 @@
 				570886CA2A374AA100F48B69 /* SettingsConfig.swift */,
 				5763538A2A3889A70013F4F0 /* BarCodeAPI.swift */,
 				5709C6EE2A3B6D1000E1646F /* ErrorMessage.swift */,
+				57867D402A3C780C00E54A0D /* LLM.swift */,
 			);
 			path = Suppoort;
 			sourceTree = "<group>";
@@ -285,6 +296,7 @@
 			);
 			name = "fridge-tracker";
 			packageProductDependencies = (
+				57867D3E2A3C706300E54A0D /* OpenAIKit */,
 			);
 			productName = "fridge-tracker";
 			productReference = 5784E9BD2A2F3FBD00F2AD46 /* fridge-tracker.app */;
@@ -359,6 +371,7 @@
 			);
 			mainGroup = 5784E9B42A2F3FBD00F2AD46;
 			packageReferences = (
+				57867D3D2A3C706300E54A0D /* XCRemoteSwiftPackageReference "openai-kit" */,
 			);
 			productRefGroup = 5784E9BE2A2F3FBD00F2AD46 /* Products */;
 			projectDirPath = "";
@@ -403,12 +416,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				57CC1AF42A3341B800A902CC /* PieChartView.swift in Sources */,
+				57867D412A3C780C00E54A0D /* LLM.swift in Sources */,
 				5784E9F82A2F43BD00F2AD46 /* ItemDetail.swift in Sources */,
-				5784E9C32A2F3FBD00F2AD46 /* FridgeItem.swift in Sources */,
+				5784E9C32A2F3FBD00F2AD46 /* FoodItem.swift in Sources */,
 				5784E9F02A2F412E00F2AD46 /* MainView.swift in Sources */,
 				57CC1AF22A33380F00A902CC /* CalendarView.swift in Sources */,
 				5763538B2A3889A70013F4F0 /* BarCodeAPI.swift in Sources */,
 				570886CF2A3764B200F48B69 /* SummaryTitle.swift in Sources */,
+				57867D432A40902A00E54A0D /* FoodItemCategory.swift in Sources */,
 				5784E9F22A2F417300F2AD46 /* SummaryView.swift in Sources */,
 				570886CD2A3750C200F48B69 /* NotificationTime.swift in Sources */,
 				575FB66F2A32469100029340 /* ItemFilter.swift in Sources */,
@@ -416,7 +431,7 @@
 				5784EA012A2F54B700F2AD46 /* SampleFridgeItems.swift in Sources */,
 				5784E9F42A2F418A00F2AD46 /* SettingsView.swift in Sources */,
 				572948592A34A6D40075487E /* CategoryDropdown.swift in Sources */,
-				5784E9C12A2F3FBD00F2AD46 /* fridge_trackerApp.swift in Sources */,
+				5784E9C12A2F3FBD00F2AD46 /* App.swift in Sources */,
 				576139DB2A3090BA005A10DD /* SwipeActionButtons.swift in Sources */,
 				570886C72A37448800F48B69 /* About.swift in Sources */,
 				570886CB2A374AA100F48B69 /* SettingsConfig.swift in Sources */,
@@ -425,6 +440,7 @@
 				5784E9FA2A2F43CA00F2AD46 /* ItemLink.swift in Sources */,
 				5700E0E12A34C6280033CAE5 /* Notification.swift in Sources */,
 				5709C6EF2A3B6D1000E1646F /* ErrorMessage.swift in Sources */,
+				57867D472A41EC0100E54A0D /* FoodCategoryPicker.swift in Sources */,
 				5784E9C52A2F3FBD00F2AD46 /* ContentView.swift in Sources */,
 				579E0D7A2A2F620700A1F00B /* Utils.swift in Sources */,
 				57BD50502A30B43E0076D0E1 /* ItemLinkDropdown.swift in Sources */,
@@ -790,6 +806,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		57867D3D2A3C706300E54A0D /* XCRemoteSwiftPackageReference "openai-kit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dylanshine/openai-kit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		57867D3E2A3C706300E54A0D /* OpenAIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57867D3D2A3C706300E54A0D /* XCRemoteSwiftPackageReference "openai-kit" */;
+			productName = OpenAIKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5784E9B52A2F3FBD00F2AD46 /* Project object */;
 }

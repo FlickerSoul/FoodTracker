@@ -48,7 +48,7 @@ final class FridgeItem {
         }
     }
         
-    init(name: String, barcode: String = "", note: String = "", addedDate: Date = Date.now, expiryDate: Date = Date.now, notificationOn: Bool = true, archived: Bool = false, notificationIdentifiers: [String] = [], category: FoodItemCategory = FoodItemCategory.Other()) {
+    init(name: String, barcode: String = "", note: String = "", addedDate: Date = Date.now, expiryDate: Date = Date.now, notificationOn: Bool = true, archived: Bool = false, notificationIdentifiers: [String] = [], category: FoodItemCategory = .Milk) {
         self.id = UUID()
         self.name = name
         self.barcode = barcode
