@@ -192,8 +192,7 @@ extension ItemDetail {
         
         guard let foodFactCache = foodFactCache else { return }
         
-        // TODO: use dispatch queue
-        Task.detached {
+        Task.detached(priority: .userInitiated) {
             await OpenAIFoodItemQueryMaker.current.processFoodCategory(item: foodFactCache.product) { chat, _ in
                 
                 if let chat = chat {
