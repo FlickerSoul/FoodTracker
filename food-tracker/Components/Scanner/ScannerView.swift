@@ -55,7 +55,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         captureSession.addOutput(metadataOutput)
             
         metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-        metadataOutput.metadataObjectTypes = [.qr, .ean13, .code128]
+        metadataOutput.metadataObjectTypes = [.ean13, .code128]
     }
     
     private func setupCaptureSession() {
