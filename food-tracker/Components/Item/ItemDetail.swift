@@ -6,6 +6,7 @@
 //
 
 import OpenAIKit
+
 import SwiftUI
 
 // MARK: - Item Detail View Decl
@@ -51,6 +52,10 @@ struct ItemDetail: View {
                         } label: {
                             Image(systemName: "barcode.viewfinder")
                         }.buttonStyle(.borderless)
+                        
+                        PhotoPickerScanner(onSuccessHandler: self.loadBarcode) { error in
+                            errorMessage.showErrorMessage(title: error.description)
+                        }
                     }
                 }
                 
@@ -118,10 +123,7 @@ struct ItemDetail: View {
         }
         .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $showScanningView) {
-            ScannerView { code in
-                self.item.barcode = code
-                searchBarCode()
-            }
+            ScannerView(callback: self.loadBarcode)
         }
         .alert(isPresented: $errorMessage.isShowing) {
             Alert(title: Text(errorMessage.title), message: Text(errorMessage.message), dismissButton: .default(Text(errorMessage.buttonText)))
@@ -132,6 +134,11 @@ struct ItemDetail: View {
 // MARK: - Item Detail Bar Code
 
 extension ItemDetail {
+    private func loadBarcode(_ barcode: String) {
+        item.barcode = barcode
+        searchBarCode()
+    }
+    
     private var isCodeValid: Bool {
         item.barcode.isNumber
     }
@@ -186,7 +193,7 @@ extension ItemDetail {
         guard let foodFactCache = foodFactCache else { return }
         
         // TODO: use dispatch queue
-        Task {
+        Task.detached {
             await OpenAIFoodItemQueryMaker.current.processFoodCategory(item: foodFactCache.product) { chat, _ in
                 
                 if let chat = chat {

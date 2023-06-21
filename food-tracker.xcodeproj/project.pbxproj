@@ -20,6 +20,7 @@
 		576139F32A30AD54005A10DD /* ItemSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576139F22A30AD54005A10DD /* ItemSorter.swift */; };
 		576353892A3877A50013F4F0 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576353882A3877A50013F4F0 /* ScannerView.swift */; };
 		5763538B2A3889A70013F4F0 /* BarCodeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763538A2A3889A70013F4F0 /* BarCodeAPI.swift */; };
+		576593AC2A42F08600C7BA02 /* PhotoPickerScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576593AB2A42F08600C7BA02 /* PhotoPickerScanner.swift */; };
 		5784E9C12A2F3FBD00F2AD46 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C02A2F3FBD00F2AD46 /* App.swift */; };
 		5784E9C32A2F3FBD00F2AD46 /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C22A2F3FBD00F2AD46 /* FoodItem.swift */; };
 		5784E9C52A2F3FBD00F2AD46 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C42A2F3FBD00F2AD46 /* ContentView.swift */; };
@@ -78,6 +79,7 @@
 		576139F22A30AD54005A10DD /* ItemSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSorter.swift; sourceTree = "<group>"; };
 		576353882A3877A50013F4F0 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		5763538A2A3889A70013F4F0 /* BarCodeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeAPI.swift; sourceTree = "<group>"; };
+		576593AB2A42F08600C7BA02 /* PhotoPickerScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerScanner.swift; sourceTree = "<group>"; };
 		5784E9BD2A2F3FBD00F2AD46 /* food-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "food-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5784E9C02A2F3FBD00F2AD46 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		5784E9C22A2F3FBD00F2AD46 /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				576353882A3877A50013F4F0 /* ScannerView.swift */,
+				576593AB2A42F08600C7BA02 /* PhotoPickerScanner.swift */,
 			);
 			path = Scanner;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				57867D472A41EC0100E54A0D /* FoodCategoryPicker.swift in Sources */,
 				5784E9C52A2F3FBD00F2AD46 /* ContentView.swift in Sources */,
 				579E0D7A2A2F620700A1F00B /* Utils.swift in Sources */,
+				576593AC2A42F08600C7BA02 /* PhotoPickerScanner.swift in Sources */,
 				57BD50502A30B43E0076D0E1 /* ItemLinkDropdown.swift in Sources */,
 				576353892A3877A50013F4F0 /* ScannerView.swift in Sources */,
 			);
@@ -639,7 +643,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -682,7 +686,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
