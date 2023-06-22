@@ -196,7 +196,10 @@ struct PieChartView: View {
 
 #if DEBUG
     #Preview {
-        PieChartView()
-            .modelContainer(previewContainer)
+        MainActor.assumeIsolated {
+            PieChartView()
+
+                .modelContainer(previewContainer)
+        }
     }
 #endif

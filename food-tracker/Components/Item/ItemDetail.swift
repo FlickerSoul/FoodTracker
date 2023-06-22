@@ -290,6 +290,28 @@ private extension String {
 }
 
 #Preview("adding") {
-    MainView()
-        .modelContainer(previewContainer)
+    MainActor.assumeIsolated {
+        NavigationView {
+            ItemDetail(item: FridgeItem.makeDefaultFridgeItem(), viewingStyling: .adding)
+                .modelContainer(previewContainer)
+        }   
+    }
+}
+
+#Preview("editing") {
+    MainActor.assumeIsolated {
+        NavigationView {
+            ItemDetail(item: FridgeItem.makeDefaultFridgeItem(), viewingStyling: .editing)
+                .modelContainer(previewContainer)
+        }
+    }
+}
+
+#Preview("viewing") {
+    MainActor.assumeIsolated {
+        NavigationView {
+            ItemDetail(item: SampleFridgeItems.testSampleItem, viewingStyling: .viewing)
+                .modelContainer(previewContainer)
+        }
+    }
 }

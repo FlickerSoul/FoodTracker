@@ -53,6 +53,8 @@ struct SummaryView: View {
 }
 
 #Preview {
-    SummaryView()
-        .modelContainer(previewContainer)
+    MainActor.assumeIsolated {
+        SummaryView()
+            .modelContainer(previewContainer)
+    }
 }

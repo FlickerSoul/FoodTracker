@@ -96,6 +96,9 @@ struct ItemLink: View {
 }
 
 #Preview("Item Link") {
-    MainView()
-        .modelContainer(previewContainer)
+    MainActor.assumeIsolated {
+        
+        MainView()
+            .modelContainer(previewContainer)
+    }
 }

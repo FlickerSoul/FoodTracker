@@ -23,6 +23,8 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView()
-        .modelContainer(previewContainer)
+    MainActor.assumeIsolated {
+        MainView()
+            .modelContainer(previewContainer)
+    }
 }

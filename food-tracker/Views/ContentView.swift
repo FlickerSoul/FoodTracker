@@ -114,6 +114,8 @@ struct ContentView: View {
 }
 
 #Preview("content view only") {
-    MainView()
-        .modelContainer(previewContainer)
+    MainActor.assumeIsolated {
+        MainView()
+            .modelContainer(previewContainer)
+    }
 }

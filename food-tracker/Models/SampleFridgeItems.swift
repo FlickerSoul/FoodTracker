@@ -6,7 +6,12 @@
 //
 import Foundation
 
-struct SampleFridgeItems {
+@MainActor
+enum SampleFridgeItems {
+    static var testSampleItem: FridgeItem {
+        Self.items[0]
+    }
+
     static var items: [FridgeItem] = [
         FridgeItem(
             name: "cake",

@@ -184,7 +184,9 @@ struct CalendarView: View {
 
 #if DEBUG
     #Preview {
-        CalendarView()
-            .modelContainer(previewContainer)
+        MainActor.assumeIsolated {
+            CalendarView()
+                .modelContainer(previewContainer)
+        }
     }
 #endif
