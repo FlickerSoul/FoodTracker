@@ -129,42 +129,43 @@ struct PieChartView: View {
         VStack(alignment: .center) {
             SummaryTitle<EmptyView>(titleText: "Food Summary")
 
-            Chart {
-                ForEach(self.itemsBySections, id: \.section) { section, _, count in
-                    SectorMark(
-                        angle: .value("Count", count),
-                        innerRadius: .ratio(0.7),
-                        angularInset: 2
-                    )
-                    .cornerRadius(5)
-                    .foregroundStyle(section.color)
-                    .foregroundStyle(by: .value("Name", section))
+            List {
+                Chart {
+                    ForEach(self.itemsBySections, id: \.section) { section, _, count in
+                        SectorMark(
+                            angle: .value("Count", count),
+                            innerRadius: .ratio(0.7),
+                            angularInset: 2
+                        )
+                        .cornerRadius(5)
+                        .foregroundStyle(section.color)
+                        .foregroundStyle(by: .value("Name", section))
+                    }
                 }
-            }
-            .chartLegend(position: .bottom, alignment: .center, spacing: 20)
-            .chartForegroundStyleScale(
-                domain: self.sections,
-                range: self.sections.map { $0.color }
-            )
-            .chartBackground { chartProxy in
-                GeometryReader { geometry in
-                    let frame = geometry[chartProxy.plotAreaFrame] // TODO: error
+                .chartLegend(position: .bottom, alignment: .center, spacing: 20)
+                .chartForegroundStyleScale(
+                    domain: self.sections,
+                    range: self.sections.map { $0.color }
+                )
+                .chartBackground { chartProxy in
+                    GeometryReader { geometry in
+                        let frame = geometry[chartProxy.plotAreaFrame] // TODO: error
 
-                    VStack(alignment: .center) {
-                        if self.noItems {
-                            Text("No Items")
-                        } else {
-                            Text("Expiring Food")
-                                .font(.title2)
-                                .bold()
-                            Text("By")
-                            Text("Dates")
-                        }
-                    }.position(x: frame.midX, y: frame.midY)
+                        VStack(alignment: .center) {
+                            if self.noItems {
+                                Text("No Items")
+                            } else {
+                                Text("Expiring Food")
+                                    .font(.title2)
+                                    .bold()
+                                Text("By")
+                                Text("Dates")
+                            }
+                        }.position(x: frame.midX, y: frame.midY)
+                    }
                 }
-            }
-            .chartLegend(.hidden)
-            .frame(height: 250)
+                .chartLegend(.hidden)
+                .frame(height: 250)
 //                .chartOverlay(content: { proxy in
 //                    GeometryReader { geometry in
 //                        Rectangle()
@@ -175,9 +176,7 @@ struct PieChartView: View {
 //                            }
 //                    }
 //                })
-            .padding()
 
-            List {
                 ForEach(self.itemsBySections, id: \.section) { info in
                     Section {
                         DateCategoryDropdown(info: info, opened: self.dictBinding(for: info.section))
