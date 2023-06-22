@@ -24,8 +24,8 @@ struct SummaryView: View {
         NavigationView {
             VStack {
                 Picker("", selection: $selectedTab) {
-                    Text("Pie Chart").tag(SummaryTabs.pie)
                     Text("Calendar").tag(SummaryTabs.cal)
+                    Text("Pie Chart").tag(SummaryTabs.pie)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)

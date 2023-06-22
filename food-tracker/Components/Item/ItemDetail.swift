@@ -289,12 +289,19 @@ private extension String {
     }
 }
 
+#Preview("under action") {
+    MainActor.assumeIsolated {
+        MainView()
+            .modelContainer(previewContainer)
+    }
+}
+
 #Preview("adding") {
     MainActor.assumeIsolated {
         NavigationView {
             ItemDetail(item: FridgeItem.makeDefaultFridgeItem(), viewingStyling: .adding)
                 .modelContainer(previewContainer)
-        }   
+        }
     }
 }
 

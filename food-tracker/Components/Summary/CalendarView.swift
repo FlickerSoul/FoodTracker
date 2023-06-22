@@ -174,7 +174,7 @@ struct CalendarView: View {
                             ItemLink(item: item, viewingStyle: .viewing)
                         }
                     } else {
-                        Text("Nothing")
+                        Text("Nothing Expiring!!!").font(.headline)
                     }
                 }
             }
