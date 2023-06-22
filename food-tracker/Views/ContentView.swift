@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-    @State private var itemStack: [FridgeItem] = []
+    @State private var itemStack: [ItemDetailInfo] = []
     @State private var addingItem: Bool = false
 
     @State private var hiddenItemListOpen: Bool = false
@@ -52,6 +52,7 @@ struct ContentView: View {
                     ForEach(visibleItems, id: \.id) { item in
                         ItemLink(
                             item: item,
+                            viewingStyle: .editing,
                             leadingActions: [.archive],
                             trailingActions: [.delete]
                         )
@@ -67,7 +68,7 @@ struct ContentView: View {
                         ForEach(hiddenItems, id: \.id) {
                             item in
                             ItemLink(
-                                item: item,
+                                item: item, viewingStyle: .editing,
                                 leadingActions: [.unarchive],
                                 trailingActions: [.delete]
                             )
@@ -76,11 +77,14 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Items")
-            .navigationDestination(for: FridgeItem.self) { item in
-                ItemDetail(item: item, adding: $addingItem)
+            .navigationDestination(for: ItemDetailInfo.self) { info in
+                ItemDetail(item: info.item, viewingStyling: info.viewingStyle)
             }
             .toolbar {
                 ToolbarItemGroup(placement: .primaryAction) {
+                    Button {} label: {
+                        Label("Add By Scanning", systemImage: "barcode.viewfinder")
+                    }
                     Button(action: enterNewItem, label: {
                         Label("Add", systemImage: "plus")
                     })
@@ -95,17 +99,16 @@ struct ContentView: View {
     }
 
     private func enterNewItem() {
-        enterItem(item: FridgeItem.makeDefaultFridgeItem(), adding: true)
+        enterItem(item: FridgeItem.makeDefaultFridgeItem(), viewingStyle: .adding)
     }
 
     private func enterEditItem(item: FridgeItem) {
-        enterItem(item: item)
+        enterItem(item: item, viewingStyle: .editing)
     }
 
-    private func enterItem(item: FridgeItem, adding: Bool = false) {
+    private func enterItem(item: FridgeItem, viewingStyle: DetailViewingStyle) {
         withAnimation {
-            addingItem = adding
-            itemStack.append(item)
+            itemStack.append(.init(item: item, viewingStyle: viewingStyle))
         }
     }
 }

@@ -9,23 +9,37 @@ import OpenAIKit
 
 import SwiftUI
 
+enum DetailViewingStyle {
+    case adding
+    case editing
+    case viewing
+}
+
+struct ItemDetailInfo: Hashable {
+    let item: FridgeItem
+    let viewingStyle: DetailViewingStyle
+}
+
 // MARK: - Item Detail View Decl
 
 struct ItemDetail: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @Bindable var item: FridgeItem
-    @Binding var adding: Bool
+    let viewingStyling: DetailViewingStyle
     @State private var canceling = false
     @State private var showInvalidAleart = false
     
     @State private var showScanningView = false
     
     var titleText: String {
-        if adding {
-            return "Add Item"
-        } else {
-            return "Edit Item"
+        switch viewingStyling {
+        case .adding:
+            "Add Item"
+        case .editing:
+            "Edit Item"
+        case .viewing:
+            "Item"
         }
     }
     
@@ -40,51 +54,63 @@ struct ItemDetail: View {
     
     @AppStorage(SettingsKeys.autoFetch.rawValue) private var autoFetch: Bool = true
     
+    var isAdding: Bool {
+        viewingStyling == .adding
+    }
+    
+    var canEdit: Bool {
+        viewingStyling != .viewing
+    }
+    
     var body: some View {
-        VStack {
-            List {
-                Section(header: Label("Barcode", systemImage: "barcode"), footer: Text("The barcode of this food item. You can ignore this and fill in manually.")) {
-                    HStack {
-                        TextField("Barcode", text: $item.barcode)
+        List {
+            Section(header: Label("Barcode", systemImage: "barcode"), footer: Text("The barcode of this food item. You can ignore this and fill in manually.")) {
+                HStack {
+                    TextField("Barcode", text: $item.barcode)
                         
-                        Button {
-                            showScanningView.toggle()
-                        } label: {
-                            Image(systemName: "barcode.viewfinder")
-                        }.buttonStyle(.borderless)
+                    Button {
+                        showScanningView.toggle()
+                    } label: {
+                        Image(systemName: "barcode.viewfinder")
+                    }.buttonStyle(.borderless)
                         
-                        PhotoPickerScanner(onSuccessHandler: self.loadBarcode) { error in
-                            errorMessage.showErrorMessage(title: error.description)
-                        }
+                    PhotoPickerScanner(onSuccessHandler: self.loadBarcode) { error in
+                        errorMessage.showErrorMessage(title: error.description)
                     }
                 }
-                
-                Section(header: Label("Name", systemImage: "pencil"), footer: Text("The name should not be empty.")) {
-                    TextField("Give a name to this item", text: $item.name)
-                }
-                
-                Section(header: Label("Category", systemImage: "filemenu.and.selection")) {
-                    FoodCategoryPicker(category: $item.category)
-                }
-                
-                Section(header: Label("Dates", systemImage: "pencil")) {
-                    DatePicker("Expiry Date", selection: $item.expiryDate, displayedComponents: .date)
-                    DatePicker("Added Date", selection: $item.addedDate, displayedComponents: .date)
-                }
-                
-                Section(header: Label("Note", systemImage: "note")) {
-                    TextEditor(text: $item.note)
-                }
-                
-                Section(header: Label("Options", systemImage: "ellipsis")) {
-                    Toggle("Notification", isOn: $item.notificationOn)
-                    Toggle("Archive", isOn: $item.archived)
-                }
             }
+            .disabled(!canEdit)
+                
+            Section(header: Label("Name", systemImage: "pencil"), footer: Text("The name should not be empty.")) {
+                TextField("Give a name to this item", text: $item.name)
+            }
+            .disabled(!canEdit)
+                
+            Section(header: Label("Category", systemImage: "filemenu.and.selection")) {
+                FoodCategoryPicker(category: $item.category)
+            }
+            .disabled(!canEdit)
+            
+            Section(header: Label("Dates", systemImage: "pencil")) {
+                DatePicker("Expiry Date", selection: $item.expiryDate, displayedComponents: .date)
+                DatePicker("Added Date", selection: $item.addedDate, displayedComponents: .date)
+            }
+            .disabled(!canEdit)
+            
+            Section(header: Label("Note", systemImage: "note")) {
+                TextEditor(text: $item.note)
+            }
+            .disabled(!canEdit)
+            
+            Section(header: Label("Options", systemImage: "ellipsis")) {
+                Toggle("Notification", isOn: $item.notificationOn)
+                Toggle("Archive", isOn: $item.archived)
+            }
+            .disabled(!canEdit)
         }
         .navigationTitle(titleText)
         .toolbar {
-            if adding {
+            if isAdding {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("cancel") {
                         canceling = true
@@ -99,29 +125,31 @@ struct ItemDetail: View {
                 }
             }
             
-            ToolbarItem {
-                Button {
-                    searchBarCode()
-                } label: {
-                    Image(systemName: "questionmark.bubble")
-                        .symbolEffect(.pulse.byLayer, isActive: loadingBarcodeDetail)
-                }.buttonStyle(.borderless)
+            if canEdit {
+                ToolbarItem {
+                    Button {
+                        searchBarCode()
+                    } label: {
+                        Image(systemName: "questionmark.bubble")
+                            .symbolEffect(.pulse.byLayer, isActive: loadingBarcodeDetail)
+                    }.buttonStyle(.borderless)
+                }
             }
-
-            ToolbarItem(placement: .confirmationAction) {
-                Button {
-                    if adding {
+                
+            if isAdding {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button {
                         item.toggleNotification()
                         modelContext.insert(item)
-                    }
-                    
-                    dismiss()
-                } label: {
-                    Text("save")
-                }.disabled(isItemInvalid)
+                            
+                        dismiss()
+                    } label: {
+                        Text("save")
+                    }.disabled(isItemInvalid)
+                }
             }
         }
-        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(isAdding)
         .sheet(isPresented: $showScanningView) {
             ScannerView(callback: self.loadBarcode)
         }

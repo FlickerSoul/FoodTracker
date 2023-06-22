@@ -18,6 +18,7 @@ struct ItemLink: View {
     @Environment(\.editMode) private var listEditMode
 
     var item: FridgeItem
+    let viewingStyle: DetailViewingStyle
 
     let leadingActions: [SwipeActions]
     let trailingActions: [SwipeActions]
@@ -26,15 +27,16 @@ struct ItemLink: View {
         return listEditMode?.wrappedValue.isEditing ?? false
     }
 
-    init(item: FridgeItem, leadingActions: [SwipeActions] = [], trailingActions: [SwipeActions] = []) {
+    init(item: FridgeItem, viewingStyle: DetailViewingStyle, leadingActions: [SwipeActions] = [], trailingActions: [SwipeActions] = []) {
         self.item = item
+        self.viewingStyle = viewingStyle
         self.leadingActions = leadingActions
         self.trailingActions = trailingActions
     }
 
     var body: some View {
         NavigationLink {
-            ItemDetail(item: item, adding: .constant(false))
+            ItemDetail(item: item, viewingStyling: viewingStyle)
         } label: {
             HStack(alignment: .center) {
                 Image(uiImage: item.category.icon)
