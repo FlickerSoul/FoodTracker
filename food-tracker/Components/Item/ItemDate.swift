@@ -26,16 +26,20 @@ struct ItemDate: View {
         HStack(spacing: 5) {
             Image(systemName: "calendar")
 
-            switch roundedDate {
-            case Date.distantPast ..< today:
-                Text(date, style: .date).foregroundStyle(DateSection.alreadyExpired.color)
-            case today:
-                Text(date, style: .date).foregroundStyle(DateSection.oneDay.color)
-            case today + 1 * SECONDS_IN_A_DAY ..< today + 4 * SECONDS_IN_A_DAY:
-                Text(date, style: .date).foregroundStyle(DateSection.threeDays.color)
-            default:
-                Text(date, style: .date).foregroundStyle(DateSection.other.color)
-            }
+            let color: Color = {
+                switch roundedDate {
+                case Date.distantPast ..< today:
+                    DateSection.alreadyExpired.color
+                case today:
+                    DateSection.oneDay.color
+                case today + 1 * SECONDS_IN_A_DAY ..< today + 4 * SECONDS_IN_A_DAY:
+                    DateSection.threeDays.color
+                default:
+                    DateSection.other.color
+                }
+            }()
+
+            Text(date, format: .dateTime.year().month(.abbreviated).day(.twoDigits)).foregroundStyle(color)
         }
     }
 }

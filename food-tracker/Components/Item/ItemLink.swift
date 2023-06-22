@@ -45,12 +45,12 @@ struct ItemLink: View {
                     Text(item.name).font(.headline)
 
                     HStack {
-                        ItemCategory(category: item.category).font(.footnote)
+                        ItemDate(date: item.expiryDate)
+                            .font(.footnote.monospaced())
 
                         Spacer()
 
-                        ItemDate(date: item.expiryDate)
-                            .font(.footnote)
+                        ItemCategory(category: item.category).font(.footnote)
                     }
                 }
             }
