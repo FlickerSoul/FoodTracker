@@ -81,15 +81,35 @@ struct ItemDetail: View {
             }
             .disabled(!canEdit)
                 
-            Section(header: Label("Name", systemImage: "pencil"), footer: Text("The name should not be empty.")) {
-                TextField("Give a name to this item", text: $item.name)
-            }
-            .disabled(!canEdit)
+            Section(header: Label("Detail", systemImage: "pencil")) {
+                HStack {
+                    Text("Name")
+                    Divider()
+                    TextField("Give a name to this item", text: $item.name)
+                }
                 
-            Section(header: Label("Category", systemImage: "filemenu.and.selection")) {
+                HStack {
+                    Text("Quantity")
+                    Divider()
+                    TextField(
+                        "Quantity",
+                        text: Binding(
+                            get: {
+                                String(item.quantity)
+                            },
+                            set: { val in
+                                item.quantity = Int(val) ?? 0
+                            }
+                        )
+                    ).keyboardType(.numberPad)
+                }
+                
                 FoodCategoryPicker(category: $item.category)
             }
             .disabled(!canEdit)
+                
+            Section(header: Label("Category", systemImage: "filemenu.and.selection")) {}
+                .disabled(!canEdit)
             
             Section(header: Label("Dates", systemImage: "pencil")) {
                 DatePicker("Expiry Date", selection: $item.expiryDate, displayedComponents: .date)
@@ -103,8 +123,9 @@ struct ItemDetail: View {
             .disabled(!canEdit)
             
             Section(header: Label("Options", systemImage: "ellipsis")) {
-                Toggle("Notification", isOn: $item.notificationOn)
-                Toggle("Archive", isOn: $item.archived)
+                Toggle("Is Template", isOn: $item.isTemplate)
+                Toggle("Notification On", isOn: $item.notificationOn)
+                Toggle("Archived", isOn: $item.archived)
             }
             .disabled(!canEdit)
         }

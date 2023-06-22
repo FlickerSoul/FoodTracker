@@ -37,6 +37,8 @@ final class FridgeItem {
     
     var isTemplate: Bool
     
+    var quantity: Int
+    
     private var notificationScheduled: Bool {
         !notificationIdentifiers.isEmpty
     }
@@ -50,7 +52,7 @@ final class FridgeItem {
         }
     }
         
-    init(name: String, barcode: String = "", note: String = "", addedDate: Date = Date.now, expiryDate: Date = Date.now, notificationOn: Bool = true, archived: Bool = false, notificationIdentifiers: [String] = [], category: FoodItemCategory = .None, isTemplate: Bool = false) {
+    init(name: String, barcode: String = "", note: String = "", addedDate: Date = Date.now, expiryDate: Date = Date.now, notificationOn: Bool = true, archived: Bool = false, notificationIdentifiers: [String] = [], category: FoodItemCategory = .None, isTemplate: Bool = false, quantity: Int = 1) {
         self.id = UUID()
         self.name = name
         self.barcode = barcode
@@ -62,6 +64,7 @@ final class FridgeItem {
         self.archived = archived
         self.category = category
         self.isTemplate = isTemplate
+        self.quantity = quantity
     }
     
     static func makeDefaultFridgeItem(name: String = "") -> FridgeItem {
