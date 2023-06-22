@@ -22,7 +22,7 @@ struct SummaryTitle<Content: View>: View {
                 Text(titleText)
                     .font(.title)
                     .bold()
-                Text("As for \(Date.now.formatted(date: .abbreviated, time: .omitted))")
+                Text("As for \(Date.now.formatted(date: .abbreviated, time: .omitted))").font(.footnote)
             }
 
             Spacer()

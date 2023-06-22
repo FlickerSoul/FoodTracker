@@ -73,14 +73,16 @@ struct CalendarView: View {
 
     @State var filteringArchived: ArchiveFilterStyle = .none
 
-    @State var selectedDate: Date? = nil
+    @State var selectedDate: Date = .now
+
+    var roundedSelectedDate: Date {
+        roundDownToDate(date: selectedDate)
+    }
 
     private func selectBar(at location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) {
         let xPosition = location.x - geometry[proxy.plotAreaFrame].origin.x
         if let date: Date = proxy.value(atX: xPosition) {
             selectedDate = date
-        } else {
-            selectedDate = nil
         }
     }
 
@@ -99,27 +101,10 @@ struct CalendarView: View {
                                 y: .value("Item Count", count)
                             )
                             .foregroundStyle(date > Date.now ? .green : .red)
+                            .cornerRadius(5)
                         }
-
-                        RuleMark(x: .value("Today", Date.now, unit: .day))
-                            .foregroundStyle(.yellow)
-                            .offset(yStart: -10)
-                            .annotation(
-                                position: .top,
-                                spacing: 0,
-                                overflowResolution: .init(
-                                    x: .fit(to: .chart),
-                                    y: .disabled
-                                )
-                            ) {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .frame(width: 30, height: 20)
-                                    Text("Now")
-                                }
-                            }
                     }
-                    .frame(height: 350)
+                    .frame(height: 200)
                     .chartOverlay { proxy in
                         if noItems {
                             Text("No Items")
@@ -136,7 +121,34 @@ struct CalendarView: View {
                     }
                     .chartScrollableAxes(.horizontal)
                     .chartXAxis {
-                        AxisMarks(values: .stride(by: .day))
+                        AxisMarks(values: .stride(by: .day)) { value in
+
+                            AxisGridLine()
+                            AxisTick()
+
+                            if let date = value.as(Date.self) {
+                                let chartDate = Calendar.current.dateComponents([.year, .month, .day], from: date)
+
+                                let currentDate = Calendar.current.dateComponents([.year, .month, .day], from: Date.now)
+
+                                AxisValueLabel(centered: true) {
+                                    VStack {
+                                        if chartDate == currentDate {
+                                            Text("Today")
+                                        } else if currentDate.year == chartDate.year {
+                                            Text(date, format: .dateTime.month().day())
+                                        } else {
+                                            Text(date, format: .dateTime.year(.twoDigits).month().day())
+                                        }
+
+                                        if Calendar.current.dateComponents([.year, .month, .day], from: roundedSelectedDate) == chartDate {
+                                            Circle()
+                                                .foregroundStyle(.orange)
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                     .chartXVisibleDomain(length: 5 * SECONDS_IN_A_DAY)
                     .chartYScale(domain: countDomain)
@@ -145,7 +157,7 @@ struct CalendarView: View {
                     .chartScrollTargetBehavior(
                         .valueAligned(
                             matching: DateComponents(hour: 0),
-                            majorAlignment: .matching(DateComponents(day: 0))
+                            majorAlignment: .matching(DateComponents(hour: 0))
                         )
                     )
                     .chartYAxisLabel("Food Count")
@@ -153,22 +165,16 @@ struct CalendarView: View {
                 }
 
                 Section {
-                    if let selectedDate = selectedDate {
-                        let rounded = roundDownToDate(date: selectedDate)
+                    Text("On \(selectedDate.formatted(date: .complete, time: .omitted))")
 
-                        Text("On \(selectedDate.formatted(date: .complete, time: .omitted))")
-
-                        if let selectedItems =
-                            itemsByDates[rounded]
-                        {
-                            ForEach(selectedItems) { item in
-                                ItemLink(item: item)
-                            }
-                        } else {
-                            Text("Nothing")
+                    if let selectedItems =
+                        itemsByDates[roundedSelectedDate]
+                    {
+                        ForEach(selectedItems) { item in
+                            ItemLink(item: item)
                         }
                     } else {
-                        Text("No Date Selected")
+                        Text("Nothing")
                     }
                 }
             }
