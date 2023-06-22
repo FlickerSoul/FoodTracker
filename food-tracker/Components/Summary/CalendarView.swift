@@ -62,7 +62,7 @@ struct CalendarView: View {
             ) ... (
                 itemsByDates.keys.reduce(Date.distantPast) { partialResult, date in
                     max(partialResult, date)
-                } + 3 * SECONDS_IN_A_DAY
+                } + 4 * SECONDS_IN_A_DAY
             )
         }
     }

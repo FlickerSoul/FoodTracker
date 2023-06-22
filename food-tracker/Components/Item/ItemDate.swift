@@ -24,6 +24,8 @@ struct ItemDate: View {
 
     var body: some View {
         HStack(spacing: 5) {
+            Image(systemName: "calendar")
+
             switch roundedDate {
             case Date.distantPast ..< today:
                 Text(date, style: .date).foregroundStyle(DateSection.alreadyExpired.color)

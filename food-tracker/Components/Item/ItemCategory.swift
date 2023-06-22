@@ -11,7 +11,10 @@ struct ItemCategory: View {
     let category: FoodItemCategory
 
     var body: some View {
-        Text(category.name)
+        HStack(spacing: 5) {
+            Image(systemName: "filemenu.and.selection")
+            Text(category.name)
+        }
     }
 }
 

@@ -38,14 +38,20 @@ struct ItemLink: View {
         } label: {
             HStack(alignment: .center) {
                 Image(uiImage: item.category.icon)
+
+                Divider()
+
                 VStack(alignment: .leading) {
-                    Text(item.name)
+                    Text(item.name).font(.headline)
 
                     HStack {
-                        ItemCategory(category: item.category)
+                        ItemCategory(category: item.category).font(.footnote)
+
+                        Spacer()
+
                         ItemDate(date: item.expiryDate)
+                            .font(.footnote)
                     }
-                    .font(.footnote)
                 }
             }
         }
