@@ -37,16 +37,15 @@ struct ItemLink: View {
             ItemDetail(item: item, adding: .constant(false))
         } label: {
             HStack(alignment: .center) {
+                Image(uiImage: item.category.icon)
                 VStack(alignment: .leading) {
-                    Text(item.name).font(.title2)
+                    Text(item.name)
 
-                    ItemCategory(category: item.category)
-
-                    ItemDate(name: "Expire", date: item.expiryDate, color: true)
-                        .font(.footnote)
-
-                    ItemDate(name: "Added", date: item.addedDate)
-                        .font(.footnote)
+                    HStack {
+                        ItemCategory(category: item.category)
+                        ItemDate(date: item.expiryDate)
+                    }
+                    .font(.footnote)
                 }
             }
         }
