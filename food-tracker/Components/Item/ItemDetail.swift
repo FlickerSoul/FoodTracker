@@ -39,7 +39,7 @@ struct ItemDetail: View {
         case .editing:
             "Edit Item"
         case .viewing:
-            "Item"
+            "View Item"
         }
     }
     
@@ -237,7 +237,7 @@ extension ItemDetail {
 
 extension ItemDetail {
     private func inferDetail() {
-        guard setupAI() else { return }
+        guard OpenAIFoodItemQueryMaker.current.setupWithUserDefaulKey() else { return }
         
         guard let foodFactCache = foodFactCache else { return }
         
@@ -251,20 +251,6 @@ extension ItemDetail {
                 }
             }
         }
-    }
-    
-    private func setupAI() -> Bool {
-        let apiKey = UserDefaults.standard.string(forKey: SettingsKeys.openAIKey.rawValue)
-        
-        OpenAIFoodItemQueryMaker.current.setApiKey(apiKey)
-        
-        do {
-            try OpenAIFoodItemQueryMaker.current.setup()
-        } catch {
-            return false
-        }
-        
-        return true
     }
     
     private func updateCategory(chat: OpenAIKit.Chat) {

@@ -125,3 +125,19 @@ class OpenAIFoodItemQueryMaker: OpenAIQueryMaker {
         }
     }
 }
+
+extension OpenAIFoodItemQueryMaker {
+    func setupWithUserDefaulKey() -> Bool {
+        let apiKey = UserDefaults.standard.string(forKey: SettingsKeys.openAIKey.rawValue)
+
+        OpenAIFoodItemQueryMaker.current.setApiKey(apiKey)
+
+        do {
+            try OpenAIFoodItemQueryMaker.current.setup()
+        } catch {
+            return false
+        }
+
+        return true
+    }
+}
