@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var addingItem: Bool = false
 
     @State private var hiddenItemListOpen: Bool = false
+    @State private var templatedItemListOpen: Bool = false
 
     @State private var listEditSelections: Set<UUID> = Set()
 
@@ -37,8 +38,18 @@ struct ContentView: View {
         return hiddens
     }
 
+    var templatedItems: [FridgeItem] {
+        return items.filter { item in
+            item.isTemplate
+        }
+    }
+
     var hasHiddenItems: Bool {
         return hiddenItems.count > 0
+    }
+
+    var hasTemplatedItems: Bool {
+        return templatedItems.count > 0
     }
 
     var body: some View {
@@ -53,7 +64,7 @@ struct ContentView: View {
                         ItemLink(
                             item: item,
                             viewingStyle: .editing,
-                            leadingActions: [.archive],
+                            leadingActions: [.archive, .markTemplate],
                             trailingActions: [.delete]
                         )
                     }
@@ -69,7 +80,21 @@ struct ContentView: View {
                             item in
                             ItemLink(
                                 item: item, viewingStyle: .editing,
-                                leadingActions: [.unarchive],
+                                leadingActions: [.unarchive, .markTemplate],
+                                trailingActions: [.delete]
+                            )
+                        }
+                    }
+                }
+
+                Section {
+                    ItemLinkDropdown(name: "Item Templates", icon: "books.vertical.circle", open: $templatedItemListOpen)
+
+                    if templatedItemListOpen {
+                        ForEach(templatedItems) { item in
+                            ItemLink(
+                                item: item, viewingStyle: .editing,
+                                leadingActions: [.unarchive, .markTemplate],
                                 trailingActions: [.delete]
                             )
                         }
@@ -82,9 +107,14 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .primaryAction) {
+                    Button {}
+                        label: {
+                            Label("Add Using Tempaltes", systemImage: "book.pages")
+                        }
                     Button(action: enterNewItemAndScan) {
                         Label("Add By Scanning", systemImage: "barcode.viewfinder")
                     }
+
                     Button(action: enterNewItem) {
                         Label("Add", systemImage: "plus")
                     }

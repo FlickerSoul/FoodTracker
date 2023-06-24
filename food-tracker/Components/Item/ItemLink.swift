@@ -11,6 +11,7 @@ enum SwipeActions {
     case delete
     case archive
     case unarchive
+    case markTemplate
 }
 
 struct ItemLink: View {
@@ -82,6 +83,10 @@ struct ItemLink: View {
         }
     }
 
+    func markTempalte() {
+        item.isTemplate.toggle()
+    }
+
     @ViewBuilder
     func chooseAction(action choice: SwipeActions) -> some View {
         switch choice {
@@ -91,6 +96,8 @@ struct ItemLink: View {
             SwipeArchiveButton(action: toggleItemArchive)
         case .unarchive:
             SwipeUnarchiveButton(action: toggleItemArchive)
+        case .markTemplate:
+            SwipeMarkTemplateButton(action: markTempalte)
         }
     }
 }

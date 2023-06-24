@@ -21,10 +21,6 @@ struct SwipeActionButton: View {
     }
 }
 
-#Preview {
-    SwipeActionButton(iconLabel: "archivebox", tint: .yellow) {}
-}
-
 // TODO: use macros?
 
 struct SwipeArchiveButton: View {
@@ -48,5 +44,13 @@ struct SwipeDeleteButton: View {
 
     var body: some View {
         SwipeActionButton(iconLabel: "trash", tint: .red, action: action)
+    }
+}
+
+struct SwipeMarkTemplateButton: View {
+    let action: () -> Void
+
+    var body: some View {
+        SwipeActionButton(iconLabel: "books.vertical", tint: .orange, action: action)
     }
 }
