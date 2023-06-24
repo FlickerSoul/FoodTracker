@@ -36,7 +36,7 @@ struct ItemLink: View {
 
     var body: some View {
         NavigationLink {
-            ItemDetail(item: item, viewingStyling: viewingStyle)
+            ItemDetail(item: item, viewingStyling: viewingStyle, showScannerWhenOpen: false)
         } label: {
             HStack(alignment: .center) {
                 Image(uiImage: item.category.icon)
@@ -97,7 +97,6 @@ struct ItemLink: View {
 
 #Preview("Item Link") {
     MainActor.assumeIsolated {
-        
         MainView()
             .modelContainer(previewContainer)
     }

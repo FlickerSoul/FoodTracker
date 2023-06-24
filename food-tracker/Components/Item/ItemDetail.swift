@@ -18,6 +18,7 @@ enum DetailViewingStyle {
 struct ItemDetailInfo: Hashable {
     let item: FridgeItem
     let viewingStyle: DetailViewingStyle
+    let showScannerWhenOpen: Bool
 }
 
 // MARK: - Item Detail View Decl
@@ -27,6 +28,7 @@ struct ItemDetail: View {
     @Environment(\.dismiss) private var dismiss
     @Bindable var item: FridgeItem
     let viewingStyling: DetailViewingStyle
+    let showScannerWhenOpen: Bool
     @State private var canceling = false
     @State private var showInvalidAleart = false
     
@@ -101,7 +103,10 @@ struct ItemDetail: View {
                                 item.quantity = Int(val) ?? 0
                             }
                         )
-                    ).keyboardType(.numberPad)
+                    )
+                    .keyboardType(.numberPad)
+                    Stepper("Chagne Quantity", value: $item.quantity, step: 1)
+                        .labelsHidden()
                 }
                 
                 FoodCategoryPicker(category: $item.category)
@@ -176,6 +181,11 @@ struct ItemDetail: View {
         }
         .alert(isPresented: $errorMessage.isShowing) {
             Alert(title: Text(errorMessage.title), message: Text(errorMessage.message), dismissButton: .default(Text(errorMessage.buttonText)))
+        }
+        .onAppear {
+            if showScannerWhenOpen {
+                showScanningView = true
+            }
         }
     }
 }
@@ -285,7 +295,7 @@ private extension String {
 #Preview("adding") {
     MainActor.assumeIsolated {
         NavigationView {
-            ItemDetail(item: FridgeItem.makeDefaultFridgeItem(), viewingStyling: .adding)
+            ItemDetail(item: FridgeItem.makeDefaultFridgeItem(), viewingStyling: .adding, showScannerWhenOpen: false)
                 .modelContainer(previewContainer)
         }
     }
@@ -294,7 +304,7 @@ private extension String {
 #Preview("editing") {
     MainActor.assumeIsolated {
         NavigationView {
-            ItemDetail(item: FridgeItem.makeDefaultFridgeItem(), viewingStyling: .editing)
+            ItemDetail(item: FridgeItem.makeDefaultFridgeItem(), viewingStyling: .editing, showScannerWhenOpen: false)
                 .modelContainer(previewContainer)
         }
     }
@@ -303,7 +313,7 @@ private extension String {
 #Preview("viewing") {
     MainActor.assumeIsolated {
         NavigationView {
-            ItemDetail(item: SampleFridgeItems.testSampleItem, viewingStyling: .viewing)
+            ItemDetail(item: SampleFridgeItems.testSampleItem, viewingStyling: .viewing, showScannerWhenOpen: false)
                 .modelContainer(previewContainer)
         }
     }

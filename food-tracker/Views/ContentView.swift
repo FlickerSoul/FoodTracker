@@ -78,16 +78,16 @@ struct ContentView: View {
             }
             .navigationTitle("Items")
             .navigationDestination(for: ItemDetailInfo.self) { info in
-                ItemDetail(item: info.item, viewingStyling: info.viewingStyle)
+                ItemDetail(item: info.item, viewingStyling: info.viewingStyle, showScannerWhenOpen: info.showScannerWhenOpen)
             }
             .toolbar {
                 ToolbarItemGroup(placement: .primaryAction) {
-                    Button {} label: {
+                    Button(action: enterNewItemAndScan) {
                         Label("Add By Scanning", systemImage: "barcode.viewfinder")
                     }
-                    Button(action: enterNewItem, label: {
+                    Button(action: enterNewItem) {
                         Label("Add", systemImage: "plus")
-                    })
+                    }
                 }
 
                 ToolbarItemGroup(placement: .topBarLeading) {
@@ -99,23 +99,23 @@ struct ContentView: View {
     }
 
     private func enterNewItem() {
-        enterItem(item: FridgeItem.makeDefaultFridgeItem(), viewingStyle: .adding)
+        addItem(item: FridgeItem.makeDefaultFridgeItem(), viewingStyle: .adding)
     }
 
-    private func enterEditItem(item: FridgeItem) {
-        enterItem(item: item, viewingStyle: .editing)
+    private func enterNewItemAndScan() {
+        addItem(item: FridgeItem.makeDefaultFridgeItem(), viewingStyle: .adding, showScannerWhenOpen: true)
     }
 
-    private func enterItem(item: FridgeItem, viewingStyle: DetailViewingStyle) {
+    private func addItem(item: FridgeItem, viewingStyle: DetailViewingStyle, showScannerWhenOpen: Bool = false) {
         withAnimation {
-            itemStack.append(.init(item: item, viewingStyle: viewingStyle))
+            itemStack.append(.init(item: item, viewingStyle: viewingStyle, showScannerWhenOpen: showScannerWhenOpen))
         }
     }
 }
 
 #Preview("content view only") {
     MainActor.assumeIsolated {
-        MainView()
+        ContentView()
             .modelContainer(previewContainer)
     }
 }
