@@ -51,7 +51,7 @@ final class FridgeItem {
             NotificationHandler.current.cancelNotification(item: self)
         }
     }
-        
+    
     init(name: String, barcode: String = "", note: String = "", addedDate: Date = Date.now, expiryDate: Date = Date.now, notificationOn: Bool = true, archived: Bool = false, notificationIdentifiers: [String] = [], category: FoodItemCategory = .None, isTemplate: Bool = false, quantity: Int = 1) {
         self.id = UUID()
         self.name = name
@@ -73,5 +73,46 @@ final class FridgeItem {
     
     static func isExpiring(item: FridgeItem) -> Bool {
         return item.expiryDate < Date.now
+    }
+    
+    func copy() -> Self {
+        return .init(
+            name: name,
+            barcode: barcode,
+            note: note,
+            addedDate: addedDate,
+            expiryDate: expiryDate,
+            notificationOn: notificationOn,
+            archived: archived,
+            notificationIdentifiers: notificationIdentifiers,
+            category: category,
+            isTemplate: isTemplate,
+            quantity: quantity
+        )
+    }
+    
+    func copy(by style: TemplateCreationStyle) -> Self {
+        switch style {
+        case .sameExpiryDate:
+            return .init(
+                name: name,
+                barcode: barcode,
+                note: note,
+                expiryDate: expiryDate,
+                category: category,
+                quantity: quantity
+            )
+        case .samePeriodOfTime:
+            let now = Date.now
+            return .init(
+                name: name,
+                barcode: barcode,
+                note: note,
+                addedDate: now,
+                expiryDate: now + expiryDate.timeIntervalSince(addedDate),
+                category: category,
+                quantity: quantity
+            )
+        }
     }
 }

@@ -20,6 +20,8 @@ struct ContentView: View {
     @State private var orderSelection: OrderStyle = .expiringNearstFirst
     @State private var filteringExpired: ExpiringFilterStyle = .none
 
+    @State private var chooseFromTemplateSheetOpen: Bool = false
+
     @Query private var items: [FridgeItem]
 
     var visibleItems: [FridgeItem] {
@@ -44,12 +46,12 @@ struct ContentView: View {
         }
     }
 
-    var hasHiddenItems: Bool {
-        return hiddenItems.count > 0
+    var noHiddenItems: Bool {
+        return hiddenItems.isEmpty
     }
 
-    var hasTemplatedItems: Bool {
-        return templatedItems.count > 0
+    var noTemplatedItems: Bool {
+        return templatedItems.isEmpty
     }
 
     var body: some View {
@@ -72,8 +74,8 @@ struct ContentView: View {
 
                 Section {
                     ItemLinkDropdown(name: "archived items", icon: "archivebox.circle", open: $hiddenItemListOpen)
-                        .opacity(hasHiddenItems ? 1 : 0.3)
-                        .disabled(!hasHiddenItems)
+                        .opacity(noHiddenItems ? 0.3 : 1)
+                        .disabled(noHiddenItems)
 
                     if hiddenItemListOpen {
                         ForEach(hiddenItems, id: \.id) {
@@ -89,6 +91,8 @@ struct ContentView: View {
 
                 Section {
                     ItemLinkDropdown(name: "Item Templates", icon: "books.vertical.circle", open: $templatedItemListOpen)
+                        .opacity(noTemplatedItems ? 0.3 : 1)
+                        .disabled(noTemplatedItems)
 
                     if templatedItemListOpen {
                         ForEach(templatedItems) { item in
@@ -107,10 +111,13 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .primaryAction) {
-                    Button {}
-                        label: {
-                            Label("Add Using Tempaltes", systemImage: "book.pages")
-                        }
+                    Button {
+                        chooseFromTemplateSheetOpen.toggle()
+                    }
+                    label: {
+                        Label("Add Using Tempaltes", systemImage: "book.pages")
+                    }
+
                     Button(action: enterNewItemAndScan) {
                         Label("Add By Scanning", systemImage: "barcode.viewfinder")
                     }
@@ -125,6 +132,9 @@ struct ContentView: View {
                     ItemFilter(filtering: $filteringExpired, text: "Filter Expired")
                 }
             }
+        }
+        .sheet(isPresented: $chooseFromTemplateSheetOpen) {
+            ChooseTemplateAction()
         }
     }
 

@@ -23,6 +23,7 @@ struct ItemLink: View {
 
     let leadingActions: [SwipeActions]
     let trailingActions: [SwipeActions]
+    let templateCreationStyle: TemplateCreationStyle?
 
     private var showingEditingTools: Bool {
         return listEditMode?.wrappedValue.isEditing ?? false
@@ -33,11 +34,25 @@ struct ItemLink: View {
         self.viewingStyle = viewingStyle
         self.leadingActions = leadingActions
         self.trailingActions = trailingActions
+        self.templateCreationStyle = nil
+    }
+
+    init(item: FridgeItem, templateCreationStyle: TemplateCreationStyle, leadingActions: [SwipeActions] = [], trailingActions: [SwipeActions] = []) {
+        self.item = item
+        self.viewingStyle = .adding
+        self.leadingActions = leadingActions
+        self.trailingActions = trailingActions
+        self.templateCreationStyle = templateCreationStyle
     }
 
     var body: some View {
         NavigationLink {
-            ItemDetail(item: item, viewingStyling: viewingStyle, showScannerWhenOpen: false)
+            if let templateCreationStyle = templateCreationStyle {
+                ItemDetail(item: item.copy(by: templateCreationStyle), viewingStyling: .adding, showScannerWhenOpen: false)
+
+            } else {
+                ItemDetail(item: item, viewingStyling: viewingStyle, showScannerWhenOpen: false)
+            }
         } label: {
             HStack(alignment: .center) {
                 Image(uiImage: item.category.icon)

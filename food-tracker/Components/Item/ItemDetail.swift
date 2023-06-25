@@ -117,7 +117,7 @@ struct ItemDetail: View {
                 .disabled(!canEdit)
             
             Section(header: Label("Dates", systemImage: "pencil")) {
-                DatePicker("Expiry Date", selection: $item.expiryDate, displayedComponents: .date)
+                DatePicker("Expiry Date", selection: $item.expiryDate, in: item.addedDate..., displayedComponents: .date)
                 DatePicker("Added Date", selection: $item.addedDate, displayedComponents: .date)
             }
             .disabled(!canEdit)

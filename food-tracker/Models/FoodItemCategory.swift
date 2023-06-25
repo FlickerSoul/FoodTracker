@@ -52,6 +52,7 @@ enum FoodItemCategory: Int, Hashable, Codable, CaseIterable {
     case HumanMilk
     case Leftover
     case CannedFood
+    case FrozenFood
     case Other
 }
 
@@ -142,6 +143,8 @@ extension FoodItemCategory {
             return "Leftover"
         case .CannedFood:
             return "Canned Food"
+        case .FrozenFood:
+            return "Frozen Food"
         case .Other:
             return "Other"
         }
@@ -220,7 +223,7 @@ extension FoodItemCategory {
         case .Desserts:
             return "🍰"
         case .Fruits:
-            return "🍓"
+            return "🫐"
         case .Vegetables:
             return "🥦"
         case .Juice:
@@ -257,6 +260,8 @@ extension FoodItemCategory {
             return "🥡"
         case .CannedFood:
             return "🥫"
+        case .FrozenFood:
+            return "🧊"
         case .Other:
             return "🥄"
         }

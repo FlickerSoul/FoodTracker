@@ -14,6 +14,8 @@ enum OrderStyle: String, CaseIterable, Identifiable {
     case expiringFarestFirst = "expiring farest first"
     case newestAddedFirst = "newest added first"
     case oldestAddedFirst = "oldest added first"
+    case aToz = "A to Z"
+    case zToa = "Z to A"
 
     var id: String {
         return self.rawValue
@@ -29,19 +31,10 @@ enum OrderStyle: String, CaseIterable, Identifiable {
             return Self.sortNewestAddedFirst
         case .oldestAddedFirst:
             return Self.sortOldestAddedFirst
-        }
-    }
-
-    var sortDescriptor: SortDescriptor<FridgeItem> {
-        switch self {
-        case .expiringNearstFirst:
-            return SortDescriptor(\FridgeItem.expiryDate, order: .forward)
-        case .expiringFarestFirst:
-            return SortDescriptor(\FridgeItem.expiryDate, order: .reverse)
-        case .newestAddedFirst:
-            return SortDescriptor(\FridgeItem.addedDate, order: .forward)
-        case .oldestAddedFirst:
-            return SortDescriptor(\FridgeItem.addedDate, order: .reverse)
+        case .aToz:
+            return Self.sortAToZ
+        case .zToa:
+            return Self.sortZToA
         }
     }
 
@@ -49,6 +42,8 @@ enum OrderStyle: String, CaseIterable, Identifiable {
     static let sortExpiringFarestFirst: ComparatorType = { left, right in left.expiryDate > right.expiryDate }
     static let sortNewestAddedFirst: ComparatorType = { left, right in left.addedDate < right.addedDate }
     static let sortOldestAddedFirst: ComparatorType = { left, right in left.addedDate > right.addedDate }
+    static let sortAToZ: ComparatorType = { left, right in left.name < right.name }
+    static let sortZToA: ComparatorType = { left, right in left.name > right.name }
 }
 
 struct ItemSorter: View {
