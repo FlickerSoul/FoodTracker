@@ -60,16 +60,16 @@ struct ChooseTemplateAction: View {
                 .frame(width: 400)
 
                 NavigationLink {
-                    ChooseTemplateView(templateCreationStyle: .sameExpiryDate)
+                    ChooseTemplateView(templateCreationStyle: .samePeriodOfTime)
                 } label: {
-                    TemplateChoiceButton(image: "calendar.badge.plus", text: "Use the same expiry date as the template", helperText: "expiry date will be 01/17/2001", color: .orange)
+                    TemplateChoiceButton(image: "calendar.badge.clock", text: "Use the same length of time", helperText: "expiry date would be today + 2 days", color: .orange)
                 }
                 .buttonStyle(.plain)
 
                 NavigationLink {
-                    ChooseTemplateView(templateCreationStyle: .samePeriodOfTime)
+                    ChooseTemplateView(templateCreationStyle: .sameExpiryDate)
                 } label: {
-                    TemplateChoiceButton(image: "calendar.badge.clock", text: "Use the same length of time", helperText: "expiry date will be today + 2 days", color: .orange)
+                    TemplateChoiceButton(image: "calendar.badge.plus", text: "Use the same expiry date as the template", helperText: "expiry date would be 01/17/2001", color: .orange)
                 }
                 .buttonStyle(.plain)
             }
