@@ -26,9 +26,9 @@
 		5784E9C52A2F3FBD00F2AD46 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C42A2F3FBD00F2AD46 /* ContentView.swift */; };
 		5784E9C72A2F3FBE00F2AD46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5784E9C62A2F3FBE00F2AD46 /* Assets.xcassets */; };
 		5784E9CB2A2F3FBE00F2AD46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5784E9CA2A2F3FBE00F2AD46 /* Preview Assets.xcassets */; };
-		5784E9D52A2F3FBE00F2AD46 /* fridge_trackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9D42A2F3FBE00F2AD46 /* fridge_trackerTests.swift */; };
-		5784E9DF2A2F3FBE00F2AD46 /* fridge_trackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9DE2A2F3FBE00F2AD46 /* fridge_trackerUITests.swift */; };
-		5784E9E12A2F3FBE00F2AD46 /* fridge_trackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9E02A2F3FBE00F2AD46 /* fridge_trackerUITestsLaunchTests.swift */; };
+		5784E9D52A2F3FBE00F2AD46 /* food_trackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9D42A2F3FBE00F2AD46 /* food_trackerTests.swift */; };
+		5784E9DF2A2F3FBE00F2AD46 /* food_trackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9DE2A2F3FBE00F2AD46 /* food_trackerUITests.swift */; };
+		5784E9E12A2F3FBE00F2AD46 /* food_trackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9E02A2F3FBE00F2AD46 /* food_trackerUITestsLaunchTests.swift */; };
 		5784E9F02A2F412E00F2AD46 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9EF2A2F412E00F2AD46 /* MainView.swift */; };
 		5784E9F22A2F417300F2AD46 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9F12A2F417300F2AD46 /* SummaryView.swift */; };
 		5784E9F42A2F418A00F2AD46 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9F32A2F418A00F2AD46 /* SettingsView.swift */; };
@@ -90,10 +90,10 @@
 		5784E9C82A2F3FBE00F2AD46 /* food-tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "food-tracker.entitlements"; sourceTree = "<group>"; };
 		5784E9CA2A2F3FBE00F2AD46 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5784E9D02A2F3FBE00F2AD46 /* food-trackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "food-trackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5784E9D42A2F3FBE00F2AD46 /* fridge_trackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fridge_trackerTests.swift; sourceTree = "<group>"; };
+		5784E9D42A2F3FBE00F2AD46 /* food_trackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = food_trackerTests.swift; sourceTree = "<group>"; };
 		5784E9DA2A2F3FBE00F2AD46 /* food-trackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "food-trackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5784E9DE2A2F3FBE00F2AD46 /* fridge_trackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fridge_trackerUITests.swift; sourceTree = "<group>"; };
-		5784E9E02A2F3FBE00F2AD46 /* fridge_trackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fridge_trackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5784E9DE2A2F3FBE00F2AD46 /* food_trackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = food_trackerUITests.swift; sourceTree = "<group>"; };
+		5784E9E02A2F3FBE00F2AD46 /* food_trackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = food_trackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5784E9EF2A2F412E00F2AD46 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5784E9F12A2F417300F2AD46 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		5784E9F32A2F418A00F2AD46 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -206,7 +206,7 @@
 		5784E9D32A2F3FBE00F2AD46 /* food-trackerTests */ = {
 			isa = PBXGroup;
 			children = (
-				5784E9D42A2F3FBE00F2AD46 /* fridge_trackerTests.swift */,
+				5784E9D42A2F3FBE00F2AD46 /* food_trackerTests.swift */,
 			);
 			path = "food-trackerTests";
 			sourceTree = "<group>";
@@ -214,8 +214,8 @@
 		5784E9DD2A2F3FBE00F2AD46 /* food-trackerUITests */ = {
 			isa = PBXGroup;
 			children = (
-				5784E9DE2A2F3FBE00F2AD46 /* fridge_trackerUITests.swift */,
-				5784E9E02A2F3FBE00F2AD46 /* fridge_trackerUITestsLaunchTests.swift */,
+				5784E9DE2A2F3FBE00F2AD46 /* food_trackerUITests.swift */,
+				5784E9E02A2F3FBE00F2AD46 /* food_trackerUITestsLaunchTests.swift */,
 			);
 			path = "food-trackerUITests";
 			sourceTree = "<group>";
@@ -474,7 +474,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5784E9D52A2F3FBE00F2AD46 /* fridge_trackerTests.swift in Sources */,
+				5784E9D52A2F3FBE00F2AD46 /* food_trackerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,8 +482,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5784E9E12A2F3FBE00F2AD46 /* fridge_trackerUITestsLaunchTests.swift in Sources */,
-				5784E9DF2A2F3FBE00F2AD46 /* fridge_trackerUITests.swift in Sources */,
+				5784E9E12A2F3FBE00F2AD46 /* food_trackerUITestsLaunchTests.swift in Sources */,
+				5784E9DF2A2F3FBE00F2AD46 /* food_trackerUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,7 +622,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "food-tracker/fridge_tracker.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "food-tracker/food-tracker.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20230620.1;
@@ -631,6 +631,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "food-tracker/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Food Tracker";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We use camera to scan barcode so that users don't have to type in information manually. ";
@@ -665,7 +666,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "food-tracker/fridge_tracker.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "food-tracker/food-tracker.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20230620.1;

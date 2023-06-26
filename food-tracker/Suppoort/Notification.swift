@@ -6,7 +6,19 @@
 //
 
 import Foundation
+import os
 import UserNotifications
+
+let NOTIFICATION_LOGGER = Logger(subsystem: Bundle.main.bundlePath, category: "Notification")
+
+enum NotificatioNCategoryIdentifier: String {
+    case foodItemExpiring = "FOOD_ITEM_EXPIRING"
+}
+
+enum FoodItemNotificationAction: String {
+    case archive = "ARHIVE_FOOD_ITEM"
+    case view = "VIEW_FOOD_ITEM"
+}
 
 class NotificationHandler: ObservableObject {
     static let current = NotificationHandler()
@@ -21,10 +33,15 @@ class NotificationHandler: ObservableObject {
     
     func makeNotificationContent(item: FridgeItem) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
-        content.title = "Food '\(item.name)' is expiring today!"
-        content.subtitle = "It was added on \(item.addedDate.formatted(date: .complete, time: .omitted))"
-        content.body = "Click to see the details"
+        content.title = "Food Expiring Today!"
+        content.subtitle = "\"\(item.name.trimmingCharacters(in: .whitespacesAndNewlines))\" is expiring"
+        content.body = """
+        It was added on \(item.addedDate.formatted(date: .complete, time: .omitted))
+        Click to see the details
+        """
         content.sound = .default
+        content.categoryIdentifier = NotificatioNCategoryIdentifier.foodItemExpiring.rawValue
+        content.targetContentIdentifier = "\(item.id)"
         
         return content
     }
@@ -58,14 +75,27 @@ class NotificationHandler: ObservableObject {
             if error != nil {
                 print("error")
             } else {
-                item.notificationIdentifiers.append(identifier)
+                item.notificationIdentifiers!.insert(identifier)
             }
         }
     }
     
     func cancelNotification(item: FridgeItem) {
         let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.removePendingNotificationRequests(withIdentifiers: item.notificationIdentifiers)
-        item.notificationIdentifiers.removeAll()
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: Array(item.notificationIdentifiers!))
+        item.notificationIdentifiers!.removeAll()
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        NOTIFICATION_LOGGER.debug("Application delegate method userNotificationCenter:didReceive:withCompletionHandler: is called with user info: \(response.notification.request.content.userInfo)")
+        // ...
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        NOTIFICATION_LOGGER.debug("userNotificationCenter:willPresent")
+        // ...
+        completionHandler([.banner])
     }
 }
