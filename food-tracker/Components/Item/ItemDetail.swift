@@ -128,8 +128,8 @@ struct ItemDetail: View {
             .disabled(!canEdit)
             
             Section(header: Label("Options", systemImage: "ellipsis")) {
-                Toggle("Is Template", isOn: $item.isTemplate)
                 Toggle("Notification On", isOn: $item.notificationOn)
+                Toggle("Is Template", isOn: $item.isTemplate)
                 Toggle("Archived", isOn: $item.archived)
             }
             .disabled(!canEdit)
