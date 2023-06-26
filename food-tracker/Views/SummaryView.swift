@@ -32,20 +32,9 @@ struct SummaryView: View {
 
                 switch selectedTab {
                 case .pie:
-#if DEBUG
-                    PieChartView().tabItem { Label("Chart", systemImage: "chart.pie").foregroundColor(.blue) }
-#else
                     PieChartView(items: items).tabItem { Label("Chart", systemImage: "chart.pie").foregroundColor(.blue) }
-#endif
-
                 case .cal:
-
-#if DEBUG
-                    CalendarView().tabItem { Label("Calendar", systemImage: "calendar").foregroundColor(.blue) }
-#else
                     CalendarView(items: items).tabItem { Label("Calendar", systemImage: "calendar").foregroundColor(.blue) }
-
-#endif
                 }
             }
         }

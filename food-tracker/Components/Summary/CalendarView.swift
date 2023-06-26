@@ -13,11 +13,7 @@ import SwiftUI
 #endif
 
 struct CalendarView: View {
-    #if DEBUG
-        @Query var items: [FoodItem]
-    #else
-        var items: [FoodItem]
-    #endif
+    var items: [FoodItem]
 
     var visibleItems: [FoodItem] {
         return items.filter(filteringArchived.filter)
@@ -182,11 +178,9 @@ struct CalendarView: View {
     }
 }
 
-#if DEBUG
-    #Preview {
-        MainActor.assumeIsolated {
-            CalendarView()
-                .modelContainer(previewContainer)
-        }
+#Preview {
+    MainActor.assumeIsolated {
+        CalendarView(items: SampleFoodItems.items)
+            .modelContainer(previewContainer)
     }
-#endif
+}

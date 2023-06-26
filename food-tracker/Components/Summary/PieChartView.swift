@@ -77,11 +77,7 @@ enum DateSection: String, CaseIterable, Plottable {
 }
 
 struct PieChartView: View {
-    #if DEBUG
-        @Query var items: [FoodItem]
-    #else
-        var items: [FoodItem]
-    #endif
+    var items: [FoodItem]
 
     private let sections: [DateSection] = DateSection.allCases
 
@@ -194,12 +190,9 @@ struct PieChartView: View {
     }
 }
 
-#if DEBUG
-    #Preview {
-        MainActor.assumeIsolated {
-            PieChartView()
-
-                .modelContainer(previewContainer)
-        }
+#Preview {
+    MainActor.assumeIsolated {
+        PieChartView(items: SampleFoodItems.items)
+            .modelContainer(previewContainer)
     }
-#endif
+}
