@@ -31,7 +31,7 @@ class NotificationHandler: ObservableObject {
         }
     }
     
-    func makeNotificationContent(item: FridgeItem) -> UNMutableNotificationContent {
+    func makeNotificationContent(item: FoodItem) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
         content.title = "Food Expiring Today!"
         content.subtitle = "\"\(item.name.trimmingCharacters(in: .whitespacesAndNewlines))\" is expiring"
@@ -46,7 +46,7 @@ class NotificationHandler: ObservableObject {
         return content
     }
     
-    func makeNotificationTrigger(item: FridgeItem) -> UNNotificationTrigger? {
+    func makeNotificationTrigger(item: FoodItem) -> UNNotificationTrigger? {
         let today = roundDownToDate(date: Date.now)
         let expiryDate = roundDownToDate(date: item.expiryDate)
         
@@ -67,7 +67,7 @@ class NotificationHandler: ObservableObject {
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in callback(uuidString, error) })
     }
     
-    func scheduleNotification(item: FridgeItem) {
+    func scheduleNotification(item: FoodItem) {
         let content = NotificationHandler.current.makeNotificationContent(item: item)
         let trigger = NotificationHandler.current.makeNotificationTrigger(item: item)
             
@@ -80,7 +80,7 @@ class NotificationHandler: ObservableObject {
         }
     }
     
-    func cancelNotification(item: FridgeItem) {
+    func cancelNotification(item: FoodItem) {
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.removePendingNotificationRequests(withIdentifiers: item.notificationIdentifiers)
         item.notificationIdentifiers.removeAll()

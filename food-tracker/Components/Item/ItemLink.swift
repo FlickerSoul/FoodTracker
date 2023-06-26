@@ -18,7 +18,7 @@ struct ItemLink: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.editMode) private var listEditMode
 
-    var item: FridgeItem
+    var item: FoodItem
     let viewingStyle: DetailViewingStyle
 
     let leadingActions: [SwipeActions]
@@ -29,7 +29,7 @@ struct ItemLink: View {
         return listEditMode?.wrappedValue.isEditing ?? false
     }
 
-    init(item: FridgeItem, viewingStyle: DetailViewingStyle, leadingActions: [SwipeActions] = [], trailingActions: [SwipeActions] = []) {
+    init(item: FoodItem, viewingStyle: DetailViewingStyle, leadingActions: [SwipeActions] = [], trailingActions: [SwipeActions] = []) {
         self.item = item
         self.viewingStyle = viewingStyle
         self.leadingActions = leadingActions
@@ -37,7 +37,7 @@ struct ItemLink: View {
         self.templateCreationStyle = nil
     }
 
-    init(item: FridgeItem, templateCreationStyle: TemplateCreationStyle, leadingActions: [SwipeActions] = [], trailingActions: [SwipeActions] = []) {
+    init(item: FoodItem, templateCreationStyle: TemplateCreationStyle, leadingActions: [SwipeActions] = [], trailingActions: [SwipeActions] = []) {
         self.item = item
         self.viewingStyle = .adding
         self.leadingActions = leadingActions

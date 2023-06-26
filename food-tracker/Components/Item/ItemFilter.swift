@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-protocol FridgeItemFilter {
-    var filter: (FridgeItem) -> Bool { get }
+protocol FoodItemFilter {
+    var filter: (FoodItem) -> Bool { get }
 }
 
 protocol HasNone {
     static var none: Self { get }
 }
 
-enum ExpiringFilterStyle: String, CaseIterable, FridgeItemFilter, HasNone {
+enum ExpiringFilterStyle: String, CaseIterable, FoodItemFilter, HasNone {
     case seeExpired = "See Expired"
     case seeNotExpired = "See Not Expired"
     case none = "None"
 
-    var filter: (FridgeItem) -> Bool {
+    var filter: (FoodItem) -> Bool {
         let today = roundDownToDate(date: Date.now)
 
         switch self {
@@ -38,12 +38,12 @@ enum ExpiringFilterStyle: String, CaseIterable, FridgeItemFilter, HasNone {
     }
 }
 
-enum ArchiveFilterStyle: String, CaseIterable, FridgeItemFilter, HasNone {
+enum ArchiveFilterStyle: String, CaseIterable, FoodItemFilter, HasNone {
     case seeArchived = "See Archived"
     case seeNotArchived = "See Not Archived"
     case none = "None"
 
-    var filter: (FridgeItem) -> Bool {
+    var filter: (FoodItem) -> Bool {
         switch self {
         case .seeArchived:
             return {

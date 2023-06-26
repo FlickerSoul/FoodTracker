@@ -16,7 +16,7 @@ enum DetailViewingStyle {
 }
 
 struct ItemDetailInfo: Hashable {
-    let item: FridgeItem
+    let item: FoodItem
     let viewingStyle: DetailViewingStyle
     let showScannerWhenOpen: Bool
 }
@@ -26,7 +26,7 @@ struct ItemDetailInfo: Hashable {
 struct ItemDetail: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @Bindable var item: FridgeItem
+    @Bindable var item: FoodItem
     let viewingStyling: DetailViewingStyle
     let showScannerWhenOpen: Bool
     @State private var canceling = false
@@ -295,7 +295,7 @@ private extension String {
 #Preview("adding") {
     MainActor.assumeIsolated {
         NavigationView {
-            ItemDetail(item: FridgeItem.makeDefaultFridgeItem(), viewingStyling: .adding, showScannerWhenOpen: false)
+            ItemDetail(item: FoodItem.makeDefaultFoodItem(), viewingStyling: .adding, showScannerWhenOpen: false)
                 .modelContainer(previewContainer)
         }
     }
@@ -304,7 +304,7 @@ private extension String {
 #Preview("editing") {
     MainActor.assumeIsolated {
         NavigationView {
-            ItemDetail(item: FridgeItem.makeDefaultFridgeItem(), viewingStyling: .editing, showScannerWhenOpen: false)
+            ItemDetail(item: FoodItem.makeDefaultFoodItem(), viewingStyling: .editing, showScannerWhenOpen: false)
                 .modelContainer(previewContainer)
         }
     }
@@ -313,7 +313,7 @@ private extension String {
 #Preview("viewing") {
     MainActor.assumeIsolated {
         NavigationView {
-            ItemDetail(item: SampleFridgeItems.testSampleItem, viewingStyling: .viewing, showScannerWhenOpen: false)
+            ItemDetail(item: SampleFoodItems.testSampleItem, viewingStyling: .viewing, showScannerWhenOpen: false)
                 .modelContainer(previewContainer)
         }
     }

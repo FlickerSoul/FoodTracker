@@ -22,9 +22,9 @@ struct ContentView: View {
 
     @State private var chooseFromTemplateSheetOpen: Bool = false
 
-    @Query private var items: [FridgeItem]
+    @Query private var items: [FoodItem]
 
-    var visibleItems: [FridgeItem] {
+    var visibleItems: [FoodItem] {
         var visibles = items.filter { !$0.archived }.sorted(by: orderSelection.comparator)
 
         visibles = visibles.filter(filteringExpired.filter)
@@ -32,7 +32,7 @@ struct ContentView: View {
         return visibles
     }
 
-    var hiddenItems: [FridgeItem] {
+    var hiddenItems: [FoodItem] {
         var hiddens = items.filter { !visibleItems.contains($0) }.sorted(by: orderSelection.comparator)
 
         hiddens = hiddens.filter(filteringExpired.filter)
@@ -40,7 +40,7 @@ struct ContentView: View {
         return hiddens
     }
 
-    var templatedItems: [FridgeItem] {
+    var templatedItems: [FoodItem] {
         return items.filter { item in
             item.isTemplate
         }
@@ -139,14 +139,14 @@ struct ContentView: View {
     }
 
     private func enterNewItem() {
-        addItem(item: FridgeItem.makeDefaultFridgeItem(), viewingStyle: .adding)
+        addItem(item: FoodItem.makeDefaultFoodItem(), viewingStyle: .adding)
     }
 
     private func enterNewItemAndScan() {
-        addItem(item: FridgeItem.makeDefaultFridgeItem(), viewingStyle: .adding, showScannerWhenOpen: true)
+        addItem(item: FoodItem.makeDefaultFoodItem(), viewingStyle: .adding, showScannerWhenOpen: true)
     }
 
-    private func addItem(item: FridgeItem, viewingStyle: DetailViewingStyle, showScannerWhenOpen: Bool = false) {
+    private func addItem(item: FoodItem, viewingStyle: DetailViewingStyle, showScannerWhenOpen: Bool = false) {
         withAnimation {
             itemStack.append(.init(item: item, viewingStyle: viewingStyle, showScannerWhenOpen: showScannerWhenOpen))
         }

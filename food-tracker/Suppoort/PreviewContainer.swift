@@ -11,15 +11,15 @@ import SwiftData
 let previewContainer: ModelContainer = {
     do {
         let container = try ModelContainer(
-            for: FridgeItem.self, ModelConfiguration(inMemory: true)
+            for: FoodItem.self, ModelConfiguration(inMemory: true)
         )
 
-        for item in SampleFridgeItems.items {
+        for item in SampleFoodItems.items {
             container.mainContext.insert(item)
         }
 
         return container
     } catch {
-        fatalError("Failed to create FridgeItem container")
+        fatalError("Failed to create FoodItem container")
     }
 }()

@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-private let TEMPLATE_PREDICATE = #Predicate<FridgeItem> { item in
+private let TEMPLATE_PREDICATE = #Predicate<FoodItem> { item in
     item.isTemplate
 }
 
@@ -18,13 +18,13 @@ enum TemplateCreationStyle {
 }
 
 struct ChooseTemplateView: View {
-    @Query(filter: TEMPLATE_PREDICATE, sort: \.addedDate) var templatedItems: [FridgeItem]
+    @Query(filter: TEMPLATE_PREDICATE, sort: \.addedDate) var templatedItems: [FoodItem]
 
     @State private var sortStyle: OrderStyle = .oldestAddedFirst
 
     let templateCreationStyle: TemplateCreationStyle
 
-    var displayedItems: [FridgeItem] {
+    var displayedItems: [FoodItem] {
         templatedItems.sorted(by: sortStyle.comparator)
     }
 

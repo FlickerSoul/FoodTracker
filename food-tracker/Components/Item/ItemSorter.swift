@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum OrderStyle: String, CaseIterable, Identifiable {
-    typealias ComparatorType = (FridgeItem, FridgeItem) -> Bool
+    typealias ComparatorType = (FoodItem, FoodItem) -> Bool
 
     case expiringNearstFirst = "expiring first"
     case expiringFarestFirst = "expiring farest first"

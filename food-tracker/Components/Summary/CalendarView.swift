@@ -14,16 +14,16 @@ import SwiftUI
 
 struct CalendarView: View {
     #if DEBUG
-        @Query var items: [FridgeItem]
+        @Query var items: [FoodItem]
     #else
-        var items: [FridgeItem]
+        var items: [FoodItem]
     #endif
 
-    var visibleItems: [FridgeItem] {
+    var visibleItems: [FoodItem] {
         return items.filter(filteringArchived.filter)
     }
 
-    private typealias ItemInfoType = [Date: [FridgeItem]]
+    private typealias ItemInfoType = [Date: [FoodItem]]
 
     private var itemsByDates: ItemInfoType {
         return Dictionary(grouping: visibleItems) { item in

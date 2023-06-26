@@ -24,6 +24,6 @@ struct FoodTrackerApp: App {
         WindowGroup {
             MainView()
         }
-        .modelContainer(for: FridgeItem.self)
+        .modelContainer(for: FoodItem.self)
     }
 }

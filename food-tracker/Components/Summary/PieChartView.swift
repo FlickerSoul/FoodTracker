@@ -78,14 +78,14 @@ enum DateSection: String, CaseIterable, Plottable {
 
 struct PieChartView: View {
     #if DEBUG
-        @Query var items: [FridgeItem]
+        @Query var items: [FoodItem]
     #else
-        var items: [FridgeItem]
+        var items: [FoodItem]
     #endif
 
     private let sections: [DateSection] = DateSection.allCases
 
-    typealias ItemInfoType = (section: DateSection, items: [FridgeItem], count: Int)
+    typealias ItemInfoType = (section: DateSection, items: [FoodItem], count: Int)
 
     typealias ItemInfoArrayType = [ItemInfoType]
 

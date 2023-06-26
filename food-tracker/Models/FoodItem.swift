@@ -10,7 +10,7 @@ import SwiftData
 import UserNotifications
 
 @Model
-final class FridgeItem {
+final class FoodItem {
     // swiftformat:disable:next all
     var id: UUID = UUID()
     
@@ -84,11 +84,11 @@ final class FridgeItem {
         self.quantity = quantity
     }
     
-    static func makeDefaultFridgeItem(name: String = "") -> FridgeItem {
+    static func makeDefaultFoodItem(name: String = "") -> Self {
         return Self(name: name)
     }
     
-    static func isExpiring(item: FridgeItem) -> Bool {
+    static func isExpiring(item: FoodItem) -> Bool {
         return item.expiryDate < Date.now
     }
     
