@@ -75,15 +75,15 @@ class NotificationHandler: ObservableObject {
             if error != nil {
                 print("error")
             } else {
-                item.notificationIdentifiers!.insert(identifier)
+                item.notificationIdentifiers.append(identifier)
             }
         }
     }
     
     func cancelNotification(item: FridgeItem) {
         let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.removePendingNotificationRequests(withIdentifiers: Array(item.notificationIdentifiers!))
-        item.notificationIdentifiers!.removeAll()
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: item.notificationIdentifiers)
+        item.notificationIdentifiers.removeAll()
     }
 }
 

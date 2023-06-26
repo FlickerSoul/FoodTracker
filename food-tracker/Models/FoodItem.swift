@@ -11,13 +11,17 @@ import UserNotifications
 
 @Model
 final class FridgeItem {
-    @Attribute(.unique) var id: UUID
-    var name: String
-    var note: String
-    var addedDate: Date
-    var expiryDate: Date
+    // swiftformat:disable:next all
+    var id: UUID = UUID()
     
-    var barcode: String
+    var name: String = ""
+    var note: String = ""
+    // swiftformat:disable:next all
+    var addedDate: Date = Date.now
+    // swiftformat:disable:next all
+    var expiryDate: Date = Date.now
+    
+    var barcode: String = ""
     
     var notificationOn: Bool = true {
         didSet {
@@ -30,17 +34,30 @@ final class FridgeItem {
             toggleNotification()
         }
     }
+
+    @Attribute private var notificationIdentifiersEncoded: String = "" // TODO: ehhhh how to do transformable?
     
-    var notificationIdentifiers: [String]
+    @Attribute(.transformable) var notificationIdentifiers: [String] {
+        get {
+            _$observationRegistrar.access(self, keyPath: \.notificationIdentifiersEncoded)
+            return getValue(for: \.notificationIdentifiersEncoded).components(separatedBy: ",")
+        }
+        set {
+            _$observationRegistrar.withMutation(of: self, keyPath: \.notificationIdentifiersEncoded) {
+                self.setValue(for: \.notificationIdentifiersEncoded, to: newValue.joined(separator: ","))
+            }
+        }
+    }
     
-    var category: FoodItemCategory
+    // swiftformat:disable:next all
+    var category: FoodItemCategory = FoodItemCategory.None
     
-    var isTemplate: Bool
+    var isTemplate: Bool = false
     
-    var quantity: Int
+    var quantity: Int = 1
     
     private var notificationScheduled: Bool {
-        !notificationIdentifiers.isEmpty
+        return !notificationIdentifiers.isEmpty
     }
     
     func toggleNotification() {

@@ -26,6 +26,14 @@ struct SettingsView: View {
                     Toggle("Auto Fetch", isOn: $autoFetch)
                 }
 
+                Section(header: Text("iCloud Status")) {
+                    HStack {
+                        Text("iCloud")
+                        Spacer()
+                        CloudKitSyncIndicator()
+                    }
+                }
+
                 Section {
                     AboutLink()
                 }

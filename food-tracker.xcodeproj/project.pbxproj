@@ -21,6 +21,7 @@
 		576353892A3877A50013F4F0 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576353882A3877A50013F4F0 /* ScannerView.swift */; };
 		5763538B2A3889A70013F4F0 /* BarCodeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763538A2A3889A70013F4F0 /* BarCodeAPI.swift */; };
 		576593AC2A42F08600C7BA02 /* PhotoPickerScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576593AB2A42F08600C7BA02 /* PhotoPickerScanner.swift */; };
+		577DB8C12A49442800FF97E5 /* CloudKitSyncIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577DB8C02A49442800FF97E5 /* CloudKitSyncIndicator.swift */; };
 		5784E9C12A2F3FBD00F2AD46 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C02A2F3FBD00F2AD46 /* App.swift */; };
 		5784E9C32A2F3FBD00F2AD46 /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C22A2F3FBD00F2AD46 /* FoodItem.swift */; };
 		5784E9C52A2F3FBD00F2AD46 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C42A2F3FBD00F2AD46 /* ContentView.swift */; };
@@ -82,6 +83,7 @@
 		576353882A3877A50013F4F0 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		5763538A2A3889A70013F4F0 /* BarCodeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeAPI.swift; sourceTree = "<group>"; };
 		576593AB2A42F08600C7BA02 /* PhotoPickerScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerScanner.swift; sourceTree = "<group>"; };
+		577DB8C02A49442800FF97E5 /* CloudKitSyncIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitSyncIndicator.swift; sourceTree = "<group>"; };
 		5784E9BD2A2F3FBD00F2AD46 /* food-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "food-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5784E9C02A2F3FBD00F2AD46 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		5784E9C22A2F3FBD00F2AD46 /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
@@ -157,6 +159,14 @@
 				576593AB2A42F08600C7BA02 /* PhotoPickerScanner.swift */,
 			);
 			path = Scanner;
+			sourceTree = "<group>";
+		};
+		577DB8BF2A49441200FF97E5 /* CloudKit */ = {
+			isa = PBXGroup;
+			children = (
+				577DB8C02A49442800FF97E5 /* CloudKitSyncIndicator.swift */,
+			);
+			path = CloudKit;
 			sourceTree = "<group>";
 		};
 		5784E9B42A2F3FBD00F2AD46 = {
@@ -244,6 +254,7 @@
 		5784E9F52A2F439400F2AD46 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				577DB8BF2A49441200FF97E5 /* CloudKit */,
 				576353872A3877940013F4F0 /* Scanner */,
 				570886C52A37447F00F48B69 /* Settings */,
 				57CC1AF02A3337F000A902CC /* Summary */,
@@ -459,6 +470,7 @@
 				5784E9FA2A2F43CA00F2AD46 /* ItemLink.swift in Sources */,
 				5700E0E12A34C6280033CAE5 /* Notification.swift in Sources */,
 				5709C6EF2A3B6D1000E1646F /* ErrorMessage.swift in Sources */,
+				577DB8C12A49442800FF97E5 /* CloudKitSyncIndicator.swift in Sources */,
 				57867D4B2A420E9D00E54A0D /* ItemCategory.swift in Sources */,
 				57867D472A41EC0100E54A0D /* FoodCategoryPicker.swift in Sources */,
 				5784E9C52A2F3FBD00F2AD46 /* ContentView.swift in Sources */,
