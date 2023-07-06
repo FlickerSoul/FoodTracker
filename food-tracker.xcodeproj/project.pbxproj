@@ -49,6 +49,7 @@
 		57BD50502A30B43E0076D0E1 /* ItemLinkDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD504F2A30B43E0076D0E1 /* ItemLinkDropdown.swift */; };
 		57CC1AF22A33380F00A902CC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CC1AF12A33380F00A902CC /* CalendarView.swift */; };
 		57CC1AF42A3341B800A902CC /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CC1AF32A3341B800A902CC /* PieChartView.swift */; };
+		57D177E72A4BA22E00213235 /* SharedContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D177E62A4BA22E00213235 /* SharedContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		57BD504F2A30B43E0076D0E1 /* ItemLinkDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemLinkDropdown.swift; sourceTree = "<group>"; };
 		57CC1AF12A33380F00A902CC /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		57CC1AF32A3341B800A902CC /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
+		57D177E62A4BA22E00213235 /* SharedContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +294,7 @@
 				5763538A2A3889A70013F4F0 /* BarCodeAPI.swift */,
 				5709C6EE2A3B6D1000E1646F /* ErrorMessage.swift */,
 				57867D402A3C780C00E54A0D /* LLM.swift */,
+				57D177E62A4BA22E00213235 /* SharedContainer.swift */,
 			);
 			path = Suppoort;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				579E0D7A2A2F620700A1F00B /* Utils.swift in Sources */,
 				576593AC2A42F08600C7BA02 /* PhotoPickerScanner.swift in Sources */,
 				57BD50502A30B43E0076D0E1 /* ItemLinkDropdown.swift in Sources */,
+				57D177E72A4BA22E00213235 /* SharedContainer.swift in Sources */,
 				579DD3082A47B8F800FE90D3 /* ChooseTemplateAction.swift in Sources */,
 				576353892A3877A50013F4F0 /* ScannerView.swift in Sources */,
 			);
