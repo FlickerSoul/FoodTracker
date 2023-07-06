@@ -7,6 +7,7 @@
 
 import Foundation
 import os
+import SwiftData
 import UserNotifications
 
 let NOTIFICATION_LOGGER = Logger(subsystem: Bundle.main.bundlePath, category: "Notification")
@@ -51,7 +52,7 @@ class NotificationHandler: ObservableObject {
         """
         content.sound = .default
         content.categoryIdentifier = NotificationCategoryIdentifier.foodItemExpiring.id
-        content.targetContentIdentifier = "\(item.id)"
+        content.targetContentIdentifier = item.id.uuidString
         
         return content
     }
@@ -156,11 +157,24 @@ extension AppDelegate {
         }
     }
     
-    func handleViewAction(for id: String?) {
-        guard let id = id else { return }
+    func handleViewAction(for itemId: String?) {
+        guard let itemId = itemId else { return }
     }
     
-    func handleArchiveAction(for id: String?) {
-        guard let id = id else { return }
+    func handleArchiveAction(for itemId: String?) {
+        guard let itemId = itemId else { return }
+        let context = mainContainer.mainContext
+        
+        // SwiftData bug workaround
+        let uuid = UUID(uuidString: itemId)!
+        let itemDescriptor = FetchDescriptor<FoodItem>(predicate: #Predicate { $0.id == uuid })
+        
+        let item = try? context.fetch(itemDescriptor) //
+        guard let item = item, !item.isEmpty else { return }
+
+        DispatchQueue.main.async {
+            item[0].archived = true
+            try? mainContainer.mainContext.save()
+        }
     }
 }

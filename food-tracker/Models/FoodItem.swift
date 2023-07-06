@@ -50,7 +50,7 @@ final class FoodItem {
     }
     
     // swiftformat:disable:next all
-    var category: FoodItemCategory = FoodItemCategory.None
+    var category: FoodItemCategory = FoodItemCategory.None  // SwiftData bug, enum changes through Picker will not be persistent 
     
     var isTemplate: Bool = false
     
