@@ -16,7 +16,7 @@ private enum SummaryTabs: Hashable {
 struct SummaryView: View {
     @Query private var items: [FoodItem] // TODO: change this so that all views share one query
 
-    @State private var selectedTab: SummaryTabs = .pie
+    @State private var selectedTab: SummaryTabs = .cal
 
     @State private var itemStack: [FoodItem] = []
 
