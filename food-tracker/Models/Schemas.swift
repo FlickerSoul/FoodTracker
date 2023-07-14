@@ -42,6 +42,7 @@ enum FoodTrackerSchemeV1: VersionedSchema {
                 _$observationRegistrar.withMutation(of: self, keyPath: \._notificationOn) {
                     self.setValue(for: \._notificationOn, to: newValue)
                 }
+                toggleNotification()
             }
         }
     
@@ -56,6 +57,7 @@ enum FoodTrackerSchemeV1: VersionedSchema {
                 _$observationRegistrar.withMutation(of: self, keyPath: \._archived) {
                     self.setValue(for: \._archived, to: newValue)
                 }
+                toggleNotification()
             }
         }
         
@@ -79,6 +81,24 @@ enum FoodTrackerSchemeV1: VersionedSchema {
         var isTemplate: Bool = false
     
         var quantity: Int = 1
+        @Attribute private var _usedQuantity: Int = 0
+        @Attribute(.transformable)
+        var usedQuantity: Int {
+            get {
+                _$observationRegistrar.access(self, keyPath: \._usedQuantity)
+                return getValue(for: \._usedQuantity)
+            }
+            set {
+                _$observationRegistrar.withMutation(of: self, keyPath: \._usedQuantity) {
+                    self.setValue(for: \._usedQuantity, to: newValue)
+                }
+                
+                // archive this item if all has been consumed
+                if newValue == quantity {
+                    archived = true
+                }
+            }
+        }
     
         private var notificationScheduled: Bool {
             return !notificationIdentifiers.isEmpty
