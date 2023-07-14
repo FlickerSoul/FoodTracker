@@ -19,29 +19,46 @@ enum FoodTrackerSchemeV1: VersionedSchema {
     @Model
     final class FoodItem {
         // swiftformat:disable:next all
-    var id: UUID = UUID()
+        var id: UUID = UUID()
     
         var name: String = ""
         var note: String = ""
         // swiftformat:disable:next all
-    var addedDate: Date = Date.now
+        var addedDate: Date = Date.now
         // swiftformat:disable:next all
-    var expiryDate: Date = Date.now
+        var expiryDate: Date = Date.now
     
         var barcode: String = ""
     
-        var notificationOn: Bool = true {
-            didSet {
-                toggleNotification()
+        // SwiftData bug? Related to https://developer.apple.com/forums/thread/731113
+        @Attribute private var _notificationOn: Bool = true
+        @Attribute(.transformable)
+        var notificationOn: Bool {
+            get {
+                _$observationRegistrar.access(self, keyPath: \._notificationOn)
+                return getValue(for: \._notificationOn)
+            }
+            set {
+                _$observationRegistrar.withMutation(of: self, keyPath: \._notificationOn) {
+                    self.setValue(for: \._notificationOn, to: newValue)
+                }
             }
         }
     
-        var archived: Bool = false {
-            didSet {
-                toggleNotification()
+        @Attribute private var _archived: Bool = false
+        @Attribute(.transformable)
+        var archived: Bool {
+            get {
+                _$observationRegistrar.access(self, keyPath: \._archived)
+                return getValue(for: \._archived)
+            }
+            set {
+                _$observationRegistrar.withMutation(of: self, keyPath: \._archived) {
+                    self.setValue(for: \._archived, to: newValue)
+                }
             }
         }
-
+        
         @Attribute private var notificationIdentifiersEncoded: String = "" // TODO: ehhhh how to do transformable?
     
         @Attribute(.transformable) var notificationIdentifiers: [String] {
@@ -57,7 +74,7 @@ enum FoodTrackerSchemeV1: VersionedSchema {
         }
     
         // swiftformat:disable:next all
-    var category: FoodItemCategory = FoodItemCategory.None  // SwiftData bug, enum changes through Picker will not be persistent 
+        var category: FoodItemCategory = FoodItemCategory.None  // SwiftData bug, enum changes through Picker will not be persistent
     
         var isTemplate: Bool = false
     
