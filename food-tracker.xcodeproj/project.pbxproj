@@ -13,6 +13,7 @@
 		570886CD2A3750C200F48B69 /* NotificationTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570886CC2A3750C200F48B69 /* NotificationTime.swift */; };
 		570886CF2A3764B200F48B69 /* SummaryTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570886CE2A3764B200F48B69 /* SummaryTitle.swift */; };
 		5709C6EF2A3B6D1000E1646F /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5709C6EE2A3B6D1000E1646F /* ErrorMessage.swift */; };
+		571C39382A61C5E400544BBF /* MigrationPlans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C39372A61C5E400544BBF /* MigrationPlans.swift */; };
 		572948592A34A6D40075487E /* DateCategoryDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572948582A34A6D40075487E /* DateCategoryDropdown.swift */; };
 		575FB66F2A32469100029340 /* ItemFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575FB66E2A32469100029340 /* ItemFilter.swift */; };
 		575FB6712A324CF100029340 /* NoItemPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575FB6702A324CF100029340 /* NoItemPrompt.swift */; };
@@ -23,7 +24,7 @@
 		576593AC2A42F08600C7BA02 /* PhotoPickerScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576593AB2A42F08600C7BA02 /* PhotoPickerScanner.swift */; };
 		577DB8C12A49442800FF97E5 /* CloudKitSyncIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577DB8C02A49442800FF97E5 /* CloudKitSyncIndicator.swift */; };
 		5784E9C12A2F3FBD00F2AD46 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C02A2F3FBD00F2AD46 /* App.swift */; };
-		5784E9C32A2F3FBD00F2AD46 /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C22A2F3FBD00F2AD46 /* FoodItem.swift */; };
+		5784E9C32A2F3FBD00F2AD46 /* Schemas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C22A2F3FBD00F2AD46 /* Schemas.swift */; };
 		5784E9C52A2F3FBD00F2AD46 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784E9C42A2F3FBD00F2AD46 /* ContentView.swift */; };
 		5784E9C72A2F3FBE00F2AD46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5784E9C62A2F3FBE00F2AD46 /* Assets.xcassets */; };
 		5784E9CB2A2F3FBE00F2AD46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5784E9CA2A2F3FBE00F2AD46 /* Preview Assets.xcassets */; };
@@ -76,6 +77,7 @@
 		570886CC2A3750C200F48B69 /* NotificationTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTime.swift; sourceTree = "<group>"; };
 		570886CE2A3764B200F48B69 /* SummaryTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTitle.swift; sourceTree = "<group>"; };
 		5709C6EE2A3B6D1000E1646F /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
+		571C39372A61C5E400544BBF /* MigrationPlans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationPlans.swift; sourceTree = "<group>"; };
 		572948582A34A6D40075487E /* DateCategoryDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCategoryDropdown.swift; sourceTree = "<group>"; };
 		575FB66E2A32469100029340 /* ItemFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFilter.swift; sourceTree = "<group>"; };
 		575FB6702A324CF100029340 /* NoItemPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoItemPrompt.swift; sourceTree = "<group>"; };
@@ -87,7 +89,7 @@
 		577DB8C02A49442800FF97E5 /* CloudKitSyncIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitSyncIndicator.swift; sourceTree = "<group>"; };
 		5784E9BD2A2F3FBD00F2AD46 /* food-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "food-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5784E9C02A2F3FBD00F2AD46 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
-		5784E9C22A2F3FBD00F2AD46 /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
+		5784E9C22A2F3FBD00F2AD46 /* Schemas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schemas.swift; sourceTree = "<group>"; };
 		5784E9C42A2F3FBD00F2AD46 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5784E9C62A2F3FBE00F2AD46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5784E9C82A2F3FBE00F2AD46 /* food-tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "food-tracker.entitlements"; sourceTree = "<group>"; };
@@ -235,9 +237,10 @@
 		5784E9ED2A2F3FE200F2AD46 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5784E9C22A2F3FBD00F2AD46 /* FoodItem.swift */,
+				5784E9C22A2F3FBD00F2AD46 /* Schemas.swift */,
 				5784EA002A2F54B700F2AD46 /* SampleFridgeItems.swift */,
 				57867D422A40902A00E54A0D /* FoodItemCategory.swift */,
+				571C39372A61C5E400544BBF /* MigrationPlans.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -450,9 +453,10 @@
 				579DD30A2A4852C100FE90D3 /* ChooseTemplateView.swift in Sources */,
 				57867D412A3C780C00E54A0D /* LLM.swift in Sources */,
 				5784E9F82A2F43BD00F2AD46 /* ItemDetail.swift in Sources */,
-				5784E9C32A2F3FBD00F2AD46 /* FoodItem.swift in Sources */,
+				5784E9C32A2F3FBD00F2AD46 /* Schemas.swift in Sources */,
 				5784E9F02A2F412E00F2AD46 /* MainView.swift in Sources */,
 				57CC1AF22A33380F00A902CC /* CalendarView.swift in Sources */,
+				571C39382A61C5E400544BBF /* MigrationPlans.swift in Sources */,
 				5763538B2A3889A70013F4F0 /* BarCodeAPI.swift in Sources */,
 				570886CF2A3764B200F48B69 /* SummaryTitle.swift in Sources */,
 				57867D432A40902A00E54A0D /* FoodItemCategory.swift in Sources */,
