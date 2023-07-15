@@ -34,6 +34,8 @@ struct ItemDetail: View {
     
     @State private var showScanningView = false
     
+    @State private var consumptionArchive = ArchiveInfo()
+    
     var titleText: String {
         switch viewingStyling {
         case .adding:
@@ -100,7 +102,7 @@ struct ItemDetail: View {
                                 String(item.quantity)
                             },
                             set: { val in
-                                item.quantity = Int(val) ?? 0
+                                item.quantity = UInt(val) ?? 0
                             }
                         )
                     )
@@ -113,8 +115,42 @@ struct ItemDetail: View {
             }
             .disabled(!canEdit)
                 
-            Section(header: Label("Category", systemImage: "filemenu.and.selection")) {}
-                .disabled(!canEdit)
+            Section(header: Label("Consumption", systemImage: "refrigerator")) {
+                HStack {
+                    Text("Used Quantity")
+                    Divider()
+                    TextField(
+                        "Used Quantity",
+                        text: Binding(
+                            get: {
+                                String(item.usedQuantity)
+                            },
+                            set: { val in
+                                item.usedQuantity = UInt(val) ?? 0
+                            }
+                        )
+                    )
+                    .keyboardType(.numberPad)
+                    Stepper(
+                        "Chagne Quantity",
+                        value: $item.usedQuantity,
+                        in: 0 ... item.quantity,
+                        step: 1
+                    )
+                    .labelsHidden()
+                }
+                
+                Toggle("Consumed", isOn: $item.consumed)
+                    .onChange(of: item.consumed) {
+                        if item.consumed {
+                            consumptionArchive.archiveItem()
+                        } else {
+                            consumptionArchive.unarchiveItem()
+                        }
+                        
+                        consumptionArchive.toggle.toggle()
+                    }
+            }.disabled(!canEdit)
             
             Section(header: Label("Dates", systemImage: "pencil")) {
                 DatePicker("Expiry Date", selection: $item.expiryDate, in: item.addedDate..., displayedComponents: .date)
@@ -180,7 +216,10 @@ struct ItemDetail: View {
             ScannerView(callback: self.loadBarcode)
         }
         .alert(isPresented: $errorMessage.isShowing) {
-            Alert(title: Text(errorMessage.title), message: Text(errorMessage.message), dismissButton: .default(Text(errorMessage.buttonText)))
+            errorMessage.alertView
+        }
+        .alert(isPresented: $consumptionArchive.toggle) {
+            consumptionArchive.alertView(item: $item)
         }
         .onAppear {
             if showScannerWhenOpen {

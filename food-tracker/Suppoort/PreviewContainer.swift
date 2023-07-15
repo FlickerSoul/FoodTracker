@@ -11,7 +11,9 @@ import SwiftData
 let previewContainer: ModelContainer = {
     do {
         let container = try ModelContainer(
-            for: FoodItem.self, ModelConfiguration(inMemory: true)
+            for: FoodItem.self,
+            migrationPlan: FoodTrackerMigrationPlan.self,
+            ModelConfiguration(inMemory: true)
         )
 
         for item in SampleFoodItems.items {

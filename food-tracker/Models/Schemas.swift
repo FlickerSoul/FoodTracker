@@ -80,10 +80,11 @@ enum FoodTrackerSchemeV1: VersionedSchema {
     
         var isTemplate: Bool = false
     
-        var quantity: Int = 1
-        @Attribute private var _usedQuantity: Int = 0
+        var quantity: UInt = 1
+        
+        @Attribute private var _usedQuantity: UInt = 0
         @Attribute(.transformable)
-        var usedQuantity: Int {
+        var usedQuantity: UInt {
             get {
                 _$observationRegistrar.access(self, keyPath: \._usedQuantity)
                 return getValue(for: \._usedQuantity)
@@ -93,9 +94,30 @@ enum FoodTrackerSchemeV1: VersionedSchema {
                     self.setValue(for: \._usedQuantity, to: newValue)
                 }
                 
-                // archive this item if all has been consumed
-                if newValue == quantity {
-                    archived = true
+                // set the item to be consumed, if not already
+                if newValue == quantity, !consumed {
+                    consumed = true
+                }
+            }
+        }
+        
+        @Attribute private var _consumed: Bool = false
+        @Attribute(.transformable)
+        var consumed: Bool {
+            get {
+                _$observationRegistrar.access(self, keyPath: \._consumed)
+                return getValue(for: \._consumed)
+            }
+            set {
+                _$observationRegistrar.withMutation(of: self, keyPath: \._consumed) {
+                    self.setValue(for: \._consumed, to: newValue)
+                }
+                
+                if newValue {
+                    // set used quantity to quantity, if not already
+                    if usedQuantity != quantity {
+                        usedQuantity = quantity
+                    }
                 }
             }
         }
@@ -113,7 +135,7 @@ enum FoodTrackerSchemeV1: VersionedSchema {
             }
         }
     
-        init(name: String, barcode: String = "", note: String = "", addedDate: Date = Date.now, expiryDate: Date = Date.now, notificationOn: Bool = true, archived: Bool = false, notificationIdentifiers: [String] = [], category: FoodItemCategory = .None, isTemplate: Bool = false, quantity: Int = 1) {
+        init(name: String, barcode: String = "", note: String = "", addedDate: Date = Date.now, expiryDate: Date = Date.now, notificationOn: Bool = true, archived: Bool = false, notificationIdentifiers: [String] = [], category: FoodItemCategory = .None, isTemplate: Bool = false, quantity: UInt = 1, usedQuantity: UInt = 0, consumed: Bool = false) {
             self.id = UUID()
             self.name = name
             self.barcode = barcode
@@ -121,11 +143,13 @@ enum FoodTrackerSchemeV1: VersionedSchema {
             self.addedDate = addedDate
             self.expiryDate = expiryDate
             self.notificationIdentifiers = notificationIdentifiers
-            self.notificationOn = notificationOn
-            self.archived = archived
+            self._notificationOn = notificationOn
+            self._archived = archived
             self.category = category
             self.isTemplate = isTemplate
             self.quantity = quantity
+            self._usedQuantity = usedQuantity
+            self._consumed = consumed
         }
     
         static func makeDefaultFoodItem(name: String = "") -> Self {
@@ -148,7 +172,9 @@ enum FoodTrackerSchemeV1: VersionedSchema {
                 notificationIdentifiers: notificationIdentifiers,
                 category: category,
                 isTemplate: isTemplate,
-                quantity: quantity
+                quantity: quantity,
+                usedQuantity: usedQuantity,
+                consumed: consumed
             )
         }
     

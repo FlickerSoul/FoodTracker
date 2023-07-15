@@ -15,6 +15,7 @@
 		5709C6EF2A3B6D1000E1646F /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5709C6EE2A3B6D1000E1646F /* ErrorMessage.swift */; };
 		571C39382A61C5E400544BBF /* MigrationPlans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C39372A61C5E400544BBF /* MigrationPlans.swift */; };
 		572948592A34A6D40075487E /* DateCategoryDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572948582A34A6D40075487E /* DateCategoryDropdown.swift */; };
+		572C22A12A6316FB009EB9F6 /* ArchiveAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572C22A02A6316FB009EB9F6 /* ArchiveAlert.swift */; };
 		575FB66F2A32469100029340 /* ItemFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575FB66E2A32469100029340 /* ItemFilter.swift */; };
 		575FB6712A324CF100029340 /* NoItemPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575FB6702A324CF100029340 /* NoItemPrompt.swift */; };
 		576139DB2A3090BA005A10DD /* SwipeActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576139DA2A3090BA005A10DD /* SwipeActionButtons.swift */; };
@@ -79,6 +80,7 @@
 		5709C6EE2A3B6D1000E1646F /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		571C39372A61C5E400544BBF /* MigrationPlans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationPlans.swift; sourceTree = "<group>"; };
 		572948582A34A6D40075487E /* DateCategoryDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCategoryDropdown.swift; sourceTree = "<group>"; };
+		572C22A02A6316FB009EB9F6 /* ArchiveAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveAlert.swift; sourceTree = "<group>"; };
 		575FB66E2A32469100029340 /* ItemFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFilter.swift; sourceTree = "<group>"; };
 		575FB6702A324CF100029340 /* NoItemPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoItemPrompt.swift; sourceTree = "<group>"; };
 		576139DA2A3090BA005A10DD /* SwipeActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionButtons.swift; sourceTree = "<group>"; };
@@ -154,6 +156,15 @@
 				570886CC2A3750C200F48B69 /* NotificationTime.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		572C229F2A6316E5009EB9F6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5709C6EE2A3B6D1000E1646F /* ErrorMessage.swift */,
+				572C22A02A6316FB009EB9F6 /* ArchiveAlert.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		576353872A3877940013F4F0 /* Scanner */ = {
@@ -259,6 +270,7 @@
 		5784E9F52A2F439400F2AD46 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				572C229F2A6316E5009EB9F6 /* Utils */,
 				577DB8BF2A49441200FF97E5 /* CloudKit */,
 				576353872A3877940013F4F0 /* Scanner */,
 				570886C52A37447F00F48B69 /* Settings */,
@@ -295,7 +307,6 @@
 				5700E0E02A34C6280033CAE5 /* Notification.swift */,
 				570886CA2A374AA100F48B69 /* SettingsConfig.swift */,
 				5763538A2A3889A70013F4F0 /* BarCodeAPI.swift */,
-				5709C6EE2A3B6D1000E1646F /* ErrorMessage.swift */,
 				57867D402A3C780C00E54A0D /* LLM.swift */,
 				57D177E62A4BA22E00213235 /* SharedContainer.swift */,
 			);
@@ -463,6 +474,7 @@
 				5784E9F22A2F417300F2AD46 /* SummaryView.swift in Sources */,
 				57867D492A420E6300E54A0D /* ItemDate.swift in Sources */,
 				570886CD2A3750C200F48B69 /* NotificationTime.swift in Sources */,
+				572C22A12A6316FB009EB9F6 /* ArchiveAlert.swift in Sources */,
 				575FB66F2A32469100029340 /* ItemFilter.swift in Sources */,
 				5784E9FF2A2F545F00F2AD46 /* PreviewContainer.swift in Sources */,
 				5784EA012A2F54B700F2AD46 /* SampleFridgeItems.swift in Sources */,
@@ -579,6 +591,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-v";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -633,6 +646,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "-v";
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
