@@ -62,14 +62,19 @@ struct ItemLink: View {
                 VStack(alignment: .leading) {
                     Text(item.name).font(.headline)
 
-                    HStack {
-                        ItemDate(date: item.expiryDate)
-                            .font(.footnote.monospaced())
+                    VStack(alignment: .leading) {
+                        HStack(alignment: .center) {
+                            ItemDate(date: item.expiryDate)
+                        }
+                        HStack(alignment: .center) {
+                            ItemConsumption(used: item.usedQuantity, total: item.quantity)
 
-                        Spacer()
+                            Spacer()
 
-                        ItemCategory(category: item.category).font(.footnote)
+                            ItemCategory(category: item.category)
+                        }
                     }
+                    .font(.footnote)
                 }
             }
         }

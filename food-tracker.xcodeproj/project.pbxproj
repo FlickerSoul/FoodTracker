@@ -48,6 +48,7 @@
 		579DD3082A47B8F800FE90D3 /* ChooseTemplateAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579DD3072A47B8F800FE90D3 /* ChooseTemplateAction.swift */; };
 		579DD30A2A4852C100FE90D3 /* ChooseTemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579DD3092A4852C100FE90D3 /* ChooseTemplateView.swift */; };
 		579E0D7A2A2F620700A1F00B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579E0D792A2F620700A1F00B /* Utils.swift */; };
+		57B3F2422A6AD8A700A6EBCB /* ItemConsumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3F2412A6AD8A700A6EBCB /* ItemConsumption.swift */; };
 		57BD50502A30B43E0076D0E1 /* ItemLinkDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BD504F2A30B43E0076D0E1 /* ItemLinkDropdown.swift */; };
 		57CC1AF22A33380F00A902CC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CC1AF12A33380F00A902CC /* CalendarView.swift */; };
 		57CC1AF42A3341B800A902CC /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CC1AF32A3341B800A902CC /* PieChartView.swift */; };
@@ -117,6 +118,7 @@
 		579DD3072A47B8F800FE90D3 /* ChooseTemplateAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTemplateAction.swift; sourceTree = "<group>"; };
 		579DD3092A4852C100FE90D3 /* ChooseTemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTemplateView.swift; sourceTree = "<group>"; };
 		579E0D792A2F620700A1F00B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		57B3F2412A6AD8A700A6EBCB /* ItemConsumption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemConsumption.swift; sourceTree = "<group>"; };
 		57BD504F2A30B43E0076D0E1 /* ItemLinkDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemLinkDropdown.swift; sourceTree = "<group>"; };
 		57CC1AF12A33380F00A902CC /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		57CC1AF32A3341B800A902CC /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				57867D4A2A420E9D00E54A0D /* ItemCategory.swift */,
 				579DD3072A47B8F800FE90D3 /* ChooseTemplateAction.swift */,
 				579DD3092A4852C100FE90D3 /* ChooseTemplateView.swift */,
+				57B3F2412A6AD8A700A6EBCB /* ItemConsumption.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				5784E9F22A2F417300F2AD46 /* SummaryView.swift in Sources */,
 				57867D492A420E6300E54A0D /* ItemDate.swift in Sources */,
 				570886CD2A3750C200F48B69 /* NotificationTime.swift in Sources */,
+				57B3F2422A6AD8A700A6EBCB /* ItemConsumption.swift in Sources */,
 				572C22A12A6316FB009EB9F6 /* ArchiveAlert.swift in Sources */,
 				575FB66F2A32469100029340 /* ItemFilter.swift in Sources */,
 				5784E9FF2A2F545F00F2AD46 /* PreviewContainer.swift in Sources */,
