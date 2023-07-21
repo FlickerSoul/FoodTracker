@@ -23,8 +23,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         NOTIFICATION_LOGGER.debug("userNotificationCenter:willPresent")
-        // ...
-        completionHandler([.list, .banner])
+        switch notification.request.content.categoryIdentifier {
+        case NotificationCategoryIdentifier.foodItemExpiring.id:
+            NOTIFICATION_LOGGER.debug("Display Food Expiring Notification Tapped")
+            completionHandler([.list, .banner])
+        default:
+            NOTIFICATION_LOGGER.debug("Unknown Notification")
+        }
     }
     
     func setupNotificationCategory() {
@@ -38,11 +43,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let viewAction = UNNotificationAction(identifier: NotificationCategoryIdentifier.FoodItemNotificationAction.view.id,
                                               title: "View",
                                               options: [.foreground])
+        let consumeAndArchive = UNNotificationAction(identifier: NotificationCategoryIdentifier.FoodItemNotificationAction.consumeAndArchive.id,
+                                                     title: "Consume And Archive",
+                                                     options: [.destructive])
         
         // Define the notification type
         let meetingInviteCategory =
             UNNotificationCategory(identifier: NotificationCategoryIdentifier.foodItemExpiring.id,
-                                   actions: [archiveAction, viewAction],
+                                   actions: [archiveAction, viewAction, consumeAndArchive],
                                    intentIdentifiers: [],
                                    hiddenPreviewsBodyPlaceholder: "",
                                    options: .customDismissAction)

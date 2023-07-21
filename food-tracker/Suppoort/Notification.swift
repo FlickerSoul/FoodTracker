@@ -33,6 +33,7 @@ class NotificationHandler: ObservableObject {
         content.sound = .default
         content.categoryIdentifier = NotificationCategoryIdentifier.foodItemExpiring.id
         content.targetContentIdentifier = item.id.uuidString
+        content.interruptionLevel = .active
         
         return content
     }

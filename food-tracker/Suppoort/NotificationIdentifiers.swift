@@ -19,6 +19,7 @@ extension NotificationCategoryIdentifier {
     enum FoodItemNotificationAction: String {
         case archive = "ARHIVE_FOOD_ITEM"
         case view = "VIEW_FOOD_ITEM"
+        case consumeAndArchive = "CONSUME_AND_ARCHIVE_ITEM"
 
         var id: String {
             self.rawValue

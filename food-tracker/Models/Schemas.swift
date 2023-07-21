@@ -179,6 +179,11 @@ enum FoodTrackerSchemeV1: VersionedSchema {
                 usedQuantity -= 1
             }
         }
+        
+        func consumeAllAndArchive() {
+            usedQuantity = quantity
+            archived = true
+        }
     
         func copy() -> Self {
             return .init(
