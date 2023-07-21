@@ -76,7 +76,7 @@ struct CalendarView: View {
     }
 
     private func selectBar(at location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) {
-        let xPosition = location.x - geometry[proxy.plotAreaFrame].origin.x
+        let xPosition = location.x - geometry[proxy.plotFrame!].origin.x
         if let date: Date = proxy.value(atX: xPosition) {
             selectedDate = date
         }

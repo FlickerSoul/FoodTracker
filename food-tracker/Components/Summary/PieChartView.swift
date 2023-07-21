@@ -145,7 +145,7 @@ struct PieChartView: View {
                 )
                 .chartBackground { chartProxy in
                     GeometryReader { geometry in
-                        let frame = geometry[chartProxy.plotAreaFrame] // TODO: error
+                        let frame = geometry[chartProxy.plotFrame!] // TODO: error
 
                         VStack(alignment: .center) {
                             if self.noItems {
