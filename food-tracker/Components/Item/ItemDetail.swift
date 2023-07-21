@@ -26,9 +26,10 @@ struct ItemDetailInfo: Hashable {
 struct ItemDetail: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.editMode) private var editMode
+    
     @Bindable var item: FoodItem
-    let viewingStyling: DetailViewingStyle
-    let showScannerWhenOpen: Bool
+    @State var viewingStyling: DetailViewingStyle
     @State private var canceling = false
     @State private var showInvalidAleart = false
     
@@ -36,14 +37,20 @@ struct ItemDetail: View {
     
     @State private var consumptionArchive = ArchiveInfo()
     
+    init(item: FoodItem, viewingStyling: DetailViewingStyle, showScannerWhenOpen: Bool) {
+        _item = Bindable(wrappedValue: item)
+        _viewingStyling = State(initialValue: viewingStyling)
+        _showScanningView = State(initialValue: showScannerWhenOpen)
+    }
+    
     var titleText: String {
         switch viewingStyling {
         case .adding:
-            "Add Item"
+            "Adding Item"
         case .editing:
-            "Edit Item"
+            "Editing"
         case .viewing:
-            "View Item"
+            "Detail"
         }
     }
     
@@ -66,109 +73,143 @@ struct ItemDetail: View {
         viewingStyling != .viewing
     }
     
+    var barcodeSection: some View {
+        Section(header: Label("Barcode", systemImage: "barcode"), footer: Text("The barcode of this food item. You can ignore this and fill in manually.")) {
+            HStack {
+                TextField("Barcode", text: $item.barcode)
+                    
+                Button {
+                    showScanningView.toggle()
+                } label: {
+                    Image(systemName: "barcode.viewfinder")
+                }.buttonStyle(.borderless)
+                    
+                PhotoPickerScanner(onSuccessHandler: self.loadBarcode) { error in
+                    errorMessage.showErrorMessage(title: error.description)
+                }
+            }
+        }
+        .disabled(!canEdit)
+    }
+    
+    var detailSection: some View {
+        Section(header: Label("Detail", systemImage: "pencil")) {
+            HStack {
+                Text("Name")
+                Divider()
+                TextField("Give a name to this item", text: $item.name)
+            }
+        
+            HStack {
+                Text("Quantity")
+                Divider()
+                TextField(
+                    "Quantity",
+                    text: Binding(
+                        get: {
+                            String(item.quantity)
+                        },
+                        set: { val in
+                            item.quantity = UInt(val) ?? 0
+                        }
+                    )
+                )
+                .keyboardType(.numberPad)
+                Stepper("Chagne Quantity", value: $item.quantity, step: 1)
+                    .labelsHidden()
+            }
+        
+            FoodCategoryPicker(category: $item.category)
+        }
+        .disabled(!canEdit)
+    }
+    
+    var consumptionSection: some View {
+        Section(header: Label("Consumption", systemImage: "refrigerator")) {
+            HStack {
+                Text("Used Quantity")
+                Divider()
+                TextField(
+                    "Used Quantity",
+                    text: Binding(
+                        get: {
+                            String(item.usedQuantity)
+                        },
+                        set: { val in
+                            item.usedQuantity = UInt(val) ?? 0
+                        }
+                    )
+                )
+                .keyboardType(.numberPad)
+                Stepper(
+                    "Chagne Quantity",
+                    value: $item.usedQuantity,
+                    in: 0 ... item.quantity,
+                    step: 1
+                )
+                .labelsHidden()
+            }
+        
+            Toggle("Consumed", isOn: $item.consumed)
+                .onChange(of: item.consumed) {
+                    if item.consumed {
+                        consumptionArchive.archiveItem()
+                    } else {
+                        consumptionArchive.unarchiveItem()
+                    }
+                
+                    consumptionArchive.toggle.toggle()
+                }
+        }.disabled(!canEdit)
+    }
+    
+    var dateSection: some View {
+        Section(header: Label("Dates", systemImage: "pencil")) {
+            DatePicker("Expiry Date", selection: $item.expiryDate, in: item.addedDate..., displayedComponents: .date)
+            DatePicker("Added Date", selection: $item.addedDate, displayedComponents: .date)
+        }
+        .disabled(!canEdit)
+    }
+    
+    var noteSection: some View {
+        Section(header: Label("Note", systemImage: "note")) {
+            TextEditor(text: $item.note)
+        }
+        .disabled(!canEdit)
+    }
+    
+    var optionSection: some View {
+        Section(header: Label("Options", systemImage: "ellipsis")) {
+            Toggle("Notification On", isOn: $item.notificationOn)
+            Toggle("Is Template", isOn: $item.isTemplate)
+            Toggle("Archived", isOn: $item.archived)
+        }
+        .disabled(!canEdit)
+    }
+    
     var body: some View {
         List {
-            Section(header: Label("Barcode", systemImage: "barcode"), footer: Text("The barcode of this food item. You can ignore this and fill in manually.")) {
-                HStack {
-                    TextField("Barcode", text: $item.barcode)
-                        
-                    Button {
-                        showScanningView.toggle()
-                    } label: {
-                        Image(systemName: "barcode.viewfinder")
-                    }.buttonStyle(.borderless)
-                        
-                    PhotoPickerScanner(onSuccessHandler: self.loadBarcode) { error in
-                        errorMessage.showErrorMessage(title: error.description)
-                    }
-                }
-            }
-            .disabled(!canEdit)
-                
-            Section(header: Label("Detail", systemImage: "pencil")) {
-                HStack {
-                    Text("Name")
-                    Divider()
-                    TextField("Give a name to this item", text: $item.name)
-                }
-                
-                HStack {
-                    Text("Quantity")
-                    Divider()
-                    TextField(
-                        "Quantity",
-                        text: Binding(
-                            get: {
-                                String(item.quantity)
-                            },
-                            set: { val in
-                                item.quantity = UInt(val) ?? 0
-                            }
-                        )
-                    )
-                    .keyboardType(.numberPad)
-                    Stepper("Chagne Quantity", value: $item.quantity, step: 1)
-                        .labelsHidden()
-                }
-                
-                FoodCategoryPicker(category: $item.category)
-            }
-            .disabled(!canEdit)
-                
-            Section(header: Label("Consumption", systemImage: "refrigerator")) {
-                HStack {
-                    Text("Used Quantity")
-                    Divider()
-                    TextField(
-                        "Used Quantity",
-                        text: Binding(
-                            get: {
-                                String(item.usedQuantity)
-                            },
-                            set: { val in
-                                item.usedQuantity = UInt(val) ?? 0
-                            }
-                        )
-                    )
-                    .keyboardType(.numberPad)
-                    Stepper(
-                        "Chagne Quantity",
-                        value: $item.usedQuantity,
-                        in: 0 ... item.quantity,
-                        step: 1
-                    )
-                    .labelsHidden()
-                }
-                
-                Toggle("Consumed", isOn: $item.consumed)
-                    .onChange(of: item.consumed) {
-                        if item.consumed {
-                            consumptionArchive.archiveItem()
-                        } else {
-                            consumptionArchive.unarchiveItem()
-                        }
-                        
-                        consumptionArchive.toggle.toggle()
-                    }
-            }.disabled(!canEdit)
+            barcodeSection
+            detailSection
+            consumptionSection
+            dateSection
+            noteSection
+            optionSection
+        }
+        .onChange(of: editMode?.wrappedValue.isEditing) {
+            guard let newValue = editMode?.wrappedValue.isEditing else { return }
             
-            Section(header: Label("Dates", systemImage: "pencil")) {
-                DatePicker("Expiry Date", selection: $item.expiryDate, in: item.addedDate..., displayedComponents: .date)
-                DatePicker("Added Date", selection: $item.addedDate, displayedComponents: .date)
+            if viewingStyling == .adding {
+                return
             }
-            .disabled(!canEdit)
             
-            Section(header: Label("Note", systemImage: "note")) {
-                TextEditor(text: $item.note)
+            withAnimation(.easeInOut) {
+                if newValue {
+                    viewingStyling = .editing
+                } else {
+                    viewingStyling = .viewing
+                }
             }
-            .disabled(!canEdit)
-            
-            Section(header: Label("Options", systemImage: "ellipsis")) {
-                Toggle("Notification On", isOn: $item.notificationOn)
-                Toggle("Is Template", isOn: $item.isTemplate)
-                Toggle("Archived", isOn: $item.archived)
-            }
-            .disabled(!canEdit)
         }
         .navigationTitle(titleText)
         .toolbar {
@@ -209,8 +250,13 @@ struct ItemDetail: View {
                         Text("save")
                     }.disabled(isItemInvalid)
                 }
+            } else {
+                ToolbarItem {
+                    EditButton()
+                }
             }
         }
+        .navigationBarTitleDisplayMode(isAdding ? .large : .inline)
         .navigationBarBackButtonHidden(isAdding)
         .sheet(isPresented: $showScanningView) {
             ScannerView(callback: self.loadBarcode)
@@ -220,11 +266,6 @@ struct ItemDetail: View {
         }
         .alert(isPresented: $consumptionArchive.toggle) {
             consumptionArchive.alertView(item: $item)
-        }
-        .onAppear {
-            if showScannerWhenOpen {
-                showScanningView = true
-            }
         }
     }
 }

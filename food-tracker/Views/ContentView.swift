@@ -65,7 +65,7 @@ struct ContentView: View {
                     ForEach(visibleItems, id: \.id) { item in
                         ItemLink(
                             item: item,
-                            viewingStyle: .editing,
+                            viewingStyle: .viewing,
                             leadingActions: [.archive, .markTemplate],
                             trailingActions: [.delete]
                         )
@@ -81,7 +81,8 @@ struct ContentView: View {
                         ForEach(hiddenItems, id: \.id) {
                             item in
                             ItemLink(
-                                item: item, viewingStyle: .editing,
+                                item: item,
+                                viewingStyle: .viewing,
                                 leadingActions: [.unarchive, .markTemplate],
                                 trailingActions: [.delete]
                             )
@@ -97,7 +98,7 @@ struct ContentView: View {
                     if templatedItemListOpen {
                         ForEach(templatedItems) { item in
                             ItemLink(
-                                item: item, viewingStyle: .editing,
+                                item: item, viewingStyle: .viewing,
                                 leadingActions: [.unarchive, .markTemplate],
                                 trailingActions: [.delete]
                             )
