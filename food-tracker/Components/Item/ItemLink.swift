@@ -12,6 +12,8 @@ enum SwipeActions {
     case archive
     case unarchive
     case markTemplate
+    case consume
+    case putBack
 }
 
 struct ItemLink: View {
@@ -118,6 +120,10 @@ struct ItemLink: View {
             SwipeUnarchiveButton(action: toggleItemArchive)
         case .markTemplate:
             SwipeMarkTemplateButton(action: markTempalte)
+        case .consume:
+            SwipeConsumeButton(action: item.consumeItem).disabled(!item.canConsume)
+        case .putBack:
+            SwipePutBackButton(action: item.putBackItem).disabled(!item.canPutBack)
         }
     }
 }

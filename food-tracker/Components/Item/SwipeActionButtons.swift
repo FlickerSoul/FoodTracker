@@ -54,3 +54,19 @@ struct SwipeMarkTemplateButton: View {
         SwipeActionButton(iconLabel: "books.vertical", tint: .orange, action: action)
     }
 }
+
+struct SwipeConsumeButton: View {
+    let action: () -> Void
+
+    var body: some View {
+        SwipeActionButton(iconLabel: "checklist", tint: .mint, action: action)
+    }
+}
+
+struct SwipePutBackButton: View {
+    let action: () -> Void
+
+    var body: some View {
+        SwipeActionButton(iconLabel: "checklist.unchecked", tint: .orange, action: action)
+    }
+}

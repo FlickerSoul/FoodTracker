@@ -159,6 +159,26 @@ enum FoodTrackerSchemeV1: VersionedSchema {
         static func isExpiring(item: FoodItem) -> Bool {
             return item.expiryDate < Date.now
         }
+        
+        var canConsume: Bool {
+            usedQuantity < quantity
+        }
+        
+        var canPutBack: Bool {
+            usedQuantity > 0
+        }
+        
+        func consumeItem() {
+            if canConsume {
+                usedQuantity += 1
+            }
+        }
+        
+        func putBackItem() {
+            if canPutBack {
+                usedQuantity -= 1
+            }
+        }
     
         func copy() -> Self {
             return .init(

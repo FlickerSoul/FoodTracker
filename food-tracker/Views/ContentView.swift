@@ -66,8 +66,15 @@ struct ContentView: View {
                         ItemLink(
                             item: item,
                             viewingStyle: .viewing,
-                            leadingActions: [.archive, .markTemplate],
-                            trailingActions: [.delete]
+                            leadingActions: [
+                                .consume,
+                                .archive,
+                                .markTemplate
+                            ],
+                            trailingActions: [
+                                .putBack,
+                                .delete
+                            ]
                         )
                     }
                 }
