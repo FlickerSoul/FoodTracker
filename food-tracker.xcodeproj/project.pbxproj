@@ -53,6 +53,9 @@
 		57CC1AF22A33380F00A902CC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CC1AF12A33380F00A902CC /* CalendarView.swift */; };
 		57CC1AF42A3341B800A902CC /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CC1AF32A3341B800A902CC /* PieChartView.swift */; };
 		57D177E72A4BA22E00213235 /* SharedContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D177E62A4BA22E00213235 /* SharedContainer.swift */; };
+		57EA77D82A6AE1B6007A1EFC /* AppleDelegate+UNCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EA77D72A6AE1B6007A1EFC /* AppleDelegate+UNCDelegate.swift */; };
+		57EA77DA2A6AE1EB007A1EFC /* AppleDelegate+UNHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EA77D92A6AE1EB007A1EFC /* AppleDelegate+UNHandlers.swift */; };
+		57EA77DC2A6B10B3007A1EFC /* NotificationIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EA77DB2A6B10B3007A1EFC /* NotificationIdentifiers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +126,9 @@
 		57CC1AF12A33380F00A902CC /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		57CC1AF32A3341B800A902CC /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		57D177E62A4BA22E00213235 /* SharedContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedContainer.swift; sourceTree = "<group>"; };
+		57EA77D72A6AE1B6007A1EFC /* AppleDelegate+UNCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppleDelegate+UNCDelegate.swift"; sourceTree = "<group>"; };
+		57EA77D92A6AE1EB007A1EFC /* AppleDelegate+UNHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppleDelegate+UNHandlers.swift"; sourceTree = "<group>"; };
+		57EA77DB2A6B10B3007A1EFC /* NotificationIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationIdentifiers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +318,9 @@
 				5763538A2A3889A70013F4F0 /* BarCodeAPI.swift */,
 				57867D402A3C780C00E54A0D /* LLM.swift */,
 				57D177E62A4BA22E00213235 /* SharedContainer.swift */,
+				57EA77D72A6AE1B6007A1EFC /* AppleDelegate+UNCDelegate.swift */,
+				57EA77D92A6AE1EB007A1EFC /* AppleDelegate+UNHandlers.swift */,
+				57EA77DB2A6B10B3007A1EFC /* NotificationIdentifiers.swift */,
 			);
 			path = Suppoort;
 			sourceTree = "<group>";
@@ -470,6 +479,7 @@
 				5784E9C32A2F3FBD00F2AD46 /* Schemas.swift in Sources */,
 				5784E9F02A2F412E00F2AD46 /* MainView.swift in Sources */,
 				57CC1AF22A33380F00A902CC /* CalendarView.swift in Sources */,
+				57EA77DC2A6B10B3007A1EFC /* NotificationIdentifiers.swift in Sources */,
 				571C39382A61C5E400544BBF /* MigrationPlans.swift in Sources */,
 				5763538B2A3889A70013F4F0 /* BarCodeAPI.swift in Sources */,
 				570886CF2A3764B200F48B69 /* SummaryTitle.swift in Sources */,
@@ -478,9 +488,11 @@
 				57867D492A420E6300E54A0D /* ItemDate.swift in Sources */,
 				570886CD2A3750C200F48B69 /* NotificationTime.swift in Sources */,
 				57B3F2422A6AD8A700A6EBCB /* ItemConsumption.swift in Sources */,
+				57EA77D82A6AE1B6007A1EFC /* AppleDelegate+UNCDelegate.swift in Sources */,
 				572C22A12A6316FB009EB9F6 /* ArchiveAlert.swift in Sources */,
 				575FB66F2A32469100029340 /* ItemFilter.swift in Sources */,
 				5784E9FF2A2F545F00F2AD46 /* PreviewContainer.swift in Sources */,
+				57EA77DA2A6AE1EB007A1EFC /* AppleDelegate+UNHandlers.swift in Sources */,
 				5784EA012A2F54B700F2AD46 /* SampleFridgeItems.swift in Sources */,
 				5784E9F42A2F418A00F2AD46 /* SettingsView.swift in Sources */,
 				572948592A34A6D40075487E /* DateCategoryDropdown.swift in Sources */,
