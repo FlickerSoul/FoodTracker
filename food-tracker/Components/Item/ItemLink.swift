@@ -91,6 +91,27 @@ struct ItemLink: View {
                 chooseAction(action: choice)
             }
         }
+        .contextMenu {
+            if item.canConsume {
+                chooseAction(action: .consume)
+            }
+
+            if item.canPutBack {
+                chooseAction(action: .putBack)
+            }
+
+            Divider()
+
+            if item.archived {
+                chooseAction(action: .unarchive)
+            } else {
+                chooseAction(action: .archive)
+            }
+
+            Divider()
+
+            chooseAction(action: .delete)
+        }
     }
 
     func deleteItem() {
