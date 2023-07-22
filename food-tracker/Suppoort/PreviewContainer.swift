@@ -28,7 +28,7 @@ let previewContainer: ModelContainer = {
 }()
 
 @MainActor
-func fetchItem(for itemId: String) -> FoodItem? {
+func fetchFoodItem(for itemId: String) -> FoodItem? {
     let context = mainContainer.mainContext
 
     // SwiftData bug workaround

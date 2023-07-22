@@ -44,7 +44,7 @@ extension AppDelegate {
     }
     
     func handleArchiveAction(for itemId: String) {
-        let item = fetchItem(for: itemId)
+        let item = fetchFoodItem(for: itemId)
         
         DispatchQueue.main.async {
             item.map { item in
@@ -55,7 +55,7 @@ extension AppDelegate {
     }
     
     func handleConsumeAndArchiveAction(for itemId: String) {
-        let item = fetchItem(for: itemId)
+        let item = fetchFoodItem(for: itemId)
 
         DispatchQueue.main.async {
             item.map { item in

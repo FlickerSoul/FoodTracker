@@ -9,7 +9,7 @@ import Foundation
 import os
 import UserNotifications
 
-let NOTIFICATION_LOGGER = Logger(subsystem: Bundle.main.bundlePath, category: "Notification")
+internal let NOTIFICATION_LOGGER = Logger(subsystem: Bundle.main.bundlePath, category: "Notification")
 
 class NotificationHandler: ObservableObject {
     static let current = NotificationHandler()

@@ -154,11 +154,12 @@ struct ContentView: View {
                     return
                 }
 
+                // TODO: encap this into a fn
                 guard itemIdQuery.name == "id", let id = itemIdQuery.value else {
                     return
                 }
 
-                guard let item = fetchItem(for: id) else { return }
+                guard let item = fetchFoodItem(for: id) else { return }
 
                 addItem(item: item, viewingStyle: .viewing, showScannerWhenOpen: false)
             }
