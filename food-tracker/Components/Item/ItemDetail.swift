@@ -187,6 +187,17 @@ struct ItemDetail: View {
         .disabled(!canEdit)
     }
     
+    var deleteSection: some View {
+        Button(role: .destructive) {
+            dismiss()
+                
+            modelContext.delete(item)
+            try? modelContext.save()
+        } label: {
+            Label("Delete", systemImage: "trash")
+        }.foregroundStyle(.red)
+    }
+    
     var body: some View {
         List {
             barcodeSection
@@ -195,6 +206,7 @@ struct ItemDetail: View {
             dateSection
             noteSection
             optionSection
+            deleteSection
         }
         .onChange(of: editMode?.wrappedValue.isEditing) {
             guard let newValue = editMode?.wrappedValue.isEditing else { return }
