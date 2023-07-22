@@ -19,6 +19,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         default:
             NOTIFICATION_LOGGER.debug("Unknown Notification")
         }
+        
+        completionHandler()
+        // https://developer.apple.com/documentation/usernotifications/unusernotificationcenterdelegate/1649501-usernotificationcenter#discussion
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {

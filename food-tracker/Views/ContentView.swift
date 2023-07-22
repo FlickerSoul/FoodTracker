@@ -144,6 +144,25 @@ struct ContentView: View {
         .sheet(isPresented: $chooseFromTemplateSheetOpen) {
             ChooseTemplateAction()
         }
+        .onOpenURL { url in
+            guard let components = getURLComponents(for: url, of: FOOD_TRACKER_URL_SCHEME), let action = getURLAction(for: components) else { return }
+
+            // TODO: log errors
+            switch action {
+            case .viewItem:
+                guard let itemIdQuery = components.queryItems?.first else {
+                    return
+                }
+
+                guard itemIdQuery.name == "id", let id = itemIdQuery.value else {
+                    return
+                }
+
+                guard let item = fetchItem(for: id) else { return }
+
+                addItem(item: item, viewingStyle: .viewing, showScannerWhenOpen: false)
+            }
+        }
     }
 
     private func enterNewItem() {
