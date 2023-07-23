@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftData
-import UserNotifications
 
 enum FoodTrackerSchemeV1: VersionedSchema {
     static var versionIdentifier: String? = "0.1.0"

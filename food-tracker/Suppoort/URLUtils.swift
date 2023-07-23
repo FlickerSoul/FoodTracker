@@ -7,7 +7,7 @@
 
 import Foundation
 
-internal let FOOD_TRACKER_URL_SCHEME = "foodtracker"
+internal let FOOD_TRACKER_URL_SCHEME = "uofoodtracker"
 
 enum URLAction: String {
     case viewItem = "view-item"

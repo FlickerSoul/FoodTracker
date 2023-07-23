@@ -11,7 +11,7 @@
 			<string>observer.universe.food-tracker</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>foodtracker</string>
+				<string>uofoodtracker</string>
 			</array>
 		</dict>
 	</array>
