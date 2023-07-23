@@ -45,7 +45,7 @@ enum FoodTrackerSchemeV1: VersionedSchema {
             }
         }
     
-        @Attribute private var _archived: Bool = false
+        @Attribute var _archived: Bool = false
         @Attribute(.transformable)
         var archived: Bool {
             get {
@@ -75,7 +75,19 @@ enum FoodTrackerSchemeV1: VersionedSchema {
         }
     
         // swiftformat:disable:next all
-        var category: FoodItemCategory = FoodItemCategory.None  // SwiftData bug, enum changes through Picker will not be persistent
+        var _category: String = FoodItemCategory.Other().name  // SwiftData bug, enum changes through Picker will not be persistent
+        
+        @Attribute(.transformable) var category: FoodItemCategory {
+            get {
+                _$observationRegistrar.access(self, keyPath: \._category)
+                return FoodItemCategory.from(name: getValue(for: \._category))
+            }
+            set {
+                _$observationRegistrar.withMutation(of: self, keyPath: \._category) {
+                    self.setValue(for: \._category, to: newValue.name)
+                }
+            }
+        }
     
         var isTemplate: Bool = false
     
@@ -134,7 +146,7 @@ enum FoodTrackerSchemeV1: VersionedSchema {
             }
         }
     
-        init(name: String, barcode: String = "", note: String = "", addedDate: Date = Date.now, expiryDate: Date = Date.now, notificationOn: Bool = true, archived: Bool = false, notificationIdentifiers: [String] = [], category: FoodItemCategory = .None, isTemplate: Bool = false, quantity: UInt = 1, usedQuantity: UInt = 0, consumed: Bool = false) {
+        init(name: String, barcode: String = "", note: String = "", addedDate: Date = Date.now, expiryDate: Date = Date.now, notificationOn: Bool = true, archived: Bool = false, notificationIdentifiers: [String] = [], category: FoodItemCategory = .Other(), isTemplate: Bool = false, quantity: UInt = 1, usedQuantity: UInt = 0, consumed: Bool = false) {
             self.id = UUID()
             self.name = name
             self.barcode = barcode

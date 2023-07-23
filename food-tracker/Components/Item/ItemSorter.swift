@@ -5,6 +5,7 @@
 //  Created by Heyuan Zeng on 6/7/23.
 //
 
+import SwiftData
 import SwiftUI
 
 enum OrderStyle: String, CaseIterable, Identifiable {
@@ -18,7 +19,7 @@ enum OrderStyle: String, CaseIterable, Identifiable {
     case zToa = "Z to A"
 
     var id: String {
-        return self.rawValue
+        return rawValue
     }
 
     var comparator: ComparatorType {
@@ -35,6 +36,40 @@ enum OrderStyle: String, CaseIterable, Identifiable {
             return Self.sortAToZ
         case .zToa:
             return Self.sortZToA
+        }
+    }
+
+    var sortDescriptor: SortDescriptor<FoodItem> {
+        switch self {
+        case .expiringNearstFirst:
+            return .init(\.expiryDate, order: .forward)
+        case .expiringFarestFirst:
+            return .init(\.expiryDate, order: .reverse)
+        case .newestAddedFirst:
+            return .init(\.addedDate, order: .forward)
+        case .oldestAddedFirst:
+            return .init(\.addedDate, order: .reverse)
+        case .aToz:
+            return .init(\.name, order: .forward)
+        case .zToa:
+            return .init(\.name, order: .reverse)
+        }
+    }
+
+    func createQuery(filter: Predicate<FoodItem>? = nil) -> Query<FoodItem, [FoodItem]> {
+        switch self {
+        case .expiringNearstFirst:
+            return Query(filter: filter, sort: \.expiryDate, order: .forward)
+        case .expiringFarestFirst:
+            return Query(filter: filter, sort: \.expiryDate, order: .reverse)
+        case .newestAddedFirst:
+            return Query(filter: filter, sort: \.addedDate, order: .forward)
+        case .oldestAddedFirst:
+            return Query(filter: filter, sort: \.addedDate, order: .reverse)
+        case .aToz:
+            return Query(filter: filter, sort: \.name, order: .forward)
+        case .zToa:
+            return Query(filter: filter, sort: \.name, order: .reverse)
         }
     }
 

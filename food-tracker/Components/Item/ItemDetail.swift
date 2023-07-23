@@ -360,8 +360,12 @@ extension ItemDetail {
         
         switch choice.message {
         case .assistant(let content):
-            if let id = Int(content), let category = FoodItemCategory(rawValue: id) {
-                item.category = category
+            if let id = Int(content) {
+                if id == FoodItemCategory.allCasesExceptOther.count {
+                    item.category = .Other()
+                } else {
+                    item.category = FoodItemCategory.allCases[id]
+                }
             } else {
                 errorMessage.showErrorMessage(title: "Cannot Get Correct Category")
             }

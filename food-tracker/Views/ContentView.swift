@@ -12,9 +12,6 @@ struct ContentView: View {
     @State private var itemStack: [ItemDetailInfo] = []
     @State private var addingItem: Bool = false
 
-    @State private var hiddenItemListOpen: Bool = false
-    @State private var templatedItemListOpen: Bool = false
-
     @State private var listEditSelections: Set<UUID> = Set()
 
     @State private var orderSelection: OrderStyle = .expiringNearstFirst
@@ -22,97 +19,40 @@ struct ContentView: View {
 
     @State private var chooseFromTemplateSheetOpen: Bool = false
 
-    @Query private var items: [FoodItem]
-
-    var visibleItems: [FoodItem] {
-        var visibles = items.filter { !$0.archived }.sorted(by: orderSelection.comparator)
-
-        visibles = visibles.filter(filteringExpired.filter)
-
-        return visibles
+    private var visibleItems: Query<FoodItem, [FoodItem]> {
+        return Query(
+            FetchDescriptor(
+                predicate: #Predicate { !$0._archived },
+                sortBy: [orderSelection.sortDescriptor]
+            )
+        )
     }
 
-    var hiddenItems: [FoodItem] {
-        var hiddens = items.filter { !visibleItems.contains($0) }.sorted(by: orderSelection.comparator)
-
-        hiddens = hiddens.filter(filteringExpired.filter)
-
-        return hiddens
+    private var hiddenItems: Query<FoodItem, [FoodItem]> {
+        return Query(
+            FetchDescriptor(
+                predicate: #Predicate { $0._archived },
+                sortBy: [orderSelection.sortDescriptor]
+            )
+        )
     }
 
-    var templatedItems: [FoodItem] {
-        return items.filter { item in
-            item.isTemplate
-        }
-    }
-
-    var noHiddenItems: Bool {
-        return hiddenItems.isEmpty
-    }
-
-    var noTemplatedItems: Bool {
-        return templatedItems.isEmpty
+    private var templateItems: Query<FoodItem, [FoodItem]> {
+        return Query(
+            FetchDescriptor(
+                predicate: #Predicate { $0.isTemplate },
+                sortBy: [orderSelection.sortDescriptor]
+            )
+        )
     }
 
     var body: some View {
         NavigationStack(path: $itemStack) {
-            List {
-                Section {
-                    if visibleItems.count == 0 {
-                        NoItemPrompt()
-                    }
-
-                    ForEach(visibleItems, id: \.id) { item in
-                        ItemLink(
-                            item: item,
-                            viewingStyle: .viewing,
-                            leadingActions: [
-                                .consume,
-                                .archive,
-                                .markTemplate
-                            ],
-                            trailingActions: [
-                                .putBack,
-                                .delete
-                            ]
-                        )
-                    }
-                }
-
-                Section {
-                    ItemLinkDropdown(name: "archived items", icon: "archivebox.circle", open: $hiddenItemListOpen)
-                        .opacity(noHiddenItems ? 0.3 : 1)
-                        .disabled(noHiddenItems)
-
-                    if hiddenItemListOpen {
-                        ForEach(hiddenItems, id: \.id) {
-                            item in
-                            ItemLink(
-                                item: item,
-                                viewingStyle: .viewing,
-                                leadingActions: [.unarchive, .markTemplate],
-                                trailingActions: [.delete]
-                            )
-                        }
-                    }
-                }
-
-                Section {
-                    ItemLinkDropdown(name: "Item Templates", icon: "books.vertical.circle", open: $templatedItemListOpen)
-                        .opacity(noTemplatedItems ? 0.3 : 1)
-                        .disabled(noTemplatedItems)
-
-                    if templatedItemListOpen {
-                        ForEach(templatedItems) { item in
-                            ItemLink(
-                                item: item, viewingStyle: .viewing,
-                                leadingActions: [.unarchive, .markTemplate],
-                                trailingActions: [.delete]
-                            )
-                        }
-                    }
-                }
-            }
+            ContentViewInnerView(
+                visibleItems: visibleItems,
+                hiddenItems: hiddenItems,
+                templatedItems: templateItems
+            )
             .navigationTitle("Items")
             .navigationDestination(for: ItemDetailInfo.self) { info in
                 ItemDetail(item: info.item, viewingStyling: info.viewingStyle, showScannerWhenOpen: info.showScannerWhenOpen)

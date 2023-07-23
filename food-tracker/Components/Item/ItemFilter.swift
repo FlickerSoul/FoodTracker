@@ -18,7 +18,7 @@ protocol HasNone {
 enum ExpiringFilterStyle: String, CaseIterable, FoodItemFilter, HasNone {
     case seeExpired = "See Expired"
     case seeNotExpired = "See Not Expired"
-    case none = "None"
+    case none = "All"
 
     var filter: (FoodItem) -> Bool {
         let today = roundDownToDate(date: Date.now)
