@@ -8,20 +8,29 @@
 import CloudKit
 import SwiftUI
 
-enum CloudKitError {
-    case couldNotDetermine
-    case restricted
-    case noAccount
-    case temporarilyUnavailable
-    case unknown
+enum CloudKitError: String {
+    case couldNotDetermine = "Cannot Determine "
+    case restricted = "Restricted"
+    case noAccount = "No Account"
+    case temporarilyUnavailable = "Temporarily Unavailable"
+    case unknown = "Uknown"
 }
 
 struct CloudKitSyncIndicator: View {
-    @State var icloudSignedIn: Bool = false
-    @State var error: CloudKitError? = nil
+    @State private var icloudSignedIn: Bool = false
+    @State private var error: CloudKitError? = nil
+
+    private var statusText: String {
+        return icloudSignedIn ? "Signed In" : (error?.rawValue ?? "Internal Error")
+    }
 
     var body: some View {
-        Image(systemName: icloudSignedIn ? "icloud" : "exclamationmark.icloud")
+        HStack {
+            Text(statusText)
+
+            Image(systemName: icloudSignedIn ? "icloud" : "exclamationmark.icloud")
+        }
+        .onAppear(perform: checkStatus)
     }
 
     func checkStatus() {

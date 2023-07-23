@@ -231,3 +231,9 @@ enum FoodTrackerSchemeV1: VersionedSchema {
 
 typealias LatestSchema = FoodTrackerSchemeV1
 typealias FoodItem = LatestSchema.FoodItem
+
+extension FoodItem: CustomStringConvertible {
+    var description: String {
+        return "FoodItem(\(name) of \(id))"
+    }
+}
