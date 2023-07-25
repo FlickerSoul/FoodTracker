@@ -12,9 +12,11 @@ struct ContentViewInnerView: View {
     @State private var hiddenItemListOpen: Bool = false
     @State private var templatedItemListOpen: Bool = false
 
-    @Query var visibleItems: [FoodItem]
-    @Query var hiddenItems: [FoodItem]
-    @Query var templatedItems: [FoodItem]
+    var visibleItems: [FoodItem]
+
+    var hiddenItems: [FoodItem]
+
+    var templatedItems: [FoodItem]
 
     var noHiddenItems: Bool {
         return hiddenItems.isEmpty
@@ -91,8 +93,4 @@ struct ContentViewInnerView: View {
             }
         }
     }
-}
-
-#Preview {
-    ContentViewInnerView()
 }

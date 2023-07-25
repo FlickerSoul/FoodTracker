@@ -39,40 +39,6 @@ enum OrderStyle: String, CaseIterable, Identifiable {
         }
     }
 
-    var sortDescriptor: SortDescriptor<FoodItem> {
-        switch self {
-        case .expiringNearstFirst:
-            return .init(\.expiryDate, order: .forward)
-        case .expiringFarestFirst:
-            return .init(\.expiryDate, order: .reverse)
-        case .newestAddedFirst:
-            return .init(\.addedDate, order: .forward)
-        case .oldestAddedFirst:
-            return .init(\.addedDate, order: .reverse)
-        case .aToz:
-            return .init(\.name, order: .forward)
-        case .zToa:
-            return .init(\.name, order: .reverse)
-        }
-    }
-
-    func createQuery(filter: Predicate<FoodItem>? = nil) -> Query<FoodItem, [FoodItem]> {
-        switch self {
-        case .expiringNearstFirst:
-            return Query(filter: filter, sort: \.expiryDate, order: .forward)
-        case .expiringFarestFirst:
-            return Query(filter: filter, sort: \.expiryDate, order: .reverse)
-        case .newestAddedFirst:
-            return Query(filter: filter, sort: \.addedDate, order: .forward)
-        case .oldestAddedFirst:
-            return Query(filter: filter, sort: \.addedDate, order: .reverse)
-        case .aToz:
-            return Query(filter: filter, sort: \.name, order: .forward)
-        case .zToa:
-            return Query(filter: filter, sort: \.name, order: .reverse)
-        }
-    }
-
     static let sortExpiringNearestFirst: ComparatorType = { left, right in left.expiryDate < right.expiryDate }
     static let sortExpiringFarestFirst: ComparatorType = { left, right in left.expiryDate > right.expiryDate }
     static let sortNewestAddedFirst: ComparatorType = { left, right in left.addedDate < right.addedDate }

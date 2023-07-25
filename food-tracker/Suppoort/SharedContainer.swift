@@ -14,7 +14,7 @@ let mainContainer: ModelContainer = {
         let container = try ModelContainer(
             for: FoodItem.self,
             migrationPlan: FoodTrackerMigrationPlan.self,
-            ModelConfiguration(cloudKitContainerIdentifier: "observer.universe.food-tracker")
+            ModelConfiguration()
         )
 
         return container

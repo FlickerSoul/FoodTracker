@@ -19,67 +19,60 @@ struct ContentView: View {
 
     @State private var chooseFromTemplateSheetOpen: Bool = false
 
-    private var visibleItems: Query<FoodItem, [FoodItem]> {
-        return Query(
-            FetchDescriptor(
-                predicate: #Predicate { !$0._archived },
-                sortBy: [orderSelection.sortDescriptor]
-            )
-        )
+    @Query private var items: [FoodItem]
+
+    var visibleItems: [FoodItem] {
+        var visibles = items.filter { !$0.archived }.sorted(by: orderSelection.comparator)
+
+        visibles = visibles.filter(filteringExpired.filter)
+
+        return visibles
     }
 
-    private var hiddenItems: Query<FoodItem, [FoodItem]> {
-        return Query(
-            FetchDescriptor(
-                predicate: #Predicate { $0._archived },
-                sortBy: [orderSelection.sortDescriptor]
-            )
-        )
+    var hiddenItems: [FoodItem] {
+        var hiddens = items.filter { !visibleItems.contains($0) }.sorted(by: orderSelection.comparator)
+
+        hiddens = hiddens.filter(filteringExpired.filter)
+
+        return hiddens
     }
 
-    private var templateItems: Query<FoodItem, [FoodItem]> {
-        return Query(
-            FetchDescriptor(
-                predicate: #Predicate { $0.isTemplate },
-                sortBy: [orderSelection.sortDescriptor]
-            )
-        )
+    var templatedItems: [FoodItem] {
+        return items.filter { item in
+            item.isTemplate
+        }
     }
 
     var body: some View {
         NavigationStack(path: $itemStack) {
-            ContentViewInnerView(
-                visibleItems: visibleItems,
-                hiddenItems: hiddenItems,
-                templatedItems: templateItems
-            )
-            .navigationTitle("Items")
-            .navigationDestination(for: ItemDetailInfo.self) { info in
-                ItemDetail(item: info.item, viewingStyling: info.viewingStyle, showScannerWhenOpen: info.showScannerWhenOpen)
-            }
-            .toolbar {
-                ToolbarItemGroup(placement: .primaryAction) {
-                    Button {
-                        chooseFromTemplateSheetOpen.toggle()
-                    }
-                    label: {
-                        Label("Add Using Tempaltes", systemImage: "book.pages")
+            ContentViewInnerView(visibleItems: visibleItems, hiddenItems: hiddenItems, templatedItems: templatedItems)
+                .navigationTitle("Items")
+                .navigationDestination(for: ItemDetailInfo.self) { info in
+                    ItemDetail(item: info.item, viewingStyling: info.viewingStyle, showScannerWhenOpen: info.showScannerWhenOpen)
+                }
+                .toolbar {
+                    ToolbarItemGroup(placement: .primaryAction) {
+                        Button {
+                            chooseFromTemplateSheetOpen.toggle()
+                        }
+                        label: {
+                            Label("Add Using Tempaltes", systemImage: "book.pages")
+                        }
+
+                        Button(action: enterNewItemAndScan) {
+                            Label("Add By Scanning", systemImage: "barcode.viewfinder")
+                        }
+
+                        Button(action: enterNewItem) {
+                            Label("Add", systemImage: "plus")
+                        }
                     }
 
-                    Button(action: enterNewItemAndScan) {
-                        Label("Add By Scanning", systemImage: "barcode.viewfinder")
-                    }
-
-                    Button(action: enterNewItem) {
-                        Label("Add", systemImage: "plus")
+                    ToolbarItemGroup(placement: .topBarLeading) {
+                        ItemSorter(selection: $orderSelection)
+                        ItemFilter(filtering: $filteringExpired, text: "Filter Expired")
                     }
                 }
-
-                ToolbarItemGroup(placement: .topBarLeading) {
-                    ItemSorter(selection: $orderSelection)
-                    ItemFilter(filtering: $filteringExpired, text: "Filter Expired")
-                }
-            }
         }
         .sheet(isPresented: $chooseFromTemplateSheetOpen) {
             ChooseTemplateAction()

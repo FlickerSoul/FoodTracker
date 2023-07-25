@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 enum FoodTrackerSchemeV1: VersionedSchema {
-    static var versionIdentifier: String? = "0.1.0"
+    static var versionIdentifier: String = "0.1.0"
     
     static var models: [any PersistentModel.Type] {
         [Self.FoodItem.self]
