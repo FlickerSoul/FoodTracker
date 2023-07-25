@@ -40,6 +40,8 @@ struct TemplateChoiceButton: View {
 }
 
 struct ChooseTemplateAction: View {
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
         NavigationView {
             VStack(alignment: .center, spacing: 20) {
@@ -72,6 +74,15 @@ struct ChooseTemplateAction: View {
                     TemplateChoiceButton(image: "calendar.badge.plus", text: "Use the same expiry date as the template", helperText: "expiry date would be 01/17/2001", color: .orange)
                 }
                 .buttonStyle(.plain)
+            }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(role: .cancel) {
+                        dismiss()
+                    } label: {
+                        Text("cancel")
+                    }
+                }
             }
         }
     }
