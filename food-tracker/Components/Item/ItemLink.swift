@@ -19,6 +19,7 @@ enum SwipeActions {
 struct ItemLink: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.editMode) private var listEditMode
+    @Environment(\.dismiss) private var dismiss
 
     var item: FoodItem
     let viewingStyle: DetailViewingStyle
@@ -51,6 +52,9 @@ struct ItemLink: View {
         NavigationLink {
             if let templateCreationStyle = templateCreationStyle {
                 ItemDetail(item: item.copy(by: templateCreationStyle), viewingStyling: .adding, showScannerWhenOpen: false)
+                    .onDisappear {
+                        dismiss()
+                    }
 
             } else {
                 ItemDetail(item: item, viewingStyling: viewingStyle, showScannerWhenOpen: false)
