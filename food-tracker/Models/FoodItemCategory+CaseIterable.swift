@@ -9,12 +9,54 @@ import Foundation
 
 extension FoodItemCategory: CaseIterable {
     static var allCases: [FoodItemCategory] {
-        return [
-        ]
+        return allCasesExceptOther + [.Other()]
     }
     
     static var allCasesExceptOther: [FoodItemCategory] {
-        return []
+        return [
+            .Milk,
+            .FlavoredMilk,
+            .DairyDrinksAndSubstitutes,
+            .Cheese,
+            .Yogurt,
+            .Meats,
+            .Poultry,
+            .Seafood,
+            .Eggs,
+            .CuredMeatsOrPoultry,
+            .PlantbasedProteinFoods,
+            .CookedGrains,
+            .BreadsRollsTortillas,
+            .QuickBreadsAndBreadProducts,
+            .ReadyToEatCereals,
+            .CookedCereals,
+            .SavorySnacks,
+            .Crackers,
+            .SnackMealBars,
+            .SweetBakeryProducts,
+            .Candy,
+            .Desserts,
+            .Fruits,
+            .Vegetables,
+            .Juice,
+            .DietBeverages,
+            .SweetenedBeverages,
+            .CoffeeAndTea,
+            .AlcoholicBeverages,
+            .PlainWater,
+            .FlavoredOrEnhancedWater,
+            .FatsAndOils,
+            .CondimentsAndSauces,
+            .Nuts,
+            .Sugars,
+            .BabyFoods,
+            .BabyBeverages,
+            .InfantFormulas,
+            .HumanMilk,
+            .Leftover,
+            .CannedFood,
+            .FrozenFood
+        ]
     }
     
     static func from(name: String) -> Self {
