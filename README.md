@@ -7,11 +7,4 @@ The application allows the users to scan the QR code of a food item and add it t
 
 ## Screenshots
 
-![List View](./screenshots/list_view.png)
-
-![Edit View](./screenshots/edit_view.png)
-
-![Calendar View](./screenshots/calendar_view.png)
-
-![Chat View](./screenshots/pie_char_view.png)
-
+<img src="./screenshots/list_view.png" width="300" alt="list view" /> <img src="./screenshots/edit_view.png" width="300" alt="edit view" /> <img src="./screenshots/calendar_view.png" width="300" alt="calendar view" /> <img src="./screenshots/pie_char_view.png" width="300" alt="pie chart view" />
