@@ -14,7 +14,7 @@ let previewContainer: ModelContainer = {
         let container = try ModelContainer(
             for: FoodItem.self,
             migrationPlan: FoodTrackerMigrationPlan.self,
-            ModelConfiguration(inMemory: true)
+            configurations: ModelConfiguration(isStoredInMemoryOnly: true)
         )
 
         for item in SampleFoodItems.items {

@@ -9,10 +9,10 @@ import Foundation
 import SwiftData
 
 enum FoodTrackerSchemeV1: VersionedSchema {
-    static var versionIdentifier: String = "0.1.0"
+    static var versionIdentifier: Schema.Version = .init(0, 1, 0)
     
     static var models: [any PersistentModel.Type] {
-        [Self.FoodItem.self]
+        [FoodItem.self]
     }
     
     @Model
@@ -31,30 +31,30 @@ enum FoodTrackerSchemeV1: VersionedSchema {
     
         // SwiftData bug? Related to https://developer.apple.com/forums/thread/731113
         @Attribute private var _notificationOn: Bool = true
-        @Attribute(.transformable)
+        @Attribute(.transformable(by: "_notificationOn"))
         var notificationOn: Bool {
             get {
                 _$observationRegistrar.access(self, keyPath: \._notificationOn)
-                return getValue(for: \._notificationOn)
+                return getValue(forKey: \._notificationOn)
             }
             set {
                 _$observationRegistrar.withMutation(of: self, keyPath: \._notificationOn) {
-                    self.setValue(for: \._notificationOn, to: newValue)
+                    self.setValue(forKey: \._notificationOn, to: newValue)
                 }
                 toggleNotification()
             }
         }
     
         @Attribute var _archived: Bool = false
-        @Attribute(.transformable)
+        @Attribute(.transformable(by: "_archived"))
         var archived: Bool {
             get {
                 _$observationRegistrar.access(self, keyPath: \._archived)
-                return getValue(for: \._archived)
+                return getValue(forKey: \._archived)
             }
             set {
                 _$observationRegistrar.withMutation(of: self, keyPath: \._archived) {
-                    self.setValue(for: \._archived, to: newValue)
+                    self.setValue(forKey: \._archived, to: newValue)
                 }
                 toggleNotification()
             }
@@ -62,14 +62,15 @@ enum FoodTrackerSchemeV1: VersionedSchema {
         
         @Attribute private var notificationIdentifiersEncoded: String = "" // TODO: ehhhh how to do transformable?
     
-        @Attribute(.transformable) var notificationIdentifiers: [String] {
+        @Attribute(.transformable(by: "notificationIdentifiersEncoded"))
+        var notificationIdentifiers: [String] {
             get {
                 _$observationRegistrar.access(self, keyPath: \.notificationIdentifiersEncoded)
-                return getValue(for: \.notificationIdentifiersEncoded).components(separatedBy: ",")
+                return getValue(forKey: \.notificationIdentifiersEncoded).components(separatedBy: ",")
             }
             set {
                 _$observationRegistrar.withMutation(of: self, keyPath: \.notificationIdentifiersEncoded) {
-                    self.setValue(for: \.notificationIdentifiersEncoded, to: newValue.joined(separator: ","))
+                    self.setValue(forKey: \.notificationIdentifiersEncoded, to: newValue.joined(separator: ","))
                 }
             }
         }
@@ -77,14 +78,15 @@ enum FoodTrackerSchemeV1: VersionedSchema {
         // swiftformat:disable:next all
         var _category: String = FoodItemCategory.Other().name  // SwiftData bug, enum changes through Picker will not be persistent
         
-        @Attribute(.transformable) var category: FoodItemCategory {
+        @Attribute(.transformable(by: "_category"))
+        var category: FoodItemCategory {
             get {
                 _$observationRegistrar.access(self, keyPath: \._category)
-                return FoodItemCategory.from(name: getValue(for: \._category))
+                return FoodItemCategory.from(name: getValue(forKey: \._category))
             }
             set {
                 _$observationRegistrar.withMutation(of: self, keyPath: \._category) {
-                    self.setValue(for: \._category, to: newValue.name)
+                    self.setValue(forKey: \._category, to: newValue.name)
                 }
             }
         }
@@ -94,15 +96,15 @@ enum FoodTrackerSchemeV1: VersionedSchema {
         var quantity: UInt = 1
         
         @Attribute private var _usedQuantity: UInt = 0
-        @Attribute(.transformable)
+        @Attribute(.transformable(by: "_usedQuantity"))
         var usedQuantity: UInt {
             get {
                 _$observationRegistrar.access(self, keyPath: \._usedQuantity)
-                return getValue(for: \._usedQuantity)
+                return getValue(forKey: \._usedQuantity)
             }
             set {
                 _$observationRegistrar.withMutation(of: self, keyPath: \._usedQuantity) {
-                    self.setValue(for: \._usedQuantity, to: newValue)
+                    self.setValue(forKey: \._usedQuantity, to: newValue)
                 }
                 
                 // set the item to be consumed, if not already
@@ -113,15 +115,15 @@ enum FoodTrackerSchemeV1: VersionedSchema {
         }
         
         @Attribute private var _consumed: Bool = false
-        @Attribute(.transformable)
+        @Attribute(.transformable(by: "_consumed"))
         var consumed: Bool {
             get {
                 _$observationRegistrar.access(self, keyPath: \._consumed)
-                return getValue(for: \._consumed)
+                return getValue(forKey: \._consumed)
             }
             set {
                 _$observationRegistrar.withMutation(of: self, keyPath: \._consumed) {
-                    self.setValue(for: \._consumed, to: newValue)
+                    self.setValue(forKey: \._consumed, to: newValue)
                 }
                 
                 if newValue {

@@ -14,7 +14,7 @@ let mainContainer: ModelContainer = {
         let container = try ModelContainer(
             for: FoodItem.self,
             migrationPlan: FoodTrackerMigrationPlan.self,
-            ModelConfiguration()
+            configurations: ModelConfiguration()
         )
 
         return container
